@@ -1,0 +1,18 @@
+{
+  "no-image-selected": "No image selected",
+  "title-is-required": "Title is required",
+  "enter-title": "Enter a title",
+  "enter-description": "Enter a description",
+  "add-carousel": "Add Carousel",
+  "update-carousel": "Update carousel",
+  "add-new-event": "Add new Event",
+  "add-event": "Add Event",
+  "enter-representative-name": "Enter the Representative Name",
+  "description": "Description",
+  "change-photo": "Change Photo",
+  "save": "Save",
+  "representative-title": "Representative Title",
+  "name": "Name",
+  "warning-image": "Only pick an Image that has a person on it and also has a transparent background",
+  "representative-details": "Representative Details"
+}

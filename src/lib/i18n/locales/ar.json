@@ -1,0 +1,17 @@
+{
+  "no-image-selected": "لم يتم اختيار صورة",
+  "title-is-required": "العنوان مطلوب",
+  "enter-title": "أدخل عنوانا",
+  "enter-description": "أدخل الوصف",
+  "add-carousel": "أضف دائري",
+  "update-carousel": "تحديث دائري",
+  "add-event": "أضف حدثًا",
+  "enter-representative-name": "أدخل اسم الممثل",
+  "description": "وصف",
+  "change-photo": "تغيير الصورة",
+  "save": "حفظ",
+  "representative-title": "عنوان الممثل",
+  "name": "اسم",
+  "warning-image": "اختر فقط الصورة التي تحتوي على شخص ولها أيضًا خلفية شفافة",
+  "representative-details": "تفاصيل الممثل"
+}

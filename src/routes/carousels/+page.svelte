@@ -1,0 +1,92 @@
+<script lang="ts">
+	import { onMount } from 'svelte';
+	import { goto } from '$app/navigation';
+	import { carouselStore } from '$lib/Stores/Carousel';
+	import { VITE_SUPABASE_STORAGE_URL, VITE_SUPABASE_URL } from '$env/static/public';
+	import { scale } from 'svelte/transition';
+	import { PlusOutline } from 'flowbite-svelte-icons';
+
+	onMount(async () => {
+		await carouselStore.fetchAll();
+	});
+
+	function handleEdit(id: number) {
+		goto(`/carousels/edit/${id}`);
+	}
+
+	async function handleDelete(id: number) {
+		await carouselStore.remove(id);
+	}
+</script>
+
+<div class="container mx-auto p-4">
+	<h1 class="text-2xl font-bold mb-4">Carousels</h1>
+
+	<a
+		href="/carousels/add"
+		class="bg-blue-500 text-white w-12 h-12 rounded-full items-center justify-center mb-4 flex hover:bg-blue-600 transition-colors duration-300"
+	>
+		<PlusOutline class="w-8 h-8" strokeWidth="2" />
+	</a>
+
+	<div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+		{#each $carouselStore as carousel}
+			<div
+				class="relative overflow-hidden rounded-xl shadow-lg group transition-transform duration-300 hover:scale-105"
+			>
+				<img
+					src={`${VITE_SUPABASE_STORAGE_URL}${carousel.media?.en}`}
+					alt={carousel.title?.en}
+					class="w-full h-64 object-cover"
+				/>
+				<div
+					class="absolute inset-0 bg-black bg-opacity-50 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-between p-4"
+				>
+					<h2 class="text-xl font-semibold text-white mb-2">{carousel.title?.en}</h2>
+					<div class="flex justify-end space-x-2">
+						<button
+							on:click={() => handleEdit(carousel.id)}
+							class="text-white hover:text-blue-300 transition-colors duration-300"
+							transition:scale
+						>
+							<svg
+								class="w-5 h-5"
+								fill="none"
+								stroke="currentColor"
+								viewBox="0 0 24 24"
+								xmlns="http://www.w3.org/2000/svg"
+							>
+								<path
+									stroke-linecap="round"
+									stroke-linejoin="round"
+									stroke-width="2"
+									d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"
+								></path>
+							</svg>
+						</button>
+						<button
+							on:click={() => handleDelete(carousel.id)}
+							class="text-white hover:text-red-300 transition-colors duration-300"
+							transition:scale
+						>
+							<svg
+								class="w-5 h-5"
+								fill="none"
+								stroke="currentColor"
+								viewBox="0 0 24 24"
+								xmlns="http://www.w3.org/2000/svg"
+							>
+								<path
+									stroke-linecap="round"
+									stroke-linejoin="round"
+									stroke-width="2"
+									d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"
+								></path>
+							</svg>
+						</button>
+					</div>
+				</div>
+			</div>
+		{/each}
+	</div>
+</div>

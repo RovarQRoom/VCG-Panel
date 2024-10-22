@@ -1,0 +1,7 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+div[role='application'] {
+	height: 300px !important;
+}

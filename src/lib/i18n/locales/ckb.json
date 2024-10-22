@@ -1,0 +1,17 @@
+{
+  "no-image-selected": "هیچ وێنەیەک هەڵبژاردراو نییە",
+  "title-is-required": "ناونیشان پێویستە",
+  "enter-title": "ناونیشانێک دابنێ",
+  "enter-description": "وەسفێک دابنێ",
+  "add-carousel": "کارۆسێل زیاد بکە",
+  "update-carousel": "کارۆسێل نوێ بکەرەوە",
+  "add-event": "زیادکردنی ڕووداو",
+  "enter-representative-name": "ناوی نوێنەرەکە دابنێ",
+  "description": "وەسف",
+  "change-photo": "گۆڕینی وێنە",
+  "save": "هەڵگرتن",
+  "representative-title": "ناونیشانی نوێنەر",
+  "name": "ناو",
+  "warning-image": "تەنها وێنەیەک هەڵبژێرە کە کەسێکی لەسەر بێت و هەروەها پاشخانێکی شەفافی هەبێت",
+  "representative-details": "وردەکاری نوێنەر"
+}
