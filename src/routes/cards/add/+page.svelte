@@ -102,16 +102,16 @@
 				d="M10 19l-7-7m0 0l7-7m-7 7h18"
 			></path>
 		</svg>
-		Back
+		{$_('back')}
 	</Button>
 </div>
 
-<h1 class="text-3xl font-bold mb-6">Add New Card</h1>
+<h1 class="text-3xl font-bold mb-6">{$_('add-new-card')}</h1>
 
 <Card class="max-w-2xl mx-auto p-6 bg-white shadow-lg rounded-lg">
 	<form on:submit|preventDefault={handleSubmit} class="flex flex-col space-y-6">
 		<div>
-			<Label for="icon" class="mb-2">Icon</Label>
+			<Label for="icon" class="mb-2">{$_('icon')}</Label>
 			<Input type="file" id="icon" accept="image/*" on:change={handleFileSelect} />
 			<div class="mt-2 h-48 flex items-center justify-center overflow-hidden">
 				{#if imagePreview}
@@ -128,9 +128,9 @@
 
 		<Tabs style="pills" class="justify-center mb-6">
 			{#each Object.keys(LanguageEnum) as key}
-				<TabItem open title={key}>
+				<TabItem open title={$_(key.toLowerCase())}>
 					<div class="mt-4">
-						<Label for="title-en" class="mb-2">Title ({key})</Label>
+						<Label for="title-en" class="mb-2">{$_('title')} ({$_(key.toLowerCase())})</Label>
 						<Input
 							type="text"
 							id="title-en"
@@ -148,7 +148,9 @@
 						/>
 					</div>
 					<div class="mt-4">
-						<Label for="description-en" class="mb-2">Description ({key})</Label>
+						<Label for="description-en" class="mb-2"
+							>{$_('description')} ({$_(key.toLowerCase())})</Label
+						>
 						<Textarea
 							id="description-en"
 							placeholder="Enter card description"
@@ -177,7 +179,7 @@
 				{#if isLoading}
 					<Spinner class="mr-3" size="4" color="white" />
 				{/if}
-				Add Card
+				{$_('add-card')}
 			</Button>
 		</div>
 	</form>

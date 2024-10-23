@@ -37,22 +37,22 @@
 			</div>
 		</div>
 		<div class="flex items-center justify-center h-48 mb-4 rounded bg-gray-50 dark:bg-gray-800">
-			<p class="text-2xl text-gray-400 dark:text-gray-500">
-				Quick Actions
-			</p>
+			<p class="text-2xl text-gray-400 dark:text-gray-500">Quick Actions</p>
 		</div>
 		<div class="grid grid-cols-2 gap-4 mb-4">
 			<div class="flex items-center justify-center rounded bg-gray-50 h-28 dark:bg-gray-800">
-				<a href="/cards" class="text-xl text-blue-600 dark:text-blue-500 hover:underline">Manage Cards</a>
+				<a href="/cards" class="text-xl text-blue-600 dark:text-blue-500 hover:underline"
+					>Manage Cards</a
+				>
 			</div>
 			<div class="flex items-center justify-center rounded bg-gray-50 h-28 dark:bg-gray-800">
-				<a href="/event" class="text-xl text-blue-600 dark:text-blue-500 hover:underline">Manage Events</a>
+				<a href="/event" class="text-xl text-blue-600 dark:text-blue-500 hover:underline"
+					>Manage Events</a
+				>
 			</div>
 		</div>
 		<div class="flex items-center justify-center h-48 mb-4 rounded bg-gray-50 dark:bg-gray-800">
-			<p class="text-2xl text-gray-400 dark:text-gray-500">
-				Recent Activity
-			</p>
+			<p class="text-2xl text-gray-400 dark:text-gray-500">Recent Activity</p>
 		</div>
 	</div>
 </div>

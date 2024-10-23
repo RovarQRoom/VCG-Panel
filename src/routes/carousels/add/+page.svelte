@@ -167,7 +167,7 @@
 				d="M10 19l-7-7m0 0l7-7m-7 7h18"
 			></path>
 		</svg>
-		Back
+		{$_('back')}
 	</Button>
 </div>
 
@@ -177,10 +177,10 @@
 	<form on:submit|preventDefault={handleSubmit} class="flex flex-col space-y-6">
 		<Tabs style="pills" class="justify-center mb-6">
 			{#each Object.keys(LanguageEnum) as key}
-				<TabItem open title={key}>
+				<TabItem open title={$_(key.toLowerCase())}>
 					<div class="mt-4">
 						<Label for="title-{key.toLowerCase()}" class="mb-2">
-							{$_('title')} ({key})
+							{$_('title')} ({$_(key.toLowerCase())})
 						</Label>
 						<Input
 							type="text"
@@ -194,7 +194,7 @@
 					</div>
 					<div class="mt-4">
 						<Label for="description-{key.toLowerCase()}" class="mb-2">
-							{$_('description')} ({key})
+							{$_('description')} ({$_(key.toLowerCase())})
 						</Label>
 						<Textarea
 							id="description-{key.toLowerCase()}"
@@ -206,7 +206,9 @@
 						/>
 					</div>
 					<div class="mt-4">
-						<Label for="media-{key.toLowerCase()}" class="mb-2">{$_('media')} ({key})</Label>
+						<Label for="media-{key.toLowerCase()}" class="mb-2"
+							>{$_('media')} ({$_(key.toLowerCase())})</Label
+						>
 						<Input
 							type="file"
 							id="media-{key.toLowerCase()}"

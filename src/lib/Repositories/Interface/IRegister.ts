@@ -1,9 +1,5 @@
 import type { ListOption } from '$lib/Models/Common/ListOption';
-import type {
-	InsertRegister,
-	Register,
-	UpdateRegister
-} from '$lib/Supabase/Types/database.types';
+import type { InsertRegister, Register, UpdateRegister } from '$lib/Supabase/Types/database.types';
 
 export interface IRegister {
 	createRegisterAsync(register: InsertRegister): Promise<Register>;

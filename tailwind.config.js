@@ -8,7 +8,7 @@ export default {
 	content: [
 		'./src/**/*.{html,js,svelte,ts}',
 		'./node_modules/flowbite-svelte/**/*.{html,js,svelte,ts}',
-		"./node_modules/flowbite-svelte-icons/**/*.{html,js,svelte,ts}",
+		'./node_modules/flowbite-svelte-icons/**/*.{html,js,svelte,ts}'
 	],
 	darkMode: 'selector',
 	theme: {
@@ -31,19 +31,14 @@ export default {
 				},
 				secondary: {
 					light: '#F0EDFF',
-					dark: '#D3C8FF',
+					dark: '#D3C8FF'
 				},
 				main: {
 					light: '#FFFFFF',
-					dark: '#1A1A1A',
-				},
+					dark: '#1A1A1A'
+				}
 			}
 		},
-		plugins: [
-			flowbitePlugin,
-			formsPlugin,
-			typographyPlugin,
-			aspectRatioPlugin
-		]
+		plugins: [flowbitePlugin, formsPlugin, typographyPlugin, aspectRatioPlugin]
 	}
 };

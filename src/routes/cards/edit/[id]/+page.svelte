@@ -72,13 +72,13 @@
 		try {
 			titleResponse = await languageStore.put({
 				...titleLanguage,
-				id: card.title,
+				id: card.title
 			});
 			descriptionResponse = await languageStore.put({
 				...descriptionLanguage,
 				id: card.description ?? 0
 			});
-			
+
 			if (selectedFile && selectedFile.size > 0) {
 				iconResponse = await storageStore.uploadFile(selectedFile);
 				card.icon = iconResponse?.fullPath ?? null;
@@ -87,7 +87,7 @@
 			const updatedCard: UpdateCard = {
 				...card,
 				title: titleResponse?.id ?? card.title,
-				description: descriptionResponse?.id ?? card.description,
+				description: descriptionResponse?.id ?? card.description
 			};
 
 			await cardStore.put(updatedCard);
@@ -99,7 +99,7 @@
 			goto('/cards');
 		} catch (error) {
 			console.error(error);
-			
+
 			// Revert changes if an error occurs
 			if (titleResponse && titleResponse.id) {
 				await languageStore.put(titleLanguage);
@@ -111,7 +111,7 @@
 				await storageStore.deleteFile(iconResponse.fullPath);
 				card.icon = oldIcon;
 			}
-			
+
 			// Show an error message to the user
 			alert('An error occurred while updating the card. Please try again.');
 		} finally {
@@ -144,12 +144,12 @@
 	</Button>
 </div>
 
-<h1 class="text-3xl font-bold mb-6">Edit Card</h1>
+<h1 class="text-3xl font-bold mb-6">{$_('edit-card')}</h1>
 
 <Card class="max-w-2xl mx-auto p-6 bg-white shadow-lg rounded-lg">
 	<form on:submit|preventDefault={handleUpdate} class="flex flex-col space-y-6">
 		<div>
-			<Label for="icon" class="mb-2">Icon</Label>
+			<Label for="icon" class="mb-2">{$_('icon')}</Label>
 			<Input type="file" id="icon" accept="image/*" on:change={handleFileSelect} />
 			<div class="mt-2 h-48 flex items-center justify-center overflow-hidden">
 				{#if imagePreview && imagePreview !== `${VITE_SUPABASE_STORAGE_URL}null`}
@@ -166,23 +166,43 @@
 
 		<Tabs style="pills" class="justify-center mb-6">
 			{#each Object.keys(LanguageEnum) as key}
-				<TabItem open title={key}>
+				<TabItem open title={$_(key.toLowerCase())}>
 					<div class="mt-4">
-						<Label for="title-{key.toLowerCase()}" class="mb-2">Title ({key})</Label>
+						<Label for="title-{key.toLowerCase()}" class="mb-2"
+							>{$_('title')} ({$_(key.toLowerCase())})</Label
+						>
 						<Input
 							type="text"
 							id="title-{key.toLowerCase()}"
 							placeholder="Enter card title"
-							bind:value={titleLanguage[key === 'ENGLISH' ? 'en' : key === 'KURDISH' ? 'ckb' : key === 'ARABIC' ? 'ar' : 'en']}
+							bind:value={titleLanguage[
+								key === 'ENGLISH'
+									? 'en'
+									: key === 'KURDISH'
+										? 'ckb'
+										: key === 'ARABIC'
+											? 'ar'
+											: 'en'
+							]}
 							required={key === 'ENGLISH'}
 						/>
 					</div>
 					<div class="mt-4">
-						<Label for="description-{key.toLowerCase()}" class="mb-2">Description ({key})</Label>
+						<Label for="description-{key.toLowerCase()}" class="mb-2"
+							>{$_('description')} ({$_(key.toLowerCase())})</Label
+						>
 						<Textarea
 							id="description-{key.toLowerCase()}"
 							placeholder="Enter card description"
-							bind:value={descriptionLanguage[key === 'ENGLISH' ? 'en' : key === 'KURDISH' ? 'ckb' : key === 'ARABIC' ? 'ar' : 'en']}
+							bind:value={descriptionLanguage[
+								key === 'ENGLISH'
+									? 'en'
+									: key === 'KURDISH'
+										? 'ckb'
+										: key === 'ARABIC'
+											? 'ar'
+											: 'en'
+							]}
 							required={key === 'ENGLISH'}
 						/>
 					</div>
@@ -199,7 +219,7 @@
 				{#if isLoading}
 					<Spinner class="mr-3" size="4" color="white" />
 				{/if}
-				Update Card
+				{$_('update-card')}
 			</Button>
 		</div>
 	</form>

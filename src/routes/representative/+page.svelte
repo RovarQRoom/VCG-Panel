@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { Card, Button, Label, Input, Tabs, TabItem, Fileupload } from 'flowbite-svelte';
+	import { Card, Button, Label, Input, Tabs, TabItem, Fileupload, Spinner } from 'flowbite-svelte';
 	import Editor from '@tinymce/tinymce-svelte';
 	import {
 		LanguageEnum,
@@ -24,6 +24,7 @@
 
 	let isEditing = false;
 	let isSmallScreen: boolean;
+	let isSaving = false; // New variable to track saving state
 
 	onMount(() => {
 		(async () => {
@@ -65,6 +66,8 @@
 	}
 
 	async function handleSave() {
+		if (isSaving) return; // Prevent multiple clicks
+		isSaving = true;
 		isEditing = false;
 		let descriptionResponse: Language | null = null;
 		let nameResponse: Language | null = null;
@@ -96,6 +99,8 @@
 			if (imageResponse && imageResponse.id) {
 				await storageStore.deleteFile(imageResponse.id);
 			}
+		} finally {
+			isSaving = false; // Reset saving state
 		}
 	}
 
@@ -141,11 +146,20 @@
 			<h1 class="text-2xl font-bold text-gray-800">{$_('representative-details')}</h1>
 			<div class="flex space-x-2">
 				{#if isEditing}
-					<Button on:click={handleSave} class="px-2 py-2 rounded-full" color="green">
-						<DocumentCheck size="20" />
+					<Button
+						on:click={handleSave}
+						class="px-2 py-2 rounded-full"
+						color="green"
+						disabled={isSaving}
+					>
+						{#if isSaving}
+							<Spinner size="4" color="white" />
+						{:else}
+							<DocumentCheck size="20" />
+						{/if}
 					</Button>
 				{/if}
-				<Button on:click={toggleEdit} class="px-2 py-2 rounded-full">
+				<Button on:click={toggleEdit} class="px-2 py-2 rounded-full" disabled={isSaving}>
 					<PencilSquare size="20" class={isEditing ? 'text-gray-300' : ''} />
 				</Button>
 			</div>
@@ -204,7 +218,7 @@
 			<div class="w-full md:w-2/3">
 				<Tabs style="pills" class="justify-center mb-6">
 					{#each Object.keys(LanguageEnum) as key}
-						<TabItem open={key === 'ENGLISH'} title={key}>
+						<TabItem open={key === 'ENGLISH'} title={$_(key.toLowerCase())}>
 							<div transition:fade={{ duration: 300 }}>
 								<div class="mt-4">
 									<Label for="name-{key.toLowerCase()}" class="mb-2">{$_('name')} ({key})</Label>

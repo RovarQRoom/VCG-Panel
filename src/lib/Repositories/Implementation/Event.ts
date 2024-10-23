@@ -66,7 +66,7 @@ export class EventRepository implements IEvent {
 			.limit(1)
 			.returns<EventEntity>()
 			.single();
-		
+
 		if (response.error) {
 			throw response.error;
 		}

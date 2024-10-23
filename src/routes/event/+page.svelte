@@ -97,7 +97,9 @@
 				{#each Object.keys(LanguageEnum) as key}
 					<TabItem open={key === 'ENGLISH'} title={$_(key.toLowerCase())}>
 						<div class="mt-4">
-							<Label for="place-{key.toLowerCase()}" class="mb-2">{$_('place')} ({$_(key.toLowerCase())})</Label>
+							<Label for="place-{key.toLowerCase()}" class="mb-2"
+								>{$_('place')} ({$_(key.toLowerCase())})</Label
+							>
 							<Input
 								type="text"
 								id="place-{key.toLowerCase()}"

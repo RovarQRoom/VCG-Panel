@@ -199,10 +199,10 @@
 	<form on:submit|preventDefault={handleUpdate} class="flex flex-col space-y-6">
 		<Tabs style="pills" class="justify-center mb-6">
 			{#each Object.keys(LanguageEnum) as key}
-				<TabItem open title={key}>
+				<TabItem open title={$_(key.toLowerCase())}>
 					<div class="mt-4">
 						<Label for="title-{key.toLowerCase()}" class="mb-2">
-							{$_('title')} ({key})
+							{$_('title')} ({$_(key.toLowerCase())})
 						</Label>
 						<Input
 							type="text"
@@ -216,7 +216,7 @@
 					</div>
 					<div class="mt-4">
 						<Label for="description-{key.toLowerCase()}" class="mb-2">
-							{$_('description')} ({key})
+							{$_('description')} ({$_(key.toLowerCase())})
 						</Label>
 						<Textarea
 							id="description-{key.toLowerCase()}"
@@ -228,8 +228,8 @@
 						/>
 					</div>
 					<div class="mt-4">
-							<Label for="media-{key.toLowerCase()}" class="mb-2">
-							{$_('media')} ({key})
+						<Label for="media-{key.toLowerCase()}" class="mb-2">
+							{$_('media')} ({$_(key.toLowerCase())})
 						</Label>
 						<Input
 							type="file"

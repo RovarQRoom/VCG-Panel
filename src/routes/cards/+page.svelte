@@ -1,17 +1,11 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
-
-	import { Card, Button } from 'flowbite-svelte';
-
+	import { Card } from 'flowbite-svelte';
 	import { cardStore } from '$lib/Stores/Card';
-
 	import { goto } from '$app/navigation';
-
 	import { VITE_SUPABASE_STORAGE_URL } from '$env/static/public';
-
 	import { Trash } from 'svelte-heros-v2';
-
-	import { fade, fly } from 'svelte/transition';
+	import { _ } from 'svelte-i18n';
 
 	onMount(async () => {
 		await cardStore.fetchAll();
@@ -30,10 +24,13 @@
 	}
 </script>
 
-<h1 class="text-3xl font-bold mb-6">Cards</h1>
+<h1 class="text-3xl font-bold mb-6">{$_('cards')}</h1>
 
 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-	<Card class="cursor-pointer hover:bg-secondary-light dark:hover:bg-secondary-dark" on:click={goToAddCard}>
+	<Card
+		class="cursor-pointer hover:bg-secondary-light dark:hover:bg-secondary-dark"
+		on:click={goToAddCard}
+	>
 		<div class="flex items-center justify-center h-full">
 			<svg
 				class="w-12 h-12 text-gray-400"
@@ -53,7 +50,9 @@
 	</Card>
 
 	{#each $cardStore.slice(0, 9) as card}
-		<Card class="relative overflow-hidden pb-1 hover:scale-105 transition-all duration-300 bg-main-light dark:bg-main-dark">
+		<Card
+			class="relative overflow-hidden pb-1 hover:scale-105 transition-all duration-300 bg-main-light dark:bg-main-dark"
+		>
 			<div class="p-5">
 				<div class="flex items-start mb-4">
 					{#if card.icon}
@@ -101,10 +100,7 @@
 				</svg>
 			</button>
 
-			<button
-				on:click={() => deleteCard(card.id)}
-				class="absolute top-2 right-2 bg-transparent"
-			>
+			<button on:click={() => deleteCard(card.id)} class="absolute top-2 right-2 bg-transparent">
 				<Trash class="w-5 h-5 text-gray-500 hover:text-red-500" />
 			</button>
 		</Card>

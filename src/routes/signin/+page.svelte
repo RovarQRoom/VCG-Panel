@@ -23,7 +23,8 @@
 
 			goto('/');
 		} catch (err) {
-			errorMessage = err instanceof Error ? err.message : 'An unexpected error occurred. Please try again.';
+			errorMessage =
+				err instanceof Error ? err.message : 'An unexpected error occurred. Please try again.';
 
 			console.error('Sign-in error:', err);
 		} finally {
