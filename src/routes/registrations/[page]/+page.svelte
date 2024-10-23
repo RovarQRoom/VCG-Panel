@@ -6,7 +6,7 @@
 		TableBodyCell,
 		TableBodyRow,
 		TableHead,
-			TableHeadCell,
+		TableHeadCell,
 		Button,
 		Badge
 	} from 'flowbite-svelte';
@@ -24,7 +24,7 @@
 	};
 
 	onMount(async () => {
-		await registerStore.fetchAll(filter);
+		await fetchRegistrations();
 	});
 
 	async function handleAccept(id: number) {
@@ -39,10 +39,6 @@
 			id,
 			action: false
 		});
-	}
-
-	async function handleDelete(id: number) {
-		await registerStore.remove(id);
 	}
 
 	function getLanguageBadge(
@@ -70,13 +66,12 @@
 		}
 	}
 
-
-	async function fetchRegistrations(page: number) {
+	async function fetchRegistrations() {
 		try {
-			await registerStore.fetchAll({ page });
+			await registerStore.fetchAll(filter);
 		} catch (error) {
 			const errorMessage = error instanceof Error ? error.message : 'An unknown error occurred';
-			toastStore.showToast('Failed to fetch registrations: ' + errorMessage, 'error');
+			toastStore.showToast(`${$_('failed-to-fetch-registrations')}: ${errorMessage}`, 'error');
 		}
 	}
 
@@ -86,7 +81,7 @@
 			toastStore.showToast('Registration deleted successfully!', 'success');
 		} catch (error) {
 			const errorMessage = error instanceof Error ? error.message : 'An unknown error occurred';
-			toastStore.showToast('Failed to delete registration: ' + errorMessage, 'error');
+			toastStore.showToast(`${$_('failed-to-delete-registration')}: ${errorMessage}`, 'error');
 		}
 	}
 </script>
@@ -136,7 +131,7 @@
 									size="xs"
 									color="light"
 									class="hover:bg-red-100 transition-colors duration-300 rounded-full p-2"
-									on:click={() => handleDelete(registration.id)}
+									on:click={() => deleteRegistration(registration.id)}
 								>
 									<TrashBinOutline
 										class="h-5 w-5 text-red-500 hover:text-red-700 transition-colors duration-300"

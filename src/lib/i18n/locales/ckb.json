@@ -55,5 +55,7 @@
   "password": "وشەی نهێنی",
   "enter-your-email": "ئیمەیڵەکەت داخڵ بکە",
   "enter-your-password": "وشەی نهێنی خۆت داخڵ بکە",
-  "signing-in": "چوونەژوورەوە"
+  "signing-in": "چوونەژوورەوە",
+  "failed-to-delete-registration": "شکستی هێنا لە سڕینەوەی ناو تۆمارکردن",
+  "failed-to-fetch-registrations": "شکستی هێنا لە هێنانی ناو تۆمارکردن"
 }

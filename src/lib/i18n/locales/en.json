@@ -56,5 +56,7 @@
   "password": "Password",
   "enter-your-email": "Enter Your Email",
   "enter-your-password": "Enter Your Password",
-  "signing-in": "Signing In"
+  "signing-in": "Signing In",
+  "failed-to-delete-registration": "Failed to delete registration",
+  "failed-to-fetch-registrations": "Failed to fetch registrations"
 }
