@@ -22,5 +22,16 @@
   "title": "ناونیشان",
   "add-new-carousel": "کارۆسێلی نوێ زیاد بکە",
   "edit-carousel": "دەستکاری کارۆسێل",
-  "back": "گەڕانەوە"
+  "back": "گەڕانەوە",
+  "enter-event-place": "شوێنی ڕووداوەکە دابنێ",
+  "date-and-time": "بەروار و کات",
+  "event-details": "وردەکاری ئیڤێنتەکە",
+  "place": "شوێن",
+  "ticket-type": "جۆری بلیت",
+  "free": "خۆڕای",
+  "paid": "پارەدان",
+  "invitation-only": "تەنها بانگهێشتنامە",
+  "kurdish": "کوردی",
+  "english": "ئینگلیزی",
+  "arabic": "عەرەبی"
 }

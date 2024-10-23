@@ -22,5 +22,16 @@
   "title": "عنوان",
   "add-new-carousel": "إضافة دائري جديد",
   "edit-carousel": "تحرير دائري",
-  "back": "خلف"
+  "back": "خلف",
+  "enter-event-place": "أدخل موقع الحدث",
+  "date-and-time": "التاريخ والوقت",
+  "event-details": "تفاصيل الحدث",
+  "place": "مكان",
+  "ticket-type": "نوع التذكرة",
+  "free": "بلاش",
+  "paid": "دفع",
+  "invitation-only": "دعوة فقط",
+  "kurdish": "كردي",
+  "english": "إنجليزي",
+  "arabic": "عربي"
 }

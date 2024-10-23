@@ -6,7 +6,11 @@
 	import { onMount } from 'svelte';
 	import { eventStore } from '$lib/Stores/Event';
 	import { languageStore } from '$lib/Stores/Language';
-	import { LanguageEnum, type UpdateEvent, type Language } from '$lib/Supabase/Types/database.types';
+	import {
+		LanguageEnum,
+		type UpdateEvent,
+		type Language
+	} from '$lib/Supabase/Types/database.types';
 	import moment from 'moment';
 
 	let placeLanguage: { en: string; ckb?: string; ar?: string } = { en: '' };
@@ -91,9 +95,9 @@
 
 			<Tabs style="pills" class="justify-center mb-6">
 				{#each Object.keys(LanguageEnum) as key}
-					<TabItem open={key === 'ENGLISH'} title={key}>
+					<TabItem open={key === 'ENGLISH'} title={$_(key.toLowerCase())}>
 						<div class="mt-4">
-							<Label for="place-{key.toLowerCase()}" class="mb-2">{$_('place')} ({key})</Label>
+							<Label for="place-{key.toLowerCase()}" class="mb-2">{$_('place')} ({$_(key.toLowerCase())})</Label>
 							<Input
 								type="text"
 								id="place-{key.toLowerCase()}"
