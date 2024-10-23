@@ -96,7 +96,7 @@
 				await storageStore.deleteFile(oldIcon);
 			}
 
-			goto('/cards');
+			goto('/cards/1');
 		} catch (error) {
 			console.error(error);
 
@@ -120,7 +120,7 @@
 	}
 
 	function goBack() {
-		goto('/cards');
+		goto('/cards/1');
 	}
 </script>
 

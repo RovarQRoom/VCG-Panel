@@ -134,7 +134,7 @@
 				}
 			}
 
-			goto('/carousels');
+			goto('/carousels/1');
 		} catch (error) {
 			console.error(error);
 
@@ -164,7 +164,7 @@
 	}
 
 	function goBack() {
-		goto('/carousels');
+		goto('/carousels/1');
 	}
 
 	function isVideoLink(link: string): boolean {

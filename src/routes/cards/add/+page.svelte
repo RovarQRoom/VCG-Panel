@@ -62,7 +62,7 @@
 			createCard.description = descriptionResponse.id;
 			const response = await cardStore.insert(createCard);
 			if (response && response.id) {
-				goto('/cards');
+				goto('/cards/1');
 			}
 		} catch (error) {
 			console.error(error);
@@ -81,7 +81,7 @@
 	}
 
 	function goBack() {
-		goto('/cards');
+		goto('/cards/1');
 	}
 </script>
 

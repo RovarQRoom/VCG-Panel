@@ -119,7 +119,7 @@
 			createCarousel.media = mediaResponse.id;
 			const response = await carouselStore.insert(createCarousel);
 			if (response && response.id) {
-				goto('/carousels');
+				goto('/carousels/1');
 			}
 		} catch (error) {
 			console.error(error);
@@ -147,7 +147,7 @@
 	}
 
 	function goBack() {
-		goto('/carousels');
+		goto('/carousels/1');
 	}
 </script>
 
