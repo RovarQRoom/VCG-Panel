@@ -14,6 +14,9 @@
 	import { fade, slide } from 'svelte/transition';
 	import { cubicInOut } from 'svelte/easing';
 
+	import Toast from '$lib/Components/Toast.svelte';
+	import { toastStore } from '$lib/Stores/Toast';
+
 	let isLoading = true;
 
 	onMount(() => {
@@ -45,6 +48,8 @@
 		}
 		return $page.url.pathname.startsWith(href) && href !== '/';
 	};
+
+	// You can now use handleError in your authentication or other error-prone operations
 </script>
 
 {#if isLoading}
@@ -130,3 +135,5 @@
 {:else}
 	<slot />
 {/if}
+
+<Toast />

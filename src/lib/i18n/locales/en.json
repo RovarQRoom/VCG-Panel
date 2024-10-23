@@ -51,5 +51,10 @@
   "registrations": "Registrations",
   "delete": "Delete",
   "accepted": "Accepted",
-  "rejected": "Rejected"
+  "rejected": "Rejected",
+  "sign-in": "Sign In",
+  "password": "Password",
+  "enter-your-email": "Enter Your Email",
+  "enter-your-password": "Enter Your Password",
+  "signing-in": "Signing In"
 }

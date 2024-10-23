@@ -50,5 +50,10 @@
   "registrations": "تۆمارکراوەکان",
   "delete": "سڕینەوە",
   "accepted": "قبوڵ کراوە",
-  "rejected": "ڕەتکرایەوە"
+  "rejected": "ڕەتکرایەوە",
+  "sign-in": "چوونەژوورەوە",
+  "password": "وشەی نهێنی",
+  "enter-your-email": "ئیمەیڵەکەت داخڵ بکە",
+  "enter-your-password": "وشەی نهێنی خۆت داخڵ بکە",
+  "signing-in": "چوونەژوورەوە"
 }

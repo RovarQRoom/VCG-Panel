@@ -50,5 +50,10 @@
   "registrations": "التسجيلات",
   "delete": "يمسح",
   "accepted": "مقبول",
-  "rejected": "مرفوض"
+  "rejected": "مرفوض",
+  "sign-in": "تسجيل الدخول",
+  "password": "كلمة المرور",
+  "enter-your-email": "أدخل بريدك الإلكتروني",
+  "enter-your-password": "أدخل كلمة المرور الخاصة بك",
+  "signing-in": "تسجيل الدخول"
 }

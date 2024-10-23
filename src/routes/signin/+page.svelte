@@ -1,32 +1,30 @@
 <script lang="ts">
-	import { Card, Button, Label, Input, Alert } from 'flowbite-svelte';
+	import { Card, Button, Label, Input } from 'flowbite-svelte';
 
 	import { authStore } from '$lib/Stores/Authentication';
+	import { toastStore } from '$lib/Stores/Toast';
 
 	import { goto } from '$app/navigation';
+	import { _ } from 'svelte-i18n';
 
 	let email: string = '';
 
 	let password: string = '';
 
-	let errorMessage: string = '';
-
 	let isLoading: boolean = false;
 
-	async function handleSignIn() {
-		errorMessage = '';
-
+	async function handleSubmit() {
 		isLoading = true;
-
 		try {
 			await authStore.signIn(email, password);
-
-			goto('/cards/1');
-		} catch (err) {
-			errorMessage =
-				err instanceof Error ? err.message : 'An unexpected error occurred. Please try again.';
-
-			console.error('Sign-in error:', err);
+			toastStore.showToast($_('sign-in-successful'), 'success');
+			goto('/');
+		} catch (error) {
+			if (error instanceof Error) {
+				toastStore.showToast(error.message, 'error');
+			} else {
+				toastStore.showToast($_('unknown-error-occurred'), 'error');
+			}
 		} finally {
 			isLoading = false;
 		}
@@ -35,35 +33,33 @@
 
 <div class="flex items-center justify-center min-h-screen bg-gray-100">
 	<Card class="w-full max-w-md">
-		<h2 class="text-2xl font-bold mb-6 text-center">Sign In</h2>
+		<h2 class="text-2xl font-bold mb-6 text-center">{$_('sign-in')}</h2>
 
-		{#if errorMessage}
-			<Alert color="red" class="mb-4">
-				{errorMessage}
-			</Alert>
-		{/if}
-
-		<form on:submit|preventDefault={handleSignIn}>
+		<form on:submit|preventDefault={handleSubmit}>
 			<div class="mb-4">
-				<Label for="email" class="mb-2">Email</Label>
-
-				<Input type="email" id="email" placeholder="Enter your email" bind:value={email} required />
+				<Label for="email" class="mb-2">{$_('email')}</Label>
+				<Input
+					type="email"
+					id="email"
+					placeholder={$_('enter-your-email')}
+					bind:value={email}
+					required
+				/>
 			</div>
 
 			<div class="mb-6">
-				<Label for="password" class="mb-2">Password</Label>
-
+				<Label for="password" class="mb-2">{$_('password')}</Label>
 				<Input
 					type="password"
 					id="password"
-					placeholder="Enter your password"
+					placeholder={$_('enter-your-password')}
 					bind:value={password}
 					required
 				/>
 			</div>
 
 			<Button type="submit" class="w-full" disabled={isLoading}>
-				{isLoading ? 'Signing In...' : 'Sign In'}
+				{isLoading ? $_('signing-in') : $_('sign-in')}
 			</Button>
 		</form>
 	</Card>

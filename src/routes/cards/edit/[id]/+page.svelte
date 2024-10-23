@@ -9,6 +9,7 @@
 	import { page } from '$app/stores';
 	import { VITE_SUPABASE_STORAGE_URL } from '$env/static/public';
 	import { _ } from 'svelte-i18n';
+	import { toastStore } from '$lib/Stores/Toast';
 
 	let card: UpdateCard | null = null;
 	let titleLanguage: {
@@ -112,8 +113,11 @@
 				card.icon = oldIcon;
 			}
 
-			// Show an error message to the user
-			alert('An error occurred while updating the card. Please try again.');
+			if (error instanceof Error) {
+				toastStore.showToast(error.message, 'error');
+			} else {
+				toastStore.showToast('An unknown error occurred', 'error');
+			}
 		} finally {
 			isLoading = false;
 		}

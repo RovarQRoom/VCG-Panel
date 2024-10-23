@@ -10,6 +10,7 @@
 	import { languageStore } from '$lib/Stores/Language';
 	import { storageStore } from '$lib/Stores/Storage';
 	import { carouselStore } from '$lib/Stores/Carousel';
+	import { toastStore } from '$lib/Stores/Toast';
 
 	let createCarousel: InsertCarousel = {
 		title: 0,
@@ -119,6 +120,7 @@
 			createCarousel.media = mediaResponse.id;
 			const response = await carouselStore.insert(createCarousel);
 			if (response && response.id) {
+				toastStore.showToast('Carousel added successfully!', 'success');
 				goto('/carousels/1');
 			}
 		} catch (error) {

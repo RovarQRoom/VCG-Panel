@@ -6,6 +6,7 @@
 	import { languageStore } from '$lib/Stores/Language';
 	import { storageStore } from '$lib/Stores/Storage';
 	import { cardStore } from '$lib/Stores/Card';
+	import { toastStore } from '$lib/Stores/Toast';
 
 	let createCard: InsertCard = {
 		icon: '',
@@ -60,10 +61,9 @@
 			createCard.icon = iconResponse?.fullPath ?? null;
 			createCard.title = titleResponse.id;
 			createCard.description = descriptionResponse.id;
-			const response = await cardStore.insert(createCard);
-			if (response && response.id) {
-				goto('/cards/1');
-			}
+			await cardStore.insert(createCard);
+			toastStore.showToast('Card added successfully!', 'success');
+			goto('/cards/1');
 		} catch (error) {
 			console.error(error);
 			if (titleResponse && titleResponse.id) {
@@ -74,6 +74,11 @@
 			}
 			if (iconResponse && iconResponse.id) {
 				await storageStore.deleteFile(iconResponse.id);
+			}
+			if (error instanceof Error) {
+				toastStore.showToast(error.message, 'error');
+			} else {
+				toastStore.showToast('An unknown error occurred', 'error');
 			}
 		} finally {
 			isLoading = false;

@@ -14,6 +14,7 @@
 	import { page } from '$app/stores';
 	import { VITE_SUPABASE_STORAGE_URL } from '$env/static/public';
 	import { isVideoFile } from '$lib/utils/fileUtils';
+	import { toastStore } from '$lib/Stores/Toast';
 
 	let carousel: UpdateCarousel | null = null;
 	let titleLanguage: { en: string; ckb?: string; ar?: string } = { en: '' };
@@ -155,9 +156,11 @@
 					);
 				}
 			}
-
-			// Show an error message to the user
-			alert('An error occurred while updating the carousel. Please try again.');
+			if (error instanceof Error) {
+				toastStore.showToast(error.message, 'error');
+			} else {
+				toastStore.showToast('An unknown error occurred', 'error');
+			}
 		} finally {
 			isLoading = false;
 		}

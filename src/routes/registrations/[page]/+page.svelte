@@ -6,7 +6,7 @@
 		TableBodyCell,
 		TableBodyRow,
 		TableHead,
-		TableHeadCell,
+			TableHeadCell,
 		Button,
 		Badge
 	} from 'flowbite-svelte';
@@ -16,6 +16,7 @@
 	import Pagination from '$lib/Components/Pagination.svelte';
 	import type { ListOption } from '$lib/Models/Common/ListOption';
 	import { page } from '$app/stores';
+	import { toastStore } from '$lib/Stores/Toast';
 
 	let filter: ListOption = {
 		page: 1,
@@ -66,6 +67,26 @@
 				return 'red';
 			default:
 				return 'primary'; // Changed from 'gray' to 'primary'
+		}
+	}
+
+
+	async function fetchRegistrations(page: number) {
+		try {
+			await registerStore.fetchAll({ page });
+		} catch (error) {
+			const errorMessage = error instanceof Error ? error.message : 'An unknown error occurred';
+			toastStore.showToast('Failed to fetch registrations: ' + errorMessage, 'error');
+		}
+	}
+
+	async function deleteRegistration(id: number) {
+		try {
+			await registerStore.remove(id);
+			toastStore.showToast('Registration deleted successfully!', 'success');
+		} catch (error) {
+			const errorMessage = error instanceof Error ? error.message : 'An unknown error occurred';
+			toastStore.showToast('Failed to delete registration: ' + errorMessage, 'error');
 		}
 	}
 </script>
