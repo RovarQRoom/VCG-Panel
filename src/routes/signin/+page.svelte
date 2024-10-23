@@ -21,7 +21,7 @@
 		try {
 			await authStore.signIn(email, password);
 
-			goto('/');
+			goto('/cards/1');
 		} catch (err) {
 			errorMessage =
 				err instanceof Error ? err.message : 'An unexpected error occurred. Please try again.';
