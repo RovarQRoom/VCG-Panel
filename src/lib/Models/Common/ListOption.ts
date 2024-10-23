@@ -2,7 +2,7 @@ import type { Database } from '$lib/Supabase/Types/database.types';
 import { PageOption } from './PageOption';
 
 export class ListOption extends PageOption {
-	language?: Database['public']['Enums']['LanguageEnum'] = 'ENGLISH';
+	language?: 'en' | 'ar' | 'ckb' = 'en';
 	selected?: string;
 	equal?: string;
 	notEqual?: string;

@@ -6,9 +6,17 @@
 	import { VITE_SUPABASE_STORAGE_URL } from '$env/static/public';
 	import { Trash } from 'svelte-heros-v2';
 	import { _ } from 'svelte-i18n';
+	import Pagination from '$lib/Components/Pagination.svelte';
+	import { page } from '$app/stores';
+	import type { ListOption } from '$lib/Models/Common/ListOption';
+
+	let filter: ListOption = {
+		page: 1,
+		limit: 8
+	};
 
 	onMount(async () => {
-		await cardStore.fetchAll();
+		await cardStore.fetchAll(filter);
 	});
 
 	function goToAddCard() {
@@ -49,7 +57,7 @@
 		</div>
 	</Card>
 
-	{#each $cardStore.slice(0, 9) as card}
+	{#each $cardStore.data as card}
 		<Card
 			class="relative overflow-hidden pb-1 hover:scale-105 transition-all duration-300 bg-main-light dark:bg-main-dark"
 		>
@@ -105,4 +113,12 @@
 			</button>
 		</Card>
 	{/each}
+</div>
+<div class="flex justify-center mt-8">
+	<Pagination
+		Store={cardStore}
+		currentPage={Number($page.params.page)}
+		name={'cards'}
+		{filter}
+	/>
 </div>

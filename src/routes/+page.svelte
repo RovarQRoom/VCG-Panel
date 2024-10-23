@@ -11,7 +11,7 @@
 	onMount(async () => {
 		await cardStore.fetchAll();
 		await eventStore.fetchAll();
-		totalCards = $cardStore.length;
+		totalCards = $cardStore.total;
 		totalEvents = $eventStore.length;
 		userName = $authStore?.email || 'User';
 	});

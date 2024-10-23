@@ -70,7 +70,7 @@ export class RepresentativeRepository implements IRepresentative {
 	async getLatestRepresentativeAsync(): Promise<RepresentativeEntity | null> {
 		const response = await supabase
 			.from('Representative')
-			.select('*, name(*), description(*)')
+			.select('*, name(id,en,ar,ckb), description(id,en,ar,ckb)')
 			.is('deleted_at', null)
 			.order('created_at', { ascending: false })
 			.limit(1)

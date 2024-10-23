@@ -20,7 +20,7 @@ export class EventRepository implements IEvent {
 	async getEventAsync(id: number): Promise<EventEntity> {
 		const response = await supabase
 			.from('Event')
-			.select('*,place(*)')
+			.select('*,place(id,en,ar,ckb)')
 			.eq('id', id)
 			.returns<EventEntity>()
 			.single();

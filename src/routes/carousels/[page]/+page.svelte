@@ -7,9 +7,16 @@
 	import { PlusOutline } from 'flowbite-svelte-icons';
 	import { isVideoFile, isVideoLink } from '$lib/utils/fileUtils';
 	import { _ } from 'svelte-i18n';
+	import Pagination from '$lib/Components/Pagination.svelte';
+	import { page } from '$app/stores';
+	import type { ListOption } from '$lib/Models/Common/ListOption';
+	let filter: ListOption = {
+		page: 1,
+		limit: 6
+	};
 
 	onMount(async () => {
-		await carouselStore.fetchAll();
+		await carouselStore.fetchAll(filter);
 	});
 
 	function handleEdit(id: number) {
@@ -31,8 +38,8 @@
 		<PlusOutline class="w-8 h-8" strokeWidth="2" />
 	</a>
 
-	<div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
-		{#each $carouselStore as carousel}
+	<div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 mb-8">
+		{#each $carouselStore.data as carousel}
 			<div
 				class="relative overflow-hidden rounded-xl shadow-lg group transition-transform duration-300 hover:scale-105"
 			>
@@ -117,5 +124,14 @@
 				</div>
 			</div>
 		{/each}
+	</div>
+
+	<div class="flex justify-center mt-8">
+		<Pagination
+			Store={carouselStore}
+			currentPage={Number($page.params.page)}
+			name={'carousels'}
+			{filter}
+		/>
 	</div>
 </div>

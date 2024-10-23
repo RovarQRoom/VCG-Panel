@@ -182,6 +182,7 @@ export type Database = {
 			};
 			Register: {
 				Row: {
+					action: boolean | null;
 					created_at: string;
 					deleted_at: string | null;
 					email: string;
@@ -191,6 +192,7 @@ export type Database = {
 					phone: string;
 				};
 				Insert: {
+					action?: boolean | null;
 					created_at?: string;
 					deleted_at?: string | null;
 					email: string;
@@ -200,6 +202,7 @@ export type Database = {
 					phone: string;
 				};
 				Update: {
+					action?: boolean | null;
 					created_at?: string;
 					deleted_at?: string | null;
 					email?: string;

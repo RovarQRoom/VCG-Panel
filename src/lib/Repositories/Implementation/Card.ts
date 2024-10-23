@@ -3,6 +3,7 @@ import type { Card, InsertCard, UpdateCard } from '$lib/Supabase/Types/database.
 import type { ICard } from '../Interface/ICard';
 import type { ListOption } from '$lib/Models/Common/ListOption';
 import type { CardEntity } from '$lib/Models/Entities/Card';
+import type { PostgrestSingleResponse } from '@supabase/supabase-js';
 
 export class CardRepository implements ICard {
 	async createCardAsync(card: InsertCard): Promise<CardEntity> {
@@ -29,16 +30,23 @@ export class CardRepository implements ICard {
 		}
 		return response.data;
 	}
-	async getCardsAsync(_option?: ListOption): Promise<CardEntity[]> {
+	async getCardsAsync(_option?: ListOption): Promise<PostgrestSingleResponse<CardEntity[]>> {
 		const response = await supabase
 			.from('Card')
-			.select('*,title(en),description(en)')
+			.select(`*,title(${_option?.language ?? 'en'}),description(${_option?.language ?? 'en'})`, {
+				count: 'exact'
+			})
 			.is('deleted_at', null)
+			.order('id', { ascending: false })
+			.range(
+				((_option?.page ?? 1) - 1) * (_option?.limit ?? 10),
+				(_option?.page ?? 1) * (_option?.limit ?? 10)
+			)
 			.returns<CardEntity[]>();
 		if (response.error) {
 			throw response.error;
 		}
-		return response.data;
+		return response;
 	}
 	async updateCardAsync(card: UpdateCard): Promise<CardEntity> {
 		const response = await supabase

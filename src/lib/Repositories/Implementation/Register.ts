@@ -1,13 +1,8 @@
 import type { ListOption } from '$lib/Models/Common/ListOption';
-import type {
-	Database,
-	InsertRegister,
-	Register,
-	UpdateRegister
-} from '$lib/Supabase/Types/database.types';
-import type { PostgrestSingleResponse } from '@supabase/supabase-js';
+import type { InsertRegister, Register, UpdateRegister } from '$lib/Supabase/Types/database.types';
 import type { IRegister } from '../Interface/IRegister';
 import { supabase } from '$lib/Supabase/supabase';
+import type { PostgrestSingleResponse } from '@supabase/supabase-js';
 
 export class RegisterRepository implements IRegister {
 	async createRegisterAsync(register: InsertRegister): Promise<Register> {
@@ -24,12 +19,22 @@ export class RegisterRepository implements IRegister {
 		}
 		return response.data;
 	}
-	async getRegistersAsync(_option?: ListOption): Promise<Register[]> {
-		const response = await supabase.from('Register').select('*');
+	async getRegistersAsync(_option?: ListOption): Promise<PostgrestSingleResponse<Register[]>> {
+		const response = await supabase
+			.from('Register')
+			.select('*', {
+				count: 'exact'
+			})
+			.is('deleted_at', null)
+			.order('id', { ascending: false })
+			.range(
+				((_option?.page ?? 1) - 1) * (_option?.limit ?? 10),
+				(_option?.page ?? 1) * (_option?.limit ?? 10)
+			);
 		if (response.error) {
 			throw response.error;
 		}
-		return response.data;
+		return response;
 	}
 	async updateRegisterAsync(register: UpdateRegister): Promise<Register> {
 		const response = await supabase
