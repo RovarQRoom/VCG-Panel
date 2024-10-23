@@ -14,5 +14,14 @@
   "representative-title": "Representative Title",
   "name": "Name",
   "warning-image": "Only pick an Image that has a person on it and also has a transparent background",
-  "representative-details": "Representative Details"
+  "representative-details": "Representative Details",
+  "carousels": "Carousels",
+  "your-browser-does-not-support-the-video-tag": "Your browser does not support the video tag",
+  "video": "Video",
+  "no-media-selected": "No Media Selected",
+  "media": "Media",
+  "title": "Title",
+  "add-new-carousel": "Add new Carousel",
+  "edit-carousel": "Edit Carousel",
+  "back": "Back"
 }

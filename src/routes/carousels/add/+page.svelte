@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
-	import { Card, Button, Label, Input, Textarea, Tabs, TabItem } from 'flowbite-svelte';
+	import { Card, Button, Label, Input, Textarea, Tabs, TabItem, Spinner } from 'flowbite-svelte';
 	import {
 		LanguageEnum,
 		type InsertCarousel,
@@ -57,6 +57,8 @@
 		en: null
 	};
 
+	let isLoading = false;
+
 	function handleFileSelect(event: Event, lang: string) {
 		const input = event.target as HTMLInputElement;
 		if (input.files && input.files[0]) {
@@ -69,6 +71,9 @@
 	}
 
 	async function handleSubmit() {
+		if (isLoading) return;
+		isLoading = true;
+
 		let mediaResponse: Language | null = null;
 		let mediaFilesResponse: {
 			en?: { id: string; path: string; fullPath: string };
@@ -136,6 +141,8 @@
 			if (mediaFilesResponse.ckb && mediaFilesResponse.ckb.id) {
 				await storageStore.deleteFile(mediaFilesResponse.ckb.id);
 			}
+		} finally {
+			isLoading = false;
 		}
 	}
 
@@ -164,7 +171,7 @@
 	</Button>
 </div>
 
-<h1 class="text-3xl font-bold mb-6">Add New Carousel</h1>
+<h1 class="text-3xl font-bold mb-6">{$_('add-new-carousel')}</h1>
 
 <Card class="max-w-2xl mx-auto p-6 bg-white shadow-lg rounded-lg">
 	<form on:submit|preventDefault={handleSubmit} class="flex flex-col space-y-6">
@@ -172,7 +179,9 @@
 			{#each Object.keys(LanguageEnum) as key}
 				<TabItem open title={key}>
 					<div class="mt-4">
-						<Label for="title-{key.toLowerCase()}" class="mb-2">Title ({key})</Label>
+						<Label for="title-{key.toLowerCase()}" class="mb-2">
+							{$_('title')} ({key})
+						</Label>
 						<Input
 							type="text"
 							id="title-{key.toLowerCase()}"
@@ -184,7 +193,9 @@
 						/>
 					</div>
 					<div class="mt-4">
-						<Label for="description-{key.toLowerCase()}" class="mb-2">Description ({key})</Label>
+						<Label for="description-{key.toLowerCase()}" class="mb-2">
+							{$_('description')} ({key})
+						</Label>
 						<Textarea
 							id="description-{key.toLowerCase()}"
 							placeholder={$_('enter-description')}
@@ -195,7 +206,7 @@
 						/>
 					</div>
 					<div class="mt-4">
-						<Label for="media-{key.toLowerCase()}" class="mb-2">Media ({key})</Label>
+						<Label for="media-{key.toLowerCase()}" class="mb-2">{$_('media')} ({key})</Label>
 						<Input
 							type="file"
 							id="media-{key.toLowerCase()}"
@@ -221,7 +232,7 @@
 										controls
 										class="w-full h-full object-contain"
 									>
-										Your browser does not support the video tag.
+										{$_('your-browser-does-not-support-the-video-tag')}
 									</video>
 								{/if}
 							{:else}
@@ -237,7 +248,11 @@
 			<Button
 				type="submit"
 				class="px-6 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg transition duration-300 ease-in-out"
+				disabled={isLoading}
 			>
+				{#if isLoading}
+					<Spinner class="mr-3" size="4" color="white" />
+				{/if}
 				{$_('add-carousel')}
 			</Button>
 		</div>

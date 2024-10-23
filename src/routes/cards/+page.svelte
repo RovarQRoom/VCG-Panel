@@ -33,7 +33,7 @@
 <h1 class="text-3xl font-bold mb-6">Cards</h1>
 
 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-	<Card class="cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-700" on:click={goToAddCard}>
+	<Card class="cursor-pointer hover:bg-secondary-light dark:hover:bg-secondary-dark" on:click={goToAddCard}>
 		<div class="flex items-center justify-center h-full">
 			<svg
 				class="w-12 h-12 text-gray-400"
@@ -53,7 +53,7 @@
 	</Card>
 
 	{#each $cardStore.slice(0, 9) as card}
-		<Card class="relative overflow-hidden pb-1 hover:scale-105 transition-all duration-300">
+		<Card class="relative overflow-hidden pb-1 hover:scale-105 transition-all duration-300 bg-main-light dark:bg-main-dark">
 			<div class="p-5">
 				<div class="flex items-start mb-4">
 					{#if card.icon}

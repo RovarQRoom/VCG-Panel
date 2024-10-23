@@ -13,5 +13,14 @@
   "representative-title": "ناونیشانی نوێنەر",
   "name": "ناو",
   "warning-image": "تەنها وێنەیەک هەڵبژێرە کە کەسێکی لەسەر بێت و هەروەها پاشخانێکی شەفافی هەبێت",
-  "representative-details": "وردەکاری نوێنەر"
+  "representative-details": "وردەکاری نوێنەر",
+  "carousels": "کارۆسێلەکان",
+  "your-browser-does-not-support-the-video-tag": "وێبگەڕەکەت پشتگیری لە تاگی ڤیدیۆکە ناکات",
+  "video": "ڤیدیۆ",
+  "no-media-selected": "هیچ میدیایەک هەڵنەبژێردراوە",
+  "media": "میدیا",
+  "title": "ناونیشان",
+  "add-new-carousel": "کارۆسێلی نوێ زیاد بکە",
+  "edit-carousel": "دەستکاری کارۆسێل",
+  "back": "گەڕانەوە"
 }

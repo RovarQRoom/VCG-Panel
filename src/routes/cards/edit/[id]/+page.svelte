@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
-	import { Card, Button, Label, Input, Textarea, Tabs, TabItem } from 'flowbite-svelte';
+	import { Card, Button, Label, Input, Textarea, Tabs, TabItem, Spinner } from 'flowbite-svelte';
 	import { goto } from '$app/navigation';
 	import { cardStore } from '$lib/Stores/Card';
 	import { languageStore } from '$lib/Stores/Language';
@@ -28,6 +28,8 @@
 
 	let selectedFile: File | null = null;
 	let imagePreview: string | null = null;
+
+	let isLoading = false;
 
 	onMount(async () => {
 		const response = await cardStore.fetch(Number($page.params.id));
@@ -59,7 +61,8 @@
 	}
 
 	async function handleUpdate() {
-		if (!card) return;
+		if (!card || isLoading) return;
+		isLoading = true;
 
 		let titleResponse: Language | null = null;
 		let descriptionResponse: Language | null = null;
@@ -111,6 +114,8 @@
 			
 			// Show an error message to the user
 			alert('An error occurred while updating the card. Please try again.');
+		} finally {
+			isLoading = false;
 		}
 	}
 
@@ -189,7 +194,11 @@
 			<Button
 				type="submit"
 				class="px-6 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg transition duration-300 ease-in-out"
+				disabled={isLoading}
 			>
+				{#if isLoading}
+					<Spinner class="mr-3" size="4" color="white" />
+				{/if}
 				Update Card
 			</Button>
 		</div>

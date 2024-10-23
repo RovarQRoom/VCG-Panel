@@ -2,9 +2,11 @@
 	import { onMount } from 'svelte';
 	import { goto } from '$app/navigation';
 	import { carouselStore } from '$lib/Stores/Carousel';
-	import { VITE_SUPABASE_STORAGE_URL, VITE_SUPABASE_URL } from '$env/static/public';
+	import { VITE_SUPABASE_STORAGE_URL } from '$env/static/public';
 	import { scale } from 'svelte/transition';
 	import { PlusOutline } from 'flowbite-svelte-icons';
+	import { isVideoFile, isVideoLink } from '$lib/utils/fileUtils';
+	import { _ } from 'svelte-i18n';
 
 	onMount(async () => {
 		await carouselStore.fetchAll();
@@ -20,11 +22,11 @@
 </script>
 
 <div class="container mx-auto p-4">
-	<h1 class="text-2xl font-bold mb-4">Carousels</h1>
+	<h1 class="text-2xl font-bold mb-4">{$_('carousels')}</h1>
 
 	<a
 		href="/carousels/add"
-		class="bg-blue-500 text-white w-12 h-12 rounded-full items-center justify-center mb-4 flex hover:bg-blue-600 transition-colors duration-300"
+		class="btn-primary w-12 h-12 rounded-full items-center justify-center mb-4 flex"
 	>
 		<PlusOutline class="w-8 h-8" strokeWidth="2" />
 	</a>
@@ -34,11 +36,31 @@
 			<div
 				class="relative overflow-hidden rounded-xl shadow-lg group transition-transform duration-300 hover:scale-105"
 			>
-				<img
-					src={`${VITE_SUPABASE_STORAGE_URL}${carousel.media?.en}`}
-					alt={carousel.title?.en}
-					class="w-full h-64 object-cover"
-				/>
+				{#if isVideoFile(carousel.media?.en) || isVideoLink(carousel.media?.en ?? '')}
+					<div class="relative">
+						<!-- svelte-ignore a11y-media-has-caption -->
+						<video
+							src={`${VITE_SUPABASE_STORAGE_URL}${carousel.media?.en}`}
+							class="w-full h-64 object-cover"
+							autoplay
+							muted
+						>
+							{$_('your-browser-does-not-support-the-video-tag')}
+						</video>
+						<div class="absolute top-2 right-2 bg-black bg-opacity-50 text-white px-2 py-1 rounded">
+							<svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 inline-block mr-1" viewBox="0 0 20 20" fill="currentColor">
+								<path d="M2 6a2 2 0 012-2h6a2 2 0 012 2v8a2 2 0 01-2 2H4a2 2 0 01-2-2V6zM14.553 7.106A1 1 0 0014 8v4a1 1 0 00.553.894l2 1A1 1 0 0018 13V7a1 1 0 00-1.447-.894l-2 1z" />
+							</svg>
+							{$_('video')}
+						</div>
+					</div>
+				{:else}
+					<img
+						src={`${VITE_SUPABASE_STORAGE_URL}${carousel.media?.en}`}
+						alt={carousel.title?.en}
+						class="w-full h-64 object-cover"
+					/>
+				{/if}
 				<div
 					class="absolute inset-0 bg-black bg-opacity-50 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-between p-4"
 				>

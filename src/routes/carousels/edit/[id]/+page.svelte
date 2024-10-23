@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
 	import { goto } from '$app/navigation';
-	import { Card, Button, Label, Input, Textarea, Tabs, TabItem } from 'flowbite-svelte';
+	import { Card, Button, Label, Input, Textarea, Tabs, TabItem, Spinner } from 'flowbite-svelte';
 	import {
 		LanguageEnum,
 		type UpdateCarousel,
@@ -21,6 +21,8 @@
 
 	let selectedFile: { en: File | null; ckb?: File | null; ar?: File | null } = { en: null };
 	let imagePreview: { en: string | null; ckb?: string | null; ar?: string | null } = { en: null };
+
+	let isLoading = false;
 
 	onMount(async () => {
 		const response = await carouselStore.fetch(Number($page.params.id));
@@ -58,7 +60,8 @@
 	}
 
 	async function handleUpdate() {
-		if (!carousel) return;
+		if (!carousel || isLoading) return;
+		isLoading = true;
 
 		let mediaResponse: Language | null = null;
 		let mediaFilesResponse: {
@@ -155,6 +158,8 @@
 
 			// Show an error message to the user
 			alert('An error occurred while updating the carousel. Please try again.');
+		} finally {
+			isLoading = false;
 		}
 	}
 
@@ -184,11 +189,11 @@
 				d="M10 19l-7-7m0 0l7-7m-7 7h18"
 			></path>
 		</svg>
-		Back
+		{$_('back')}
 	</Button>
 </div>
 
-<h1 class="text-3xl font-bold mb-6">Edit Carousel</h1>
+<h1 class="text-3xl font-bold mb-6">{$_('edit-carousel')}</h1>
 
 <Card class="max-w-2xl mx-auto p-6 bg-white shadow-lg rounded-lg">
 	<form on:submit|preventDefault={handleUpdate} class="flex flex-col space-y-6">
@@ -196,7 +201,9 @@
 			{#each Object.keys(LanguageEnum) as key}
 				<TabItem open title={key}>
 					<div class="mt-4">
-						<Label for="title-{key.toLowerCase()}" class="mb-2">Title ({key})</Label>
+						<Label for="title-{key.toLowerCase()}" class="mb-2">
+							{$_('title')} ({key})
+						</Label>
 						<Input
 							type="text"
 							id="title-{key.toLowerCase()}"
@@ -208,7 +215,9 @@
 						/>
 					</div>
 					<div class="mt-4">
-						<Label for="description-{key.toLowerCase()}" class="mb-2">Description ({key})</Label>
+						<Label for="description-{key.toLowerCase()}" class="mb-2">
+							{$_('description')} ({key})
+						</Label>
 						<Textarea
 							id="description-{key.toLowerCase()}"
 							placeholder={$_('enter-description')}
@@ -219,7 +228,9 @@
 						/>
 					</div>
 					<div class="mt-4">
-						<Label for="media-{key.toLowerCase()}" class="mb-2">Media ({key})</Label>
+							<Label for="media-{key.toLowerCase()}" class="mb-2">
+							{$_('media')} ({key})
+						</Label>
 						<Input
 							type="file"
 							id="media-{key.toLowerCase()}"
@@ -239,7 +250,7 @@
 										controls
 										class="w-full h-full object-contain"
 									>
-										Your browser does not support the video tag.
+										{$_('your-browser-does-not-support-the-video-tag')}
 									</video>
 								{:else}
 									<img
@@ -261,7 +272,11 @@
 			<Button
 				type="submit"
 				class="px-6 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg transition duration-300 ease-in-out"
+				disabled={isLoading}
 			>
+				{#if isLoading}
+					<Spinner class="mr-3" size="4" color="white" />
+				{/if}
 				{$_('update-carousel')}
 			</Button>
 		</div>

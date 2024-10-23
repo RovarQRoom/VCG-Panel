@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { Card, Button, Label, Input, Textarea, Tabs, TabItem } from 'flowbite-svelte';
+	import { Card, Button, Label, Input, Textarea, Tabs, TabItem, Spinner } from 'flowbite-svelte';
 	import { goto } from '$app/navigation';
 	import { LanguageEnum, type InsertCard, type Language } from '$lib/Supabase/Types/database.types';
 	import { _ } from 'svelte-i18n';
@@ -30,6 +30,8 @@
 	let selectedFile: File | null = null;
 	let imagePreview: string | null = null;
 
+	let isLoading = false;
+
 	function handleFileSelect(event: Event) {
 		const input = event.target as HTMLInputElement;
 		if (input.files && input.files[0]) {
@@ -39,6 +41,9 @@
 	}
 
 	async function handleSubmit() {
+		if (isLoading) return;
+		isLoading = true;
+
 		let titleResponse: Language | null = null;
 		let descriptionResponse: Language | null = null;
 		let iconResponse: {
@@ -70,6 +75,8 @@
 			if (iconResponse && iconResponse.id) {
 				await storageStore.deleteFile(iconResponse.id);
 			}
+		} finally {
+			isLoading = false;
 		}
 	}
 
@@ -165,7 +172,11 @@
 			<Button
 				type="submit"
 				class="px-6 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg transition duration-300 ease-in-out"
+				disabled={isLoading}
 			>
+				{#if isLoading}
+					<Spinner class="mr-3" size="4" color="white" />
+				{/if}
 				Add Card
 			</Button>
 		</div>

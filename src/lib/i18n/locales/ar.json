@@ -13,5 +13,14 @@
   "representative-title": "عنوان الممثل",
   "name": "اسم",
   "warning-image": "اختر فقط الصورة التي تحتوي على شخص ولها أيضًا خلفية شفافة",
-  "representative-details": "تفاصيل الممثل"
+  "representative-details": "تفاصيل الممثل",
+  "carousels": "دائري",
+  "your-browser-does-not-support-the-video-tag": "متصفحك لا يدعم علامة الفيديو",
+  "video": "فيديو",
+  "no-media-selected": "لم يتم تحديد أي وسائط",
+  "media": "وسائط",
+  "title": "عنوان",
+  "add-new-carousel": "إضافة دائري جديد",
+  "edit-carousel": "تحرير دائري",
+  "back": "خلف"
 }
