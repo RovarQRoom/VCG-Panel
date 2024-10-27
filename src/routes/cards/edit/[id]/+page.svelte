@@ -11,7 +11,9 @@
 	import { _ } from 'svelte-i18n';
 	import { toastStore } from '$lib/Stores/Toast';
 
-	let card: UpdateCard | null = null;
+	let card: UpdateCard = {
+		link: ''
+	};
 	let titleLanguage: {
 		en: string;
 		ckb?: string;
@@ -38,7 +40,8 @@
 			title: response.title?.id,
 			description: response.description?.id,
 			icon: response.icon,
-			id: response.id
+			id: response.id,
+			link: response.link ?? ''
 		};
 		titleLanguage = {
 			en: response.title?.en ?? '',
@@ -152,6 +155,11 @@
 
 <Card class="max-w-2xl mx-auto p-6 bg-white shadow-lg rounded-lg">
 	<form on:submit|preventDefault={handleUpdate} class="flex flex-col space-y-6">
+		<div>
+			<Label for="link" class="mb-2">{$_('link')}</Label>
+			<Input type="url" id="link" placeholder={$_('enter-card-link')} bind:value={card.link} />
+		</div>
+
 		<div>
 			<Label for="icon" class="mb-2">{$_('icon')}</Label>
 			<Input type="file" id="icon" accept="image/*" on:change={handleFileSelect} />

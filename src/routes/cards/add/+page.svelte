@@ -11,7 +11,8 @@
 	let createCard: InsertCard = {
 		icon: '',
 		title: 0,
-		description: 0
+		description: 0,
+		link: '' // Add this line
 	};
 	let titleLanguage: {
 		en: string;
@@ -115,6 +116,11 @@
 
 <Card class="max-w-2xl mx-auto p-6 bg-white shadow-lg rounded-lg">
 	<form on:submit|preventDefault={handleSubmit} class="flex flex-col space-y-6">
+		<div>
+			<Label for="link" class="mb-2">{$_('link')}</Label>
+			<Input type="url" id="link" placeholder="Enter card link" bind:value={createCard.link} />
+		</div>
+
 		<div>
 			<Label for="icon" class="mb-2">{$_('icon')}</Label>
 			<Input type="file" id="icon" accept="image/*" on:change={handleFileSelect} />

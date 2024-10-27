@@ -57,5 +57,7 @@
   "enter-your-password": "وشەی نهێنی خۆت داخڵ بکە",
   "signing-in": "چوونەژوورەوە",
   "failed-to-delete-registration": "شکستی هێنا لە سڕینەوەی ناو تۆمارکردن",
-  "failed-to-fetch-registrations": "شکستی هێنا لە هێنانی ناو تۆمارکردن"
+  "failed-to-fetch-registrations": "شکستی هێنا لە هێنانی ناو تۆمارکردن",
+  "link": "لینک",
+  "enter-card-link": "لینکی کارتەکە داخڵ بکە"
 }

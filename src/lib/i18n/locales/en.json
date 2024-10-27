@@ -58,5 +58,7 @@
   "enter-your-password": "Enter Your Password",
   "signing-in": "Signing In",
   "failed-to-delete-registration": "Failed to delete registration",
-  "failed-to-fetch-registrations": "Failed to fetch registrations"
+  "failed-to-fetch-registrations": "Failed to fetch registrations",
+  "link": "Link",
+  "enter-card-link": "Enter the card link"
 }

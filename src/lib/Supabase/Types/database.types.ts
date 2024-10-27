@@ -10,6 +10,7 @@ export type Database = {
 					description: number | null;
 					icon: string | null;
 					id: number;
+					link: string | null;
 					title: number;
 				};
 				Insert: {
@@ -18,6 +19,7 @@ export type Database = {
 					description?: number | null;
 					icon?: string | null;
 					id?: number;
+					link?: string | null;
 					title: number;
 				};
 				Update: {
@@ -26,6 +28,7 @@ export type Database = {
 					description?: number | null;
 					icon?: string | null;
 					id?: number;
+					link?: string | null;
 					title?: number;
 				};
 				Relationships: [

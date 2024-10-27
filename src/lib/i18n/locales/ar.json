@@ -57,5 +57,7 @@
   "enter-your-password": "أدخل كلمة المرور الخاصة بك",
   "signing-in": "تسجيل الدخول",
   "failed-to-delete-registration": "فشل في حذف التسجيل",
-  "failed-to-fetch-registrations": "فشل في جلب التسجيلات"
+  "failed-to-fetch-registrations": "فشل في جلب التسجيلات",
+  "link": "وصلة",
+  "enter-card-link": "أدخل رابط البطاقة"
 }

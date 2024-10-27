@@ -5,6 +5,7 @@ export class CardEntity {
 	title?: Language;
 	description?: Language;
 	icon: string | null = null;
+	link: string | null = null;
 	created_at: string = null!;
 	deleted_at: string | null = null;
 }
