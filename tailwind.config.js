@@ -14,10 +14,13 @@ export default {
 	theme: {
 		extend: {
 			colors: {
+				blue: "#356fe1",
+				darkBlue: "#212b3e",
+				gray: "#f6f7f7",
 				// flowbite-svelte
 				primary: {
 					light: '#8A70D6',
-					dark: '#6A4ED3',
+					dark: '#212121',
 					50: '#FFF5F2',
 					100: '#FFF1EE',
 					200: '#FFE4DE',
@@ -31,11 +34,15 @@ export default {
 				},
 				secondary: {
 					light: '#F0EDFF',
-					dark: '#D3C8FF'
+					dark: '#212b3e'
 				},
 				main: {
 					light: '#FFFFFF',
-					dark: '#1A1A1A'
+					dark: '#212121'
+				},
+				input: {
+					light: '#f1f1f1',
+					dark: '#191919'
 				}
 			}
 		},

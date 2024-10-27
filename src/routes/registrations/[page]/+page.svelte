@@ -90,8 +90,8 @@
 	<h1 class="text-3xl font-bold mb-6">{$_('registrations')}</h1>
 
 	<div class="overflow-x-auto relative shadow-md sm:rounded-lg">
-		<Table hoverable={true}>
-			<TableHead>
+		<Table hoverable={true} >
+			<TableHead class="bg-main-dark dark:bg-input-dark text-white">
 				<TableHeadCell>{$_('name')}</TableHeadCell>
 				<TableHeadCell>{$_('email')}</TableHeadCell>
 				<TableHeadCell>{$_('phone')}</TableHeadCell>
@@ -101,7 +101,7 @@
 			</TableHead>
 			<TableBody>
 				{#each $registerStore.data as registration}
-					<TableBodyRow>
+					<TableBodyRow class="bg-input-light border-white dark:bg-main-dark dark:border-input-dark">
 						<TableBodyCell>{registration.name}</TableBodyCell>
 						<TableBodyCell>{registration.email}</TableBodyCell>
 						<TableBodyCell>{registration.phone}</TableBodyCell>

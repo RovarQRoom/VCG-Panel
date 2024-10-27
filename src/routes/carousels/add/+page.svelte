@@ -154,7 +154,7 @@
 </script>
 
 <div class="mb-6">
-	<Button color="light" on:click={goBack} class="px-4 py-2">
+	<Button color="light" on:click={goBack} class="px-4 py-2 dark:bg-input-dark border-0 m-4">
 		<svg
 			class="w-4 h-4 mr-2"
 			fill="none"
@@ -175,7 +175,7 @@
 
 <h1 class="text-3xl font-bold mb-6">{$_('add-new-carousel')}</h1>
 
-<Card class="max-w-2xl mx-auto p-6 bg-white shadow-lg rounded-lg">
+<Card class="max-w-2xl mx-auto p-6 bg-white dark:bg-main-dark shadow-lg rounded-lg">
 	<form on:submit|preventDefault={handleSubmit} class="flex flex-col space-y-6">
 		<Tabs style="pills" class="justify-center mb-6">
 			{#each Object.keys(LanguageEnum) as key}
@@ -185,6 +185,7 @@
 							{$_('title')} ({$_(key.toLowerCase())})
 						</Label>
 						<Input
+						class="bg-input-light dark:bg-input-dark border-0"
 							type="text"
 							id="title-{key.toLowerCase()}"
 							placeholder={$_('enter-title')}
@@ -199,6 +200,7 @@
 							{$_('description')} ({$_(key.toLowerCase())})
 						</Label>
 						<Textarea
+						class="bg-input-light dark:bg-input-dark border-0"
 							id="description-{key.toLowerCase()}"
 							placeholder={$_('enter-description')}
 							bind:value={descriptionLanguage[
@@ -212,6 +214,7 @@
 							>{$_('media')} ({$_(key.toLowerCase())})</Label
 						>
 						<Input
+						class="bg-input-light dark:bg-input-dark border-0"
 							type="file"
 							id="media-{key.toLowerCase()}"
 							accept="image/*,video/*"

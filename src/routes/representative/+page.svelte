@@ -141,7 +141,7 @@
 </script>
 
 <div class="container mx-auto px-4 py-8">
-	<Card class="max-w-4xl mx-auto p-4 sm:p-6 bg-white shadow-lg rounded-lg">
+	<Card class="max-w-4xl mx-auto p-4 sm:p-6 bg-white dark:bg-main-dark shadow-lg rounded-lg">
 		<div class="flex mb-4 justify-between items-center">
 			<h1 class="text-2xl font-bold text-gray-800">{$_('representative-details')}</h1>
 			<div class="flex space-x-2">
@@ -223,6 +223,7 @@
 								<div class="mt-4">
 									<Label for="name-{key.toLowerCase()}" class="mb-2">{$_('name')} ({key})</Label>
 									<Input
+									class="bg-input-light dark:bg-input-dark border-0"
 										type="text"
 										id="name-{key.toLowerCase()}"
 										placeholder={$_('enter-representative-name')}
@@ -236,13 +237,14 @@
 														: 'en'
 										]}
 										disabled={!isEditing}
-										class="w-full"
+										
 									/>
 								</div>
 								<div class="mt-4">
 									<Label for="description" class="mb-2">{$_('description')}</Label>
 									<div class="border border-gray-300 rounded-lg p-2">
 										<Editor
+										
 											apiKey="olyqgwptv2negfn1hj95rbkolfmo81y6hudkm6qi8gu3vx0m"
 											{conf}
 											bind:value={descriptionLanguage[

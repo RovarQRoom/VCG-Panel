@@ -36,7 +36,7 @@
 
 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
 	<Card
-		class="cursor-pointer hover:bg-secondary-light dark:hover:bg-secondary-dark"
+		class="cursor-pointer  dark:bg-darkBlue hover:bg-secondary-light dark:hover:bg-secondary-dark"
 		on:click={goToAddCard}
 	>
 		<div class="flex items-center justify-center h-full">
