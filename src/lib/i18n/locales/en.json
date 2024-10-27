@@ -60,5 +60,15 @@
   "failed-to-delete-registration": "Failed to delete registration",
   "failed-to-fetch-registrations": "Failed to fetch registrations",
   "link": "Link",
-  "enter-card-link": "Enter the card link"
+  "enter-card-link": "Enter the card link",
+  "phone-numbers": "Phones",
+  "add-phone": "Add Phone",
+  "social-media": "Socials",
+  "social-name": "Social Name",
+  "social-link": "Social Link",
+  "add-social": "Add Social",
+  "footer-details": "Footer Details",
+  "footer-saved": "Footer Saved",
+  "unknown-error-occurred": "Unknown error occurred",
+  "footer-not-saved": "Footer not saved"
 }

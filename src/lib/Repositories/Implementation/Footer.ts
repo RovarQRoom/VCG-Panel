@@ -5,9 +5,9 @@ import type {
 	InsertFooter,
 	UpdateFooter
 } from '$lib/Supabase/Types/database.types';
-import type { PostgrestSingleResponse } from '@supabase/supabase-js';
 import type { IFooter } from '../Interface/IFooter';
 import { supabase } from '$lib/Supabase/supabase';
+import type { FooterEntity } from '$lib/Models/Entities/Footer';
 
 export class FooterRepository implements IFooter {
 	async createFooterAsync(footer: InsertFooter): Promise<Footer> {
@@ -29,6 +29,21 @@ export class FooterRepository implements IFooter {
 		if (response.error) {
 			throw response.error;
 		}
+		return response.data;
+	}
+	async getLatestFooterAsync(): Promise<FooterEntity> {
+		// This is how to call one to Many relationship
+		const response = await supabase
+			.from('Footer')
+			.select('*, socials:Social(id,name,link)')
+			.order('id', { ascending: false })
+			.returns<FooterEntity>()
+			.single();
+		if (response.error) {
+			throw response.error;
+		}
+
+
 		return response.data;
 	}
 	async updateFooterAsync(footer: UpdateFooter): Promise<Footer> {

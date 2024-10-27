@@ -1,3 +1,4 @@
+import type { FooterEntity } from '$lib/Models/Entities/Footer';
 import { FooterRepository } from '$lib/Repositories/Implementation/Footer';
 import type { Footer, InsertFooter, UpdateFooter } from '$lib/Supabase/Types/database.types';
 import { writable } from 'svelte/store';
@@ -5,7 +6,7 @@ import { writable } from 'svelte/store';
 const footerRepository = new FooterRepository();
 
 const createFooterStore = () => {
-	const { subscribe, set, update } = writable<Footer[]>([]);
+	const { subscribe, set, update } = writable<FooterEntity | null>(null);
 
 	return {
 		subscribe,
@@ -15,19 +16,23 @@ const createFooterStore = () => {
 		},
 		fetchAll: async () => {
 			const response = await footerRepository.getFootersAsync();
+			return response;
+		},
+		fetchLatest: async () => {
+			const response = await footerRepository.getLatestFooterAsync();
 			set(response);
+			return response;
 		},
 		insert: async (footer: InsertFooter) => {
 			const response = await footerRepository.createFooterAsync(footer);
-			update((footers) => [...footers, response]);
+			return response;
 		},
 		put: async (footer: UpdateFooter) => {
 			const response = await footerRepository.updateFooterAsync(footer);
-			update((footers) => footers.map((f) => (f.id === response.id ? response : f)));
+			return response;
 		},
 		remove: async (id: number) => {
 			await footerRepository.deleteFooterAsync(id);
-			update((footers) => footers.filter((f) => f.id !== id));
 		}
 	};
 };

@@ -137,22 +137,19 @@ export type Database = {
 					created_at: string;
 					deleted_at: string | null;
 					id: number;
-					phones: string[] | null;
-					socials: string[] | null;
+					phones: string[];
 				};
 				Insert: {
 					created_at?: string;
 					deleted_at?: string | null;
 					id?: number;
-					phones?: string[] | null;
-					socials?: string[] | null;
+					phones: string[];
 				};
 				Update: {
 					created_at?: string;
 					deleted_at?: string | null;
 					id?: number;
-					phones?: string[] | null;
-					socials?: string[] | null;
+					phones?: string[];
 				};
 				Relationships: [];
 			};
@@ -254,6 +251,44 @@ export type Database = {
 						columns: ['name'];
 						isOneToOne: false;
 						referencedRelation: 'Language';
+						referencedColumns: ['id'];
+					}
+				];
+			};
+			Social: {
+				Row: {
+					created_at: string;
+					deleted_at: string | null;
+					footer: number | null;
+					icon: string | null;
+					id: number;
+					link: string;
+					name: string;
+				};
+				Insert: {
+					created_at?: string;
+					deleted_at?: string | null;
+					footer?: number | null;
+					icon?: string | null;
+					id?: number;
+					link: string;
+					name: string;
+				};
+				Update: {
+					created_at?: string;
+					deleted_at?: string | null;
+					footer?: number | null;
+					icon?: string | null;
+					id?: number;
+					link?: string;
+					name?: string;
+				};
+				Relationships: [
+					{
+						foreignKeyName: 'Social_footer_fkey';
+						columns: ['footer'];
+						isOneToOne: false;
+						referencedRelation: 'Footer';
 						referencedColumns: ['id'];
 					}
 				];
@@ -399,3 +434,7 @@ export type UpdateRegister = Database['public']['Tables']['Register']['Update'];
 export type Representative = Database['public']['Tables']['Representative']['Row'];
 export type InsertRepresentative = Database['public']['Tables']['Representative']['Insert'];
 export type UpdateRepresentative = Database['public']['Tables']['Representative']['Update'];
+
+export type Social = Database['public']['Tables']['Social']['Row'];
+export type InsertSocial = Database['public']['Tables']['Social']['Insert'];
+export type UpdateSocial = Database['public']['Tables']['Social']['Update'];

@@ -59,5 +59,15 @@
   "failed-to-delete-registration": "فشل في حذف التسجيل",
   "failed-to-fetch-registrations": "فشل في جلب التسجيلات",
   "link": "وصلة",
-  "enter-card-link": "أدخل رابط البطاقة"
+  "enter-card-link": "أدخل رابط البطاقة",
+  "phone-numbers": "الهواتف",
+  "add-phone": "إضافة هاتف",
+  "social-name": "الاسم الاجتماعي",
+  "social-link": "الرابط الاجتماعي",
+  "add-social": "أضف الاجتماعية",
+  "footer-details": "تفاصيل التذييل",
+  "footer-saved": "تم حفظ التذييل",
+  "unknown-error-occurred": "حدث خطأ غير معروف",
+  "footer-not-saved": "لم يتم حفظ التذييل",
+  "social-media": "اجتماعيات"
 }
