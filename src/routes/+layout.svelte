@@ -68,7 +68,8 @@
 				   { href: '/event', icon: 'M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z', name: 'Event', field: '/event' },
 				    { href: '/representative', icon: 'M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z', name: 'Representative', field: '/representative' },
 					 { href: '/registrations/1', icon: 'M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01', name: 'Registrations', field: '/registrations' },
-					 { href: '/footer', icon: 'M3 3h18v18H3V3zm4 2v14h2V5H7zm4 0v14h2V5h-2zm4 0v14h2V5h-2z', name: 'Footer', field: '/footer' }
+					 { href: '/footer', icon: 'M3 3h18v18H3V3zm4 2v14h2V5H7zm4 0v14h2V5h-2zm4 0v14h2V5h-2z', name: 'Footer', field: '/footer' },
+					 { href: '/social', icon: 'M12 2a10 10 0 100 20 10 10 0 000-20zm1 17.93A8.001 8.001 0 014 12h2a6 6 0 0011.93 1H13v2h4.93A8.001 8.001 0 0113 19.93zM12 4a8.001 8.001 0 017.93 7H13V9h4.93A8.001 8.001 0 0112 4z', name: 'Social', field: '/social' }
 					 ] as item}
 					<NavLi
 						href={item.href}
