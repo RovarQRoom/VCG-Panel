@@ -13,11 +13,18 @@ export class StorageRepository implements IStorage {
 		fullPath: string;
 	}> {
 		const response = await supabase.storage
-			.from(storageName ?? 'files')
-			.upload(
-				`${folderName ?? 'public/'}${moment().format('YY-MM-DD:HH:mm:ss')}${image.name}`,
-				image
-			);
+		.from(storageName ?? 'files')
+		.upload(
+			`${folderName ?? 'public/'}${moment().format('YY-MM-DD:HH:mm:ss')}${image.name}`,
+			image
+		);
+		if (response.error) {
+			throw new Error(response.error.message);
+		}
+		return response.data;
+	}
+	async getFileInfoAsync(path: string) {
+		const response = await supabase.storage.from('files').info(path);
 		if (response.error) {
 			throw new Error(response.error.message);
 		}
@@ -30,11 +37,7 @@ export class StorageRepository implements IStorage {
 		await supabase.storage.from('files').remove([path]);
 	}
 
-	async getFileInfoAsync(path: string) {
-		const response = await supabase.storage.from('files').info(path);
-		if (response.error) {
-			throw new Error(response.error.message);
-		}
-		return response.data;
+	async deleteFilesAsync(paths: string[]): Promise<void> {
+		await supabase.storage.from('files').remove(paths);
 	}
 }

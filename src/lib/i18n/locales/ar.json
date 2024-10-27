@@ -69,5 +69,7 @@
   "footer-saved": "تم حفظ التذييل",
   "unknown-error-occurred": "حدث خطأ غير معروف",
   "footer-not-saved": "لم يتم حفظ التذييل",
-  "social-media": "اجتماعيات"
+  "social-media": "اجتماعيات",
+  "invalid-image-file": "ملف صورة غير صالح",
+  "image-upload-failed": "فشل تحميل الصورة"
 }

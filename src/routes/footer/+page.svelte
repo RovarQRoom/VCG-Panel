@@ -1,12 +1,16 @@
 <script lang="ts">
-	import { Card, Button, Label, Input, Spinner } from 'flowbite-svelte';
-	import { PencilSquare, DocumentCheck, Plus, Trash } from 'svelte-heros-v2';
+	import { Card, Button, Label, Input, Spinner, Img } from 'flowbite-svelte';
+	import { PencilSquare, DocumentCheck, Plus, Trash, ArrowUp } from 'svelte-heros-v2';
 	import { onMount } from 'svelte';
 	import { footerStore } from '$lib/Stores/Footer';
 	import { FooterEntity } from '$lib/Models/Entities/Footer';
-	import type { Social } from '$lib/Supabase/Types/database.types';
 	import { _ } from 'svelte-i18n';
 	import { toastStore } from '$lib/Stores/Toast';
+	import { storageStore } from '$lib/Stores/Storage';
+	import type { Social } from '$lib/Supabase/Types/database.types';
+	import { socialStore } from '$lib/Stores/Social';
+	import moment from 'moment';
+	import { VITE_SUPABASE_STORAGE_URL } from '$env/static/public';
 
 	let footer: FooterEntity = new FooterEntity();
 	let isEditing = false;
@@ -16,8 +20,19 @@
 		const latestFooter = await footerStore.fetchLatest();
 		if (latestFooter) {
 			footer = latestFooter;
+			console.log(footer.socials);
+			footer.socials.forEach((social, index) => {
+				icons[index] = {
+					file: null,
+					localUrl: social.icon ? `${VITE_SUPABASE_STORAGE_URL}${social.icon}` : null
+				};
+			});
 		}
 	});
+	let icons: {
+		file: File | null;
+		localUrl: string | null;
+	}[] = [];
 
 	function toggleEdit() {
 		isEditing = !isEditing;
@@ -40,13 +55,19 @@
 
 	function removeSocial(index: number) {
 		footer.socials = footer.socials.filter((_, i) => i !== index);
+		icons = icons.filter((_, i) => i !== index);
 	}
 
 	async function handleSave() {
 		if (isSaving) return;
 		isSaving = true;
 		isEditing = false;
-
+		let iconsResponse: {
+			id: string | null;
+			path: string | null;
+			fullPath: string | null;
+		}[] = [];
+		let socialsResponse: Social[] = [];
 		try {
 			const response = footer.id ? await footerStore.put(footer) : await footerStore.insert(footer);
 			if (response) {
@@ -54,10 +75,71 @@
 			} else {
 				toastStore.showToast($_('footer-not-saved'), 'error');
 			}
+			if (icons.length > 0) {
+				iconsResponse = await Promise.all(
+					icons.map(async (icon, index) => {
+						if (icon.file && icon.file.size > 0) {
+							const response = await storageStore.uploadFile(icon.file);
+							footer.socials[index].icon = response.fullPath;
+							return response;
+						} else {
+							return { fullPath: icon.localUrl, id: '', path: '' };
+						}
+					})
+				);
+			}
+			socialsResponse = await socialStore.bulkInsert(
+				footer.socials.map((social) => ({
+					...social,
+					footer: footer.id ?? 0,
+					created_at: moment().toISOString()
+				}))
+			);
+			const latestFooter = await footerStore.fetchLatest();
+			if (latestFooter) {
+				footer = latestFooter;
+				footer.socials.forEach((social, index) => {
+					icons[index] = {
+						file: null,
+						localUrl: social.icon ? `${VITE_SUPABASE_STORAGE_URL}${social.icon}` : null
+					};
+				});
+			}
 		} catch (error) {
-			toastStore.showToast($_('unknown-error-occurred'), 'error');
+			// Revert changes if an error occurs
+			if (iconsResponse.length > 0) {
+				await storageStore.removeFiles(iconsResponse.map((icon) => icon.path ?? ''));
+			}
+			if (socialsResponse.length > 0) {
+				socialsResponse.forEach(async (social) => {
+					await socialStore.remove(social.id);
+				});
+			}
+
+			if (error instanceof Error) {
+				toastStore.showToast(error.message, 'error');
+			} else {
+				toastStore.showToast($_('unknown-error-occurred'), 'error');
+			}
 		} finally {
 			isSaving = false;
+		}
+	}
+
+	async function handleImageUpload(event: Event, index: number) {
+		const input = event.target as HTMLInputElement;
+		if (!input.files?.length) return;
+
+		const file = input.files[0];
+		if (!file.type.startsWith('image/')) {
+			toastStore.showToast($_('invalid-image-file'), 'error');
+			return;
+		}
+
+		try {
+			icons[index] = { file, localUrl: URL.createObjectURL(file) };
+		} catch (error) {
+			toastStore.showToast($_('image-upload-failed'), 'error');
 		}
 	}
 </script>
@@ -130,8 +212,38 @@
 								disabled={!isEditing}
 							/>
 						</div>
+						<div class="flex flex-col w-fit">
+							<Label class="ml-1 mb-1">{$_('icon')}</Label>
+							<div class="relative">
+								{#if icons[index]?.localUrl || social.icon}
+									<div class="flex items-center justify-center size-10">
+										<Img
+											src={icons[index]?.localUrl ?? social.icon ?? ''}
+											alt="Social icon"
+											class="object-cover rounded-lg"
+										/>
+									</div>
+								{/if}
+								{#if isEditing}
+									<Input
+										type="file"
+										accept="image/*"
+										class="absolute inset-0 opacity-0 cursor-pointer rounded-lg"
+										on:change={(e) => handleImageUpload(e, index)}
+										disabled={!isEditing}
+									/>
+								{/if}
+								{#if !icons[index]?.localUrl && !social.icon}
+									<div
+										class="flex items-center justify-center w-10 h-10 border-2 border-dashed border-gray-300 rounded"
+									>
+										<ArrowUp size="20" />
+									</div>
+								{/if}
+							</div>
+						</div>
 						{#if isEditing}
-							<Button color="red" class="px-2 py-2" on:click={() => removeSocial(index)}>
+							<Button color="red" on:click={() => removeSocial(index)}>
 								<Trash size="20" />
 							</Button>
 						{/if}

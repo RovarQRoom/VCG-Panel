@@ -10,4 +10,5 @@ export interface IStorage {
 	}>;
 	deleteFileAsync(id: string): Promise<void>;
 	deleteFileByPathAsync(path: string): Promise<void>;
+	deleteFilesAsync(paths: string[]): Promise<void>;
 }

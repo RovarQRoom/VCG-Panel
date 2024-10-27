@@ -70,5 +70,7 @@
   "footer-details": "Footer Details",
   "footer-saved": "Footer Saved",
   "unknown-error-occurred": "Unknown error occurred",
-  "footer-not-saved": "Footer not saved"
+  "footer-not-saved": "Footer not saved",
+  "invalid-image-file": "Invalid Image File",
+  "image-upload-failed": "Image Upload Failed"
 }

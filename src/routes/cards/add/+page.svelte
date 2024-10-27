@@ -74,12 +74,12 @@
 				await languageStore.remove(descriptionResponse.id);
 			}
 			if (iconResponse && iconResponse.id) {
-				await storageStore.deleteFile(iconResponse.id);
+				await storageStore.removeFile(iconResponse.id);
 			}
 			if (error instanceof Error) {
 				toastStore.showToast(error.message, 'error');
 			} else {
-				toastStore.showToast('An unknown error occurred', 'error');
+				toastStore.showToast($_('unknown-error-occurred'), 'error');
 			}
 		} finally {
 			isLoading = false;

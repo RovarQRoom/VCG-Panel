@@ -14,6 +14,7 @@
 	import { storageStore } from '$lib/Stores/Storage';
 	import { VITE_SUPABASE_STORAGE_URL } from '$env/static/public';
 	import { fade } from 'svelte/transition';
+	import { toastStore } from '$lib/Stores/Toast';
 
 	let nameLanguage: { en: string; ckb?: string; ar?: string } = { en: '' };
 	let descriptionLanguage: { en: string; ckb?: string; ar?: string } = { en: '' };
@@ -97,7 +98,12 @@
 				await languageStore.remove(nameResponse.id);
 			}
 			if (imageResponse && imageResponse.id) {
-				await storageStore.deleteFile(imageResponse.id);
+				await storageStore.removeFile(imageResponse.id);
+			}
+			if (error instanceof Error) {
+				toastStore.showToast(error.message, 'error');
+			} else {
+				toastStore.showToast($_('unknown-error-occurred'), 'error');
 			}
 		} finally {
 			isSaving = false; // Reset saving state

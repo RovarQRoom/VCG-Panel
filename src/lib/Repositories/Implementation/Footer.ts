@@ -33,9 +33,11 @@ export class FooterRepository implements IFooter {
 	}
 	async getLatestFooterAsync(): Promise<FooterEntity> {
 		// This is how to call one to Many relationship
+		// also check deleted_at is null of socials
 		const response = await supabase
 			.from('Footer')
-			.select('*, socials:Social(id,name,link)')
+			.select('*, socials:Social(id,name,link,icon)', { count: 'exact' })
+			.is('socials.deleted_at', null)
 			.order('id', { ascending: false })
 			.returns<FooterEntity>()
 			.single();
@@ -43,13 +45,14 @@ export class FooterRepository implements IFooter {
 			throw response.error;
 		}
 
-
 		return response.data;
 	}
 	async updateFooterAsync(footer: UpdateFooter): Promise<Footer> {
 		const response = await supabase
 			.from('Footer')
-			.update(footer)
+			.update({
+				phones: footer.phones
+			})
 			.eq('id', footer.id!)
 			.select('*')
 			.single();

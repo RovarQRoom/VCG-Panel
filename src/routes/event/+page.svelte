@@ -12,6 +12,7 @@
 		type Language
 	} from '$lib/Supabase/Types/database.types';
 	import moment from 'moment';
+	import { toastStore } from '$lib/Stores/Toast';
 
 	let placeLanguage: { en: string; ckb?: string; ar?: string } = { en: '' };
 	let event: UpdateEvent = {};
@@ -60,6 +61,11 @@
 			console.error(error);
 			if (placeResponse && placeResponse.id) {
 				await languageStore.remove(placeResponse.id);
+			}
+			if (error instanceof Error) {
+				toastStore.showToast(error.message, 'error');
+			} else {
+				toastStore.showToast($_('unknown-error-occurred'), 'error');
 			}
 		}
 	}

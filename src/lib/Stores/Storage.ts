@@ -33,13 +33,16 @@ const createStorageStore = () => {
 				[lang]: response
 			};
 		},
-		deleteFile: async (id: string) => {
+		removeFile: async (id: string) => {
 			await storageRepository.deleteFileAsync(id);
 			set('');
 		},
-		deleteFileByPath: async (path: string) => {
+		removeFileByPath: async (path: string) => {
 			await storageRepository.deleteFileByPathAsync(path);
 			set('');
+		},
+		removeFiles: async (paths: string[]) => {
+			await storageRepository.deleteFilesAsync(paths);
 		}
 	};
 };

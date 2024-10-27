@@ -18,7 +18,21 @@ export class SocialRepository implements ISocial {
 		return response.data;
 	}
 	async createSocialsAsync(socials: InsertSocial[]): Promise<Social[]> {
-		const response = await supabase.from('Social').insert(socials).select('*').returns<Social[]>();
+		console.log(socials);
+		const response = await supabase
+			.from('Social')
+			.insert(
+				socials.map((social) => {
+					return {
+						footer: social.footer,
+						name: social.name,
+						link: social.link,
+						icon: social.icon
+					};
+				})
+			)
+			.select('*')
+			.returns<Social[]>();
 		if (response.error) {
 			throw response.error;
 		}
@@ -39,7 +53,8 @@ export class SocialRepository implements ISocial {
 	async getSocialsAsync(option?: ListOption): Promise<PostgrestSingleResponse<Social[]>> {
 		const response = await supabase
 			.from('Social')
-			.select('*')
+			.select('*', { count: 'exact' })
+			.is('deleted_at', null)
 			.range(
 				((option?.page ?? 1) - 1) * (option?.limit ?? 10),
 				(option?.page ?? 1) * (option?.limit ?? 10)
@@ -65,5 +80,9 @@ export class SocialRepository implements ISocial {
 	}
 	async deleteSocialAsync(id: number): Promise<void> {
 		await supabase.from('Social').update({ deleted_at: new Date().toUTCString() }).eq('id', id);
+	}
+	async deleteSocialsAsync(ids: string[]): Promise<void> {
+		// delete all socials
+		await supabase.from('Social').delete().in('id', ids);
 	}
 }

@@ -69,5 +69,7 @@
   "footer-saved": "پێی لاپەڕە پاشەکەوت کراوە",
   "unknown-error-occurred": "هەڵەیەکی نەناسراو ڕوویدا",
   "footer-not-saved": "فۆتەر سەیڤ نەکراوە",
-  "social-media": "کۆمەڵایەتییەکان"
+  "social-media": "کۆمەڵایەتییەکان",
+  "invalid-image-file": "فایلێکی وێنەی نادروست",
+  "image-upload-failed": "بارکردنی وێنە شکستی هێنا"
 }

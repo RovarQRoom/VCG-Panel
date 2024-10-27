@@ -130,7 +130,7 @@
 				for (const lang of ['en', 'ar', 'ckb'] as const) {
 					if (oldMediaPaths[lang] && oldMediaPaths[lang] !== mediaResponse[lang]) {
 						const filePathToDelete = oldMediaPaths[lang].replace(VITE_SUPABASE_STORAGE_URL, '');
-						await storageStore.deleteFile(filePathToDelete);
+						await storageStore.removeFile(filePathToDelete);
 					}
 				}
 			}
@@ -151,7 +151,7 @@
 			}
 			for (const lang in mediaFilesResponse) {
 				if (mediaFilesResponse[lang as keyof typeof mediaFilesResponse]) {
-					await storageStore.deleteFile(
+					await storageStore.removeFile(
 						mediaFilesResponse[lang as keyof typeof mediaFilesResponse]!.id
 					);
 				}
@@ -159,7 +159,7 @@
 			if (error instanceof Error) {
 				toastStore.showToast(error.message, 'error');
 			} else {
-				toastStore.showToast('An unknown error occurred', 'error');
+				toastStore.showToast($_('unknown-error-occurred'), 'error');
 			}
 		} finally {
 			isLoading = false;

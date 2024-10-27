@@ -135,13 +135,18 @@
 				await languageStore.remove(mediaResponse.id);
 			}
 			if (mediaFilesResponse.en && mediaFilesResponse.en.id) {
-				await storageStore.deleteFile(mediaFilesResponse.en.id);
+				await storageStore.removeFile(mediaFilesResponse.en.id);
 			}
 			if (mediaFilesResponse.ar && mediaFilesResponse.ar.id) {
-				await storageStore.deleteFile(mediaFilesResponse.ar.id);
+				await storageStore.removeFile(mediaFilesResponse.ar.id);
 			}
 			if (mediaFilesResponse.ckb && mediaFilesResponse.ckb.id) {
-				await storageStore.deleteFile(mediaFilesResponse.ckb.id);
+				await storageStore.removeFile(mediaFilesResponse.ckb.id);
+			}
+			if (error instanceof Error) {
+				toastStore.showToast(error.message, 'error');
+			} else {
+				toastStore.showToast($_('unknown-error-occurred'), 'error');
 			}
 		} finally {
 			isLoading = false;

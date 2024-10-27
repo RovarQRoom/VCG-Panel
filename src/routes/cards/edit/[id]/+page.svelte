@@ -97,7 +97,7 @@
 			await cardStore.put(updatedCard);
 
 			if (oldIcon && card.icon !== oldIcon) {
-				await storageStore.deleteFile(oldIcon);
+				await storageStore.removeFile(oldIcon);
 			}
 
 			goto('/cards/1');
@@ -112,14 +112,14 @@
 				await languageStore.put(descriptionLanguage);
 			}
 			if (iconResponse && iconResponse.fullPath) {
-				await storageStore.deleteFile(iconResponse.fullPath);
+				await storageStore.removeFile(iconResponse.fullPath);
 				card.icon = oldIcon;
 			}
 
 			if (error instanceof Error) {
 				toastStore.showToast(error.message, 'error');
 			} else {
-				toastStore.showToast('An unknown error occurred', 'error');
+				toastStore.showToast($_('unknown-error-occurred'), 'error');
 			}
 		} finally {
 			isLoading = false;
