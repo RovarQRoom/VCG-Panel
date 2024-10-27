@@ -17,9 +17,7 @@ const createRegisterStore = () => {
 		},
 		fetchAll: async (_options?: ListOption) => {
 			const response = await registerRepository.getRegistersAsync(_options);
-			console.log(response);
 			const pages = Math.ceil(response.count! / (_options?.limit ?? 10));
-			console.log(pages);
 			set({
 				data: response.data ?? [],
 				total: response.count!,

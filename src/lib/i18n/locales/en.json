@@ -78,5 +78,12 @@
   "event": "Event",
   "representative": "Representative",
   "no-title": "No Title",
-  "carousel": "Carousel"
+  "carousel": "Carousel",
+  "trading_knowledge": "Trading Knowledge",
+  "trade_priority": "Trade Priority",
+  "traded_before": "Traded Before",
+  "trading_from": "Traded From",
+  "monthly_income": "Monthly Income",
+  "goal_income": "Goal Income",
+  "no-data": "No Data"
 }

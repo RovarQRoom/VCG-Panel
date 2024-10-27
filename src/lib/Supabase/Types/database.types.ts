@@ -136,18 +136,21 @@ export type Database = {
 				Row: {
 					created_at: string;
 					deleted_at: string | null;
+					emails: string[] | null;
 					id: number;
 					phones: string[];
 				};
 				Insert: {
 					created_at?: string;
 					deleted_at?: string | null;
+					emails?: string[] | null;
 					id?: number;
 					phones: string[];
 				};
 				Update: {
 					created_at?: string;
 					deleted_at?: string | null;
+					emails?: string[] | null;
 					id?: number;
 					phones?: string[];
 				};
@@ -186,30 +189,48 @@ export type Database = {
 					created_at: string;
 					deleted_at: string | null;
 					email: string;
+					goal_income: string | null;
 					id: number;
 					language: Database['public']['Enums']['LanguageEnum'];
+					monthly_income: string | null;
 					name: string;
 					phone: string;
+					trade_priority: boolean | null;
+					traded_before: boolean | null;
+					trading_from: string | null;
+					trading_knowledge: Database['public']['Enums']['Knowledge'] | null;
 				};
 				Insert: {
 					action?: boolean | null;
 					created_at?: string;
 					deleted_at?: string | null;
 					email: string;
+					goal_income?: string | null;
 					id?: number;
 					language?: Database['public']['Enums']['LanguageEnum'];
+					monthly_income?: string | null;
 					name: string;
 					phone: string;
+					trade_priority?: boolean | null;
+					traded_before?: boolean | null;
+					trading_from?: string | null;
+					trading_knowledge?: Database['public']['Enums']['Knowledge'] | null;
 				};
 				Update: {
 					action?: boolean | null;
 					created_at?: string;
 					deleted_at?: string | null;
 					email?: string;
+					goal_income?: string | null;
 					id?: number;
 					language?: Database['public']['Enums']['LanguageEnum'];
+					monthly_income?: string | null;
 					name?: string;
 					phone?: string;
+					trade_priority?: boolean | null;
+					traded_before?: boolean | null;
+					trading_from?: string | null;
+					trading_knowledge?: Database['public']['Enums']['Knowledge'] | null;
 				};
 				Relationships: [];
 			};
@@ -301,6 +322,7 @@ export type Database = {
 			[_ in never]: never;
 		};
 		Enums: {
+			Knowledge: 'BEGINNER' | 'INTERMEDIATE' | 'ADVANCE';
 			LanguageEnum: 'ENGLISH' | 'ARABIC' | 'KURDISH';
 		};
 		CompositeTypes: {
@@ -400,6 +422,12 @@ export type CompositeTypes<
 
 // Schema: public
 // Enums
+export enum Knowledge {
+	BEGINNER = 'BEGINNER',
+	INTERMEDIATE = 'INTERMEDIATE',
+	ADVANCE = 'ADVANCE'
+}
+
 export enum LanguageEnum {
 	ENGLISH = 'ENGLISH',
 	ARABIC = 'ARABIC',

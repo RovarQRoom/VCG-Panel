@@ -90,18 +90,26 @@
 	<h1 class="text-3xl font-bold mb-6">{$_('registrations')}</h1>
 
 	<div class="overflow-x-auto relative shadow-md sm:rounded-lg">
-		<Table hoverable={true} >
+		<Table hoverable={true}>
 			<TableHead class="bg-main-dark dark:bg-input-dark text-white">
 				<TableHeadCell>{$_('name')}</TableHeadCell>
 				<TableHeadCell>{$_('email')}</TableHeadCell>
 				<TableHeadCell>{$_('phone')}</TableHeadCell>
 				<TableHeadCell>{$_('language')}</TableHeadCell>
 				<TableHeadCell>{$_('created-at')}</TableHeadCell>
+				<TableHeadCell>{$_('trading_knowledge')}</TableHeadCell>
+				<TableHeadCell>{$_('trade_priority')}</TableHeadCell>
+				<TableHeadCell>{$_('traded_before')}</TableHeadCell>
+				<TableHeadCell>{$_('trading_from')}</TableHeadCell>
+				<TableHeadCell>{$_('monthly_income')}</TableHeadCell>
+				<TableHeadCell>{$_('goal_income')}</TableHeadCell>
 				<TableHeadCell>{$_('actions')}</TableHeadCell>
 			</TableHead>
 			<TableBody>
 				{#each $registerStore.data as registration}
-					<TableBodyRow class="bg-input-light border-white dark:bg-main-dark dark:border-input-dark">
+					<TableBodyRow
+						class="bg-input-light border-white dark:bg-main-dark dark:border-input-dark"
+					>
 						<TableBodyCell>{registration.name}</TableBodyCell>
 						<TableBodyCell>{registration.email}</TableBodyCell>
 						<TableBodyCell>{registration.phone}</TableBodyCell>
@@ -111,6 +119,12 @@
 							</Badge>
 						</TableBodyCell>
 						<TableBodyCell>{new Date(registration.created_at).toLocaleString()}</TableBodyCell>
+						<TableBodyCell>{registration.trading_knowledge ?? $_('no-data')}</TableBodyCell>
+						<TableBodyCell>{registration.trade_priority ?? $_('no-data')}</TableBodyCell>
+						<TableBodyCell>{registration.traded_before ?? $_('no-data')}</TableBodyCell>
+						<TableBodyCell>{registration.trading_from ?? $_('no-data')}</TableBodyCell>
+						<TableBodyCell>{registration.monthly_income ?? $_('no-data')}</TableBodyCell>
+						<TableBodyCell>{registration.goal_income ?? $_('no-data')}</TableBodyCell>
 						<TableBodyCell>
 							<div class="flex space-x-2 gap-3">
 								{#if registration.action === null}
