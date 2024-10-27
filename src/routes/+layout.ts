@@ -5,7 +5,13 @@ import type { LayoutLoad, PageData } from './$types';
 
 export const load: LayoutLoad = async () => {
 	if (browser) {
-		locale.set(window.navigator.language);
+		const savedLang = localStorage.getItem('lang');
+		if (savedLang) {
+			locale.set(savedLang);
+		} else {
+			locale.set(window.navigator.language);
+			localStorage.setItem('lang', window.navigator.language);
+		}
 	}
 	await waitLocale();
 
