@@ -2,6 +2,27 @@
 @tailwind components;
 @tailwind utilities;
 
+@font-face {
+	font-family: 'Kurdish-Title';
+	src: url('/fonts/kurdishTitle.ttf') format('truetype');
+}
+@font-face {
+	font-family: 'Kurdish-Text';
+	src: url('/fonts/kurdishText.ttf') format('truetype');
+}
+@font-face {
+	font-family: 'Logo';
+	src: url('/fonts/logo.ttf') format('truetype');
+}
+
+*,
+body {
+	font-family: 'Kurdish-Text', sans-serif;
+	box-sizing: border-box;
+	margin: 0;
+	padding: 0;
+}
+
 div[role='application'] {
 	height: 300px !important;
 }
