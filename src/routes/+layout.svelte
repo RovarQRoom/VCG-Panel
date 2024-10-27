@@ -188,7 +188,8 @@
 							: 'object-center'}"
 						src={$locale === 'en' ? '/images/usa.jpg' : '/images/kurdish.svg'}
 					/>
-					{$locale === 'en' ? 'English' : 'Kurdish'}<ChevronDownOutline
+					{$locale === 'en' ? $_('english') : $_('kurdish')}
+					<ChevronDownOutline
 						class="w-auto h-6 ms-2 text-white dark:text-white"
 					/>
 				</Button>
