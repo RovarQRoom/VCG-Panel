@@ -1,4 +1,4 @@
-export interface IStorageRepository {
+export interface IStorage {
 	uploadFileAsync(
 		image: File,
 		folderName?: string,

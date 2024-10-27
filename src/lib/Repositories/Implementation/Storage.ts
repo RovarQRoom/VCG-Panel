@@ -1,8 +1,8 @@
 import moment from 'moment';
-import type { IStorageRepository } from '../Interface/IStorage';
+import type { IStorage } from '../Interface/IStorage';
 import { supabase } from '$lib/Supabase/supabase';
 
-export class StorageRepository implements IStorageRepository {
+export class StorageRepository implements IStorage {
 	async uploadFileAsync(
 		image: File,
 		folderName?: string,
