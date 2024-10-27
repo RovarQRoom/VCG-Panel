@@ -33,7 +33,7 @@
 
 	<a
 		href="/carousels/add"
-		class="btn-primary w-12 h-12 rounded-full items-center justify-center mb-4 flex"
+		class="bg-input-light dark:bg-input-dark hover:bg-blue duration-300 ease-in-out  w-12 h-12 rounded-full items-center justify-center mb-4 flex"
 	>
 		<PlusOutline class="w-8 h-8" strokeWidth="2" />
 	</a>

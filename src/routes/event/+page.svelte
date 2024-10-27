@@ -72,7 +72,7 @@
 </script>
 
 <div class="container mx-auto px-4 py-8">
-	<Card class="max-w-4xl mx-auto p-4 sm:p-6 bg-white shadow-lg rounded-lg">
+	<Card class="max-w-4xl mx-auto p-4 sm:p-6 bg-white dark:bg-main-dark shadow-lg rounded-lg">
 		<div class="flex mb-4 justify-between items-center">
 			<h1 class="text-2xl font-bold text-gray-800">{$_('event-details')}</h1>
 			<div class="flex space-x-2">
@@ -91,6 +91,7 @@
 			<div>
 				<Label for="date-time" class="mb-2">{$_('date-and-time')}</Label>
 				<Input
+				class="bg-input-light dark:bg-input-dark border-0"
 					type="datetime-local"
 					id="date-time"
 					bind:value={dateTime}
@@ -107,6 +108,7 @@
 								>{$_('place')} ({$_(key.toLowerCase())})</Label
 							>
 							<Input
+							class="bg-input-light dark:bg-input-dark border-0"
 								type="text"
 								id="place-{key.toLowerCase()}"
 								placeholder={$_('enter-event-place')}
