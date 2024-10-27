@@ -101,7 +101,7 @@
 			</div>
 
 			<Tabs style="pills" class="justify-center mb-6">
-				{#each Object.keys(LanguageEnum) as key}
+				{#each Object.keys(LanguageEnum).filter((key) => key !== 'ARABIC') as key}
 					<TabItem open={key === 'ENGLISH'} title={$_(key.toLowerCase())}>
 						<div class="mt-4">
 							<Label for="place-{key.toLowerCase()}" class="mb-2"

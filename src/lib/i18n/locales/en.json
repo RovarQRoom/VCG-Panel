@@ -72,5 +72,11 @@
   "unknown-error-occurred": "Unknown error occurred",
   "footer-not-saved": "Footer not saved",
   "invalid-image-file": "Invalid Image File",
-  "image-upload-failed": "Image Upload Failed"
+  "image-upload-failed": "Image Upload Failed",
+  "footer": "Footer",
+  "home": "Home",
+  "event": "Event",
+  "representative": "Representative",
+  "no-title": "No Title",
+  "carousel": "Carousel"
 }

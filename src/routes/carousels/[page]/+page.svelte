@@ -6,18 +6,25 @@
 	import { scale } from 'svelte/transition';
 	import { PlusOutline } from 'flowbite-svelte-icons';
 	import { isVideoFile, isVideoLink } from '$lib/utils/fileUtils';
-	import { _ } from 'svelte-i18n';
+	import { _, locale } from 'svelte-i18n';
 	import Pagination from '$lib/Components/Pagination.svelte';
 	import { page } from '$app/stores';
 	import type { ListOption } from '$lib/Models/Common/ListOption';
+	import type { Language } from '$lib/Supabase/Types/database.types';
 	let filter: ListOption = {
 		page: 1,
-		limit: 6
+		limit: 6,
+		language: $locale ?? 'ckb'
 	};
 
 	onMount(async () => {
-		await carouselStore.fetchAll(filter);
+		await retriveCarousels();
 	});
+
+	async function retriveCarousels() {
+		filter.language = $locale ?? 'en';
+		await carouselStore.fetchAll(filter);
+	}
 
 	function handleEdit(id: number) {
 		goto(`/carousels/edit/${id}`);
@@ -26,6 +33,19 @@
 	async function handleDelete(id: number) {
 		await carouselStore.remove(id);
 	}
+
+	let previousLocale = $locale;
+
+	$: {
+		if (previousLocale !== $locale) {
+			previousLocale = $locale;
+			retriveCarousels();
+		}
+	}
+
+	function getLanguageData(card: Language | null | undefined) {
+		return (card?.[($locale ?? 'en') as keyof Language] ?? $_('no-title')).toString();
+	}
 </script>
 
 <div class="container mx-auto p-4">
@@ -33,7 +53,7 @@
 
 	<a
 		href="/carousels/add"
-		class="bg-input-light dark:bg-input-dark hover:bg-blue duration-300 ease-in-out  w-12 h-12 rounded-full items-center justify-center mb-4 flex"
+		class="bg-input-light dark:bg-input-dark hover:bg-blue duration-300 ease-in-out w-12 h-12 rounded-full items-center justify-center mb-4 flex"
 	>
 		<PlusOutline class="w-8 h-8" strokeWidth="2" />
 	</a>
@@ -43,11 +63,12 @@
 			<div
 				class="relative overflow-hidden rounded-xl shadow-lg group transition-transform duration-300 hover:scale-105"
 			>
-				{#if isVideoFile(carousel.media?.en) || isVideoLink(carousel.media?.en ?? '')}
+				{#if getLanguageData(carousel.media)}
+				{#if isVideoFile(getLanguageData(carousel.media)) || isVideoLink(getLanguageData(carousel.media))}
 					<div class="relative">
 						<!-- svelte-ignore a11y-media-has-caption -->
 						<video
-							src={`${VITE_SUPABASE_STORAGE_URL}${carousel.media?.en}`}
+							src={`${VITE_SUPABASE_STORAGE_URL}${getLanguageData(carousel.media)}`}
 							class="w-full h-64 object-cover"
 							autoplay
 							muted
@@ -70,15 +91,15 @@
 					</div>
 				{:else}
 					<img
-						src={`${VITE_SUPABASE_STORAGE_URL}${carousel.media?.en}`}
-						alt={carousel.title?.en}
+						src={`${VITE_SUPABASE_STORAGE_URL}${getLanguageData(carousel.media)}`}
+						alt={$_('carousel') + ' ' + getLanguageData(carousel.title)}
 						class="w-full h-64 object-cover"
 					/>
 				{/if}
 				<div
 					class="absolute inset-0 bg-black bg-opacity-50 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-between p-4"
 				>
-					<h2 class="text-xl font-semibold text-white mb-2">{carousel.title?.en}</h2>
+					<h2 class="text-xl font-semibold text-white mb-2">{getLanguageData(carousel.title)}</h2>
 					<div class="flex justify-end space-x-2">
 						<button
 							on:click={() => handleEdit(carousel.id)}
@@ -122,6 +143,7 @@
 						</button>
 					</div>
 				</div>
+				{/if}
 			</div>
 		{/each}
 	</div>

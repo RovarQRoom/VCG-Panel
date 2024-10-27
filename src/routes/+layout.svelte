@@ -54,9 +54,9 @@
 		return $page.url.pathname.startsWith(href) && href !== '/';
 	};
 
-	$:{
-		if(browser){
-			if($locale !== localStorage.getItem('lang')){
+	$: {
+		if (browser) {
+			if ($locale !== localStorage.getItem('lang')) {
 				locale.set(localStorage.getItem('lang') || 'ckb');
 			}
 		}
@@ -143,7 +143,7 @@
 							<span
 								class="ml-2"
 								in:slide={{ duration: 300, easing: cubicInOut }}
-								out:fade={{ duration: 200 }}>{item.name}</span
+								out:fade={{ duration: 200 }}>{$_(item.name.toLocaleLowerCase())}</span
 							>
 							<div
 								class="absolute -bottom-1 left-0 w-full h-0.5 bg-blue-600 dark:bg-blue-400"
@@ -194,8 +194,8 @@
 				</Button>
 
 				<Dropdown
-					class="w-48 overflow-y-auto py-1 h-auto "
-					containerClass="bg-white/80 dark:bg-darkBlue/80 backdrop-blur-lg rounded-xl"
+					class="w-48 overflow-y-auto py-1 h-auto z-50"
+					containerClass="bg-white/80 dark:bg-darkBlue/80 backdrop-blur-lg rounded-xl z-50"
 				>
 					<DropdownItem
 						class="flex items-center text-base font-semibold gap-2 dark:text-white"
@@ -283,7 +283,7 @@
 		<footer class="bg-gray-100 py-4 mt-auto">
 			<div class="container mx-auto px-4">
 				<p class="text-center text-gray-600">
-					© {new Date().getFullYear()} Your App Name. All rights reserved.
+					© {new Date().getFullYear()} AhmedFX. All rights reserved
 				</p>
 			</div>
 		</footer>

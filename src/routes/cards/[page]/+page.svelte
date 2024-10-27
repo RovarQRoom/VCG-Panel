@@ -5,14 +5,16 @@
 	import { goto } from '$app/navigation';
 	import { VITE_SUPABASE_STORAGE_URL } from '$env/static/public';
 	import { Trash } from 'svelte-heros-v2';
-	import { _ } from 'svelte-i18n';
+	import { _, locale } from 'svelte-i18n';
 	import Pagination from '$lib/Components/Pagination.svelte';
 	import { page } from '$app/stores';
 	import type { ListOption } from '$lib/Models/Common/ListOption';
+	import type { Language } from '$lib/Supabase/Types/database.types';
 
 	let filter: ListOption = {
 		page: 1,
-		limit: 8
+		limit: 8,
+		language: $locale ?? 'en'
 	};
 
 	onMount(async () => {
@@ -29,6 +31,20 @@
 
 	function deleteCard(id: number) {
 		cardStore.remove(id);
+	}
+
+	let previousLocale = $locale;
+
+	$: {
+		if (previousLocale !== $locale) {
+			previousLocale = $locale;
+			filter.language = $locale ?? 'en';
+			cardStore.fetchAll(filter);
+		}
+	}
+
+	function getLanguageData(card: Language | null | undefined) {
+		return (card?.[($locale ?? 'en') as keyof Language] ?? $_('no-title')).toString();
 	}
 </script>
 
@@ -74,12 +90,12 @@
 					{/if}
 
 					<h5 class="text-xl font-semibold text-gray-900 dark:text-white">
-						{card.title?.en}
+						{getLanguageData(card.title)}
 					</h5>
 				</div>
 
 				<p class="text-gray-700 dark:text-gray-400 text-sm leading-relaxed">
-					{card.description?.en}
+					{getLanguageData(card.description)}
 				</p>
 			</div>
 

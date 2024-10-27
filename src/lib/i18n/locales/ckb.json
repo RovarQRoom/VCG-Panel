@@ -71,5 +71,11 @@
   "footer-not-saved": "فۆتەر سەیڤ نەکراوە",
   "social-media": "کۆمەڵایەتییەکان",
   "invalid-image-file": "فایلێکی وێنەی نادروست",
-  "image-upload-failed": "بارکردنی وێنە شکستی هێنا"
+  "image-upload-failed": "بارکردنی وێنە شکستی هێنا",
+  "footer": "پێی لاپەڕە",
+  "home": "سەرەکی",
+  "event": "ئیڤێنت",
+  "representative": "نوێنەر",
+  "no-title": "بێ ناونیشان",
+  "carousel": "کارۆسێل"
 }

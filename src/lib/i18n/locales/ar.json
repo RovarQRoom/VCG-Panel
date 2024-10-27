@@ -71,5 +71,11 @@
   "footer-not-saved": "لم يتم حفظ التذييل",
   "social-media": "اجتماعيات",
   "invalid-image-file": "ملف صورة غير صالح",
-  "image-upload-failed": "فشل تحميل الصورة"
+  "image-upload-failed": "فشل تحميل الصورة",
+  "footer": "تذييل",
+  "home": "بيت",
+  "event": "حدث",
+  "representative": "ممثل",
+  "no-title": "لا يوجد عنوان",
+  "carousel": "دائري"
 }

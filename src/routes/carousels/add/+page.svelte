@@ -183,7 +183,7 @@
 <Card class="max-w-2xl mx-auto p-6 bg-white dark:bg-main-dark shadow-lg rounded-lg">
 	<form on:submit|preventDefault={handleSubmit} class="flex flex-col space-y-6">
 		<Tabs style="pills" class="justify-center mb-6">
-			{#each Object.keys(LanguageEnum) as key}
+			{#each Object.keys(LanguageEnum).filter((key) => key !== "ARABIC") as key}
 				<TabItem open title={$_(key.toLowerCase())}>
 					<div class="mt-4">
 						<Label for="title-{key.toLowerCase()}" class="mb-2">

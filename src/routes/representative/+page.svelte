@@ -6,7 +6,7 @@
 		type Language,
 		type UpdateRepresentative
 	} from '$lib/Supabase/Types/database.types';
-	import { _ } from 'svelte-i18n';
+	import { _, locale } from 'svelte-i18n';
 	import { PencilSquare, DocumentCheck } from 'svelte-heros-v2';
 	import { onMount } from 'svelte';
 	import { representativeStore } from '$lib/Stores/Representative';
@@ -223,13 +223,13 @@
 
 			<div class="w-full md:w-2/3">
 				<Tabs style="pills" class="justify-center mb-6">
-					{#each Object.keys(LanguageEnum) as key}
-						<TabItem open={key === 'ENGLISH'} title={$_(key.toLowerCase())}>
+					{#each Object.keys(LanguageEnum).filter((key) => key !== 'ARABIC') as key}
+						<TabItem open={key === 'KURDISH'} title={$_(key.toLowerCase())}>
 							<div transition:fade={{ duration: 300 }}>
 								<div class="mt-4">
 									<Label for="name-{key.toLowerCase()}" class="mb-2">{$_('name')} ({key})</Label>
 									<Input
-									class="bg-input-light dark:bg-input-dark border-0"
+										class="bg-input-light dark:bg-input-dark border-0"
 										type="text"
 										id="name-{key.toLowerCase()}"
 										placeholder={$_('enter-representative-name')}
@@ -243,14 +243,12 @@
 														: 'en'
 										]}
 										disabled={!isEditing}
-										
 									/>
 								</div>
 								<div class="mt-4">
 									<Label for="description" class="mb-2">{$_('description')}</Label>
 									<div class="border border-gray-300 rounded-lg p-2">
 										<Editor
-										
 											apiKey="olyqgwptv2negfn1hj95rbkolfmo81y6hudkm6qi8gu3vx0m"
 											{conf}
 											bind:value={descriptionLanguage[
