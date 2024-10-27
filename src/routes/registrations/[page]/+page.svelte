@@ -112,7 +112,7 @@
 						</TableBodyCell>
 						<TableBodyCell>{new Date(registration.created_at).toLocaleString()}</TableBodyCell>
 						<TableBodyCell>
-							<div class="flex space-x-2">
+							<div class="flex space-x-2 gap-3">
 								{#if registration.action === null}
 									<Button size="xs" color="green" on:click={() => handleAccept(registration.id)}>
 										<CheckCircleSolid class="mr-2 h-4 w-4" />

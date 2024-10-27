@@ -193,7 +193,7 @@
 			<div>
 				<Label class="mb-2">{$_('social-media')}</Label>
 				{#each footer.socials as social, index}
-					<div class="flex space-x-2 mb-2 items-end">
+					<div class="flex space-x-2 mb-2 items-end gap-2">
 						<div class="flex flex-col w-full">
 							<Label class="ml-2 mb-1">{$_('name')}</Label>
 							<Input

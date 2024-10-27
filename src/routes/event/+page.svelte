@@ -131,8 +131,8 @@
 
 			<div>
 				<Label class="mb-2">{$_('ticket-type')}</Label>
-				<div class="flex space-x-4">
-					<label class="flex-1">
+				<div class="flex gap-2">
+					<label class="w-full">
 						<input
 							type="radio"
 							name="ticket"
@@ -148,7 +148,7 @@
 							<span class="text-sm font-medium">{$_('free')}</span>
 						</div>
 					</label>
-					<label class="flex-1">
+					<label class="w-full ">
 						<input
 							type="radio"
 							name="ticket"
@@ -164,7 +164,7 @@
 							<span class="text-sm font-medium">{$_('paid')}</span>
 						</div>
 					</label>
-					<label class="flex-1 flex-row">
+					<label class="w-full flex-row">
 						<input
 							type="radio"
 							name="ticket"
