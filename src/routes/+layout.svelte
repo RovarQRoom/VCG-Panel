@@ -126,7 +126,7 @@
 						class="relative flex items-center transition-all duration-300 ease-in-out {isActive(
 							item.field
 						)
-							? 'text-blue-600 dark:text-blue-400'
+							? 'text-orange-500 dark:text-blue-400'
 							: 'hover:text-blue-400 dark:hover:text-blue-300'}"
 					>
 						<svg

@@ -152,7 +152,7 @@
 				{#if isEditing}
 					<Button
 						on:click={handleSave}
-						class="px-2 py-2 rounded-full"
+						class="px-2 py-2 rounded-full mx-2"
 						color="green"
 						disabled={isSaving}
 					>
@@ -173,7 +173,7 @@
 			<div>
 				<Label class="mb-2">{$_('phone-numbers')}</Label>
 				{#each footer.phones as phone, index}
-					<div class="flex items-center space-x-2 mb-2">
+					<div class="flex items-center space-x-2 mb-2 gap-2">
 						<Input type="tel" class="bg-input-light dark:bg-input-dark border-0" bind:value={footer.phones[index]} disabled={!isEditing} />
 						{#if isEditing}
 							<Button color="red" class="px-2 py-2" on:click={() => removePhone(index)}>
@@ -193,7 +193,7 @@
 			<div>
 				<Label class="mb-2">{$_('social-media')}</Label>
 				{#each footer.socials as social, index}
-					<div class="flex space-x-2 mb-2 items-end gap-2">
+					<div class="flex space-x-2 mb-2 items-end">
 						<div class="flex flex-col w-full">
 							<Label class="ml-2 mb-1">{$_('name')}</Label>
 							<Input
