@@ -115,10 +115,5 @@
 	{/each}
 </div>
 <div class="flex justify-center mt-8">
-	<Pagination
-		Store={cardStore}
-		currentPage={Number($page.params.page)}
-		name={'cards'}
-		{filter}
-	/>
+	<Pagination Store={cardStore} currentPage={Number($page.params.page)} name={'cards'} {filter} />
 </div>

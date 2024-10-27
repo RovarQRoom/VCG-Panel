@@ -31,7 +31,9 @@ export class CarouselRepository implements ICarousel {
 		}
 		return response.data;
 	}
-	async getCarouselsAsync(_option?: ListOption): Promise<PostgrestSingleResponse<CarouselEntity[]>> {
+	async getCarouselsAsync(
+		_option?: ListOption
+	): Promise<PostgrestSingleResponse<CarouselEntity[]>> {
 		const response = await supabase
 			.from('Carousel')
 			.select(
