@@ -174,7 +174,12 @@
 				<Label class="mb-2">{$_('phone-numbers')}</Label>
 				{#each footer.phones as phone, index}
 					<div class="flex items-center space-x-2 mb-2 gap-2">
-						<Input type="tel" class="bg-input-light dark:bg-input-dark border-0" bind:value={footer.phones[index]} disabled={!isEditing} />
+						<Input
+							type="tel"
+							class="bg-input-light dark:bg-input-dark border-0"
+							bind:value={footer.phones[index]}
+							disabled={!isEditing}
+						/>
 						{#if isEditing}
 							<Button color="red" class="px-2 py-2" on:click={() => removePhone(index)}>
 								<Trash size="20" />
@@ -193,7 +198,7 @@
 			<div>
 				<Label class="mb-2">{$_('social-media')}</Label>
 				{#each footer.socials as social, index}
-					<div class="flex space-x-2 mb-2 items-end">
+					<div class="flex space-x-2 mb-2 items-end gap-2">
 						<div class="flex flex-col w-full">
 							<Label class="ml-2 mb-1">{$_('name')}</Label>
 							<Input
@@ -204,7 +209,7 @@
 								disabled={!isEditing}
 							/>
 						</div>
-						<div class="flex flex-col w-full">
+						<div class="flex flex-col w-full" dir="ltr">
 							<Label class="ml-2 mb-1">{$_('link')}</Label>
 							<Input
 								type="url"
@@ -229,7 +234,6 @@
 								{#if isEditing}
 									<Input
 										type="file"
-										
 										accept="image/*"
 										class="absolute inset-0 opacity-0 cursor-pointer rounded-lg"
 										on:change={(e) => handleImageUpload(e, index)}
