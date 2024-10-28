@@ -22,6 +22,7 @@ export class EventRepository implements IEvent {
 			.from('Event')
 			.select('*,place(id,en,ar,ckb)')
 			.eq('id', id)
+			.is('deleted_at', null)
 			.returns<EventEntity>()
 			.single();
 		if (response.error) {
