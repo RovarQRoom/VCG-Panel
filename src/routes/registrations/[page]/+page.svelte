@@ -56,7 +56,7 @@
 		| 'pink' {
 		switch (language) {
 			case 'ENGLISH':
-				return 'blue';
+				return 'indigo';
 			case 'ARABIC':
 				return 'green';
 			case 'KURDISH':
@@ -119,12 +119,24 @@
 							</Badge>
 						</TableBodyCell>
 						<TableBodyCell>{new Date(registration.created_at).toLocaleString()}</TableBodyCell>
-						<TableBodyCell>{registration.trading_knowledge ?? $_('no-data')}</TableBodyCell>
-						<TableBodyCell>{registration.trade_priority ?? $_('no-data')}</TableBodyCell>
-						<TableBodyCell>{registration.traded_before ?? $_('no-data')}</TableBodyCell>
+						<TableBodyCell>
+							{registration.trading_knowledge
+								? $_(registration.trading_knowledge.toLocaleLowerCase())
+								: $_('no-data')}
+						</TableBodyCell>
+						<TableBodyCell>{registration.trade_priority ? $_('true') : $_('false')}</TableBodyCell>
+						<TableBodyCell>{registration.traded_before ? $_('true') : $_('false')}</TableBodyCell>
 						<TableBodyCell>{registration.trading_from ?? $_('no-data')}</TableBodyCell>
-						<TableBodyCell>{registration.monthly_income ?? $_('no-data')}</TableBodyCell>
-						<TableBodyCell>{registration.goal_income ?? $_('no-data')}</TableBodyCell>
+						<TableBodyCell
+							>{registration.monthly_income
+								? $_(registration.monthly_income.toLocaleLowerCase())
+								: $_('no-data')}</TableBodyCell
+						>
+						<TableBodyCell
+							>{registration.goal_income
+								? $_(registration.goal_income.toLocaleLowerCase())
+								: $_('no-data')}</TableBodyCell
+						>
 						<TableBodyCell>
 							<div class="flex space-x-2 gap-3">
 								{#if registration.action === null}
