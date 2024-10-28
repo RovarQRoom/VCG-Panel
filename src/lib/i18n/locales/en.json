@@ -85,5 +85,8 @@
   "trading_from": "Traded From",
   "monthly_income": "Monthly Income",
   "goal_income": "Goal Income",
-  "no-data": "No Data"
+  "no-data": "No Data",
+  "thumbnail": "Thumbnail",
+  "media-url": "Media URL",
+  "media-upload": "Media Upload"
 }

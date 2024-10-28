@@ -55,6 +55,7 @@ export type Database = {
 					description: number | null;
 					id: number;
 					media: number | null;
+					thumbnail_video: string | null;
 					title: number;
 				};
 				Insert: {
@@ -63,6 +64,7 @@ export type Database = {
 					description?: number | null;
 					id?: number;
 					media?: number | null;
+					thumbnail_video?: string | null;
 					title: number;
 				};
 				Update: {
@@ -71,6 +73,7 @@ export type Database = {
 					description?: number | null;
 					id?: number;
 					media?: number | null;
+					thumbnail_video?: string | null;
 					title?: number;
 				};
 				Relationships: [

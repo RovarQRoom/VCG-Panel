@@ -84,5 +84,8 @@
   "trading_from": "المتداولة من",
   "monthly_income": "الدخل الشهري",
   "goal_income": "دخل الهدف",
-  "no-data": "لا توجد بيانات"
+  "no-data": "لا توجد بيانات",
+  "thumbnail": "صورة مصغرة",
+  "media-url": "عنوان URL للوسائط",
+  "media-upload": "تحميل الوسائط"
 }

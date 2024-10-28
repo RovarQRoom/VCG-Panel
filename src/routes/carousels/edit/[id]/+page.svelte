@@ -1,7 +1,17 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
 	import { goto } from '$app/navigation';
-	import { Card, Button, Label, Input, Textarea, Tabs, TabItem, Spinner } from 'flowbite-svelte';
+	import {
+		Card,
+		Button,
+		Label,
+		Input,
+		Textarea,
+		Tabs,
+		TabItem,
+		Spinner,
+		Img
+	} from 'flowbite-svelte';
 	import {
 		LanguageEnum,
 		type UpdateCarousel,
@@ -24,6 +34,34 @@
 	let imagePreview: { en: string | null; ckb?: string | null; ar?: string | null } = { en: null };
 
 	let isLoading = false;
+	let thumbnail: {
+		file: File | null;
+		preview: string | null;
+	} = {
+		file: null,
+		preview: null
+	};
+	let mediaUrl: {
+		en: string;
+		ckb?: string;
+		ar?: string;
+	} = {
+		en: ''
+	};
+
+	// Add fileType variable
+	let fileType: {
+		en: 'image' | 'video' | null;
+		ckb?: 'image' | 'video' | null;
+		ar?: 'image' | 'video' | null;
+	} = {
+		en: null
+	};
+
+	// Add this helper function
+	function isSupabasePath(path: string): boolean {
+		return path.startsWith('files/') || path.startsWith('/files/');
+	}
 
 	onMount(async () => {
 		const response = await carouselStore.fetch(Number($page.params.id));
@@ -31,7 +69,8 @@
 			title: response.title?.id,
 			description: response.description?.id,
 			media: response.media?.id,
-			id: response.id
+			id: response.id,
+			thumbnail_video: response.thumbnail_video
 		};
 		titleLanguage = {
 			en: response.title?.en ?? '',
@@ -43,11 +82,41 @@
 			ckb: response.description?.ckb ?? '',
 			ar: response.description?.ar ?? ''
 		};
+
+		// Handle both Supabase paths and external URLs
 		imagePreview = {
-			en: response.media?.en ? `${VITE_SUPABASE_STORAGE_URL}${response.media.en}` : null,
-			ckb: response.media?.ckb ? `${VITE_SUPABASE_STORAGE_URL}${response.media.ckb}` : null,
-			ar: response.media?.ar ? `${VITE_SUPABASE_STORAGE_URL}${response.media.ar}` : null
+			en: response.media?.en
+				? isSupabasePath(response.media.en)
+					? `${VITE_SUPABASE_STORAGE_URL}${response.media.en}`
+					: response.media.en
+				: null,
+			ckb: response.media?.ckb
+				? isSupabasePath(response.media.ckb)
+					? `${VITE_SUPABASE_STORAGE_URL}${response.media.ckb}`
+					: response.media.ckb
+				: null,
+			ar: response.media?.ar
+				? isSupabasePath(response.media.ar)
+					? `${VITE_SUPABASE_STORAGE_URL}${response.media.ar}`
+					: response.media.ar
+				: null
 		};
+
+		// Set mediaUrl for external URLs
+		mediaUrl = {
+			en: response.media?.en && !isSupabasePath(response.media.en) ? response.media.en : '',
+			ckb: response.media?.ckb && !isSupabasePath(response.media.ckb) ? response.media.ckb : '',
+			ar: response.media?.ar && !isSupabasePath(response.media.ar) ? response.media.ar : ''
+		};
+
+		// Set fileType based on URLs or file paths
+		fileType = {
+			en: response.media?.en ? (isVideoUrl(response.media.en) ? 'video' : 'image') : null,
+			ckb: response.media?.ckb ? (isVideoUrl(response.media.ckb) ? 'video' : 'image') : null,
+			ar: response.media?.ar ? (isVideoUrl(response.media.ar) ? 'video' : 'image') : null
+		};
+
+		thumbnail.preview = `${VITE_SUPABASE_STORAGE_URL}${response.thumbnail_video}`;
 	});
 
 	function handleFileSelect(event: Event, lang: string) {
@@ -56,6 +125,82 @@
 			if (lang === 'en' || lang === 'ckb' || lang === 'ar') {
 				selectedFile[lang] = input.files[0];
 				imagePreview[lang] = URL.createObjectURL(input.files[0]);
+				fileType[lang] = input.files[0].type.startsWith('image/') ? 'image' : 'video';
+				mediaUrl[lang] = '';
+			}
+		}
+	}
+
+	function handleThumbnailSelect(event: Event) {
+		const input = event.target as HTMLInputElement;
+		if (input.files && input.files[0]) {
+			thumbnail.file = input.files[0];
+			thumbnail.preview = URL.createObjectURL(input.files[0]);
+		}
+	}
+
+	function getYouTubeVideoId(url: string): string | null {
+		const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=)([^#\&\?]*).*/;
+		const match = url.match(regExp);
+		return match && match[2].length === 11 ? match[2] : null;
+	}
+
+	function getVimeoVideoId(url: string): string | null {
+		const regExp = /vimeo\.com\/(?:.*#|.*\/videos\/)?([0-9]+)/;
+		const match = url.match(regExp);
+		return match ? match[1] : null;
+	}
+
+	function isVideoUrl(url: string): boolean {
+		return (
+			url.includes('youtube.com') ||
+			url.includes('youtu.be') ||
+			url.includes('vimeo.com') ||
+			url.endsWith('.mp4')
+		);
+	}
+
+	function getEmbedUrl(url: string | null | undefined): string | null {
+		if (!url) return null;
+		const youtubeId = getYouTubeVideoId(url);
+		if (youtubeId) {
+			return `https://www.youtube.com/embed/${youtubeId}`;
+		}
+
+		const vimeoId = getVimeoVideoId(url);
+		if (vimeoId) {
+			return `https://player.vimeo.com/video/${vimeoId}`;
+		}
+
+		return null;
+	}
+
+	function handleUrlInput(event: Event, lang: string) {
+		const input = event.target as HTMLInputElement;
+		if (lang === 'en' || lang === 'ckb' || lang === 'ar') {
+			mediaUrl[lang] = input.value;
+			if (input.value) {
+				clearFileInput(lang);
+				fileType[lang] = isVideoUrl(input.value) ? 'video' : 'image';
+				imagePreview[lang] = input.value; // Store just the URL for external media
+			} else {
+				imagePreview[lang] = null;
+				fileType[lang] = null;
+			}
+		}
+	}
+
+	function clearFileInput(lang: string) {
+		if (lang === 'en' || lang === 'ckb' || lang === 'ar') {
+			selectedFile[lang] = null;
+			if (imagePreview[lang]) {
+				URL.revokeObjectURL(imagePreview[lang]);
+			}
+			imagePreview[lang] = null;
+			fileType[lang] = null;
+			const fileInput = document.getElementById(`media-${lang}`) as HTMLInputElement;
+			if (fileInput) {
+				fileInput.value = '';
 			}
 		}
 	}
@@ -72,6 +217,11 @@
 		} = {};
 		let titleResponse: Language | null = null;
 		let descriptionResponse: Language | null = null;
+		let thumbnailResponse: {
+			id: string;
+			path: string;
+			fullPath: string;
+		} | null = null;
 		let oldMedia = carousel.media;
 
 		try {
@@ -103,6 +253,48 @@
 				}
 			}
 
+			// Handle media paths - only store Supabase paths for uploaded files, full URLs for external media
+			const mediaUrls = {
+				en:
+					mediaUrl.en ||
+					(selectedFile.en
+						? await storageStore
+								.uploadFileWithLanguage(selectedFile.en, 'en')
+								.then((r) => r.en.fullPath)
+						: imagePreview.en
+							? isSupabasePath(imagePreview.en.replace(VITE_SUPABASE_STORAGE_URL, ''))
+								? imagePreview.en.replace(VITE_SUPABASE_STORAGE_URL, '')
+								: imagePreview.en
+							: ''),
+				ar:
+					mediaUrl.ar ||
+					(selectedFile.ar
+						? await storageStore
+								.uploadFileWithLanguage(selectedFile.ar, 'ar')
+								.then((r) => r.ar.fullPath)
+						: imagePreview.ar
+							? isSupabasePath(imagePreview.ar.replace(VITE_SUPABASE_STORAGE_URL, ''))
+								? imagePreview.ar.replace(VITE_SUPABASE_STORAGE_URL, '')
+								: imagePreview.ar
+							: ''),
+				ckb:
+					mediaUrl.ckb ||
+					(selectedFile.ckb
+						? await storageStore
+								.uploadFileWithLanguage(selectedFile.ckb, 'ckb')
+								.then((r) => r.ckb.fullPath)
+						: imagePreview.ckb
+							? isSupabasePath(imagePreview.ckb.replace(VITE_SUPABASE_STORAGE_URL, ''))
+								? imagePreview.ckb.replace(VITE_SUPABASE_STORAGE_URL, '')
+								: imagePreview.ckb
+							: '')
+			};
+
+			mediaResponse = await languageStore.put({
+				...mediaUrls,
+				id: carousel.media ?? 0
+			});
+
 			if (Object.keys(mediaFilesResponse).length > 0) {
 				mediaResponse = await languageStore.put(
 					mediaResponse ?? {
@@ -114,11 +306,16 @@
 				);
 			}
 
+			if (thumbnail.file && thumbnail.file.size > 0) {
+				thumbnailResponse = await storageStore.uploadFile(thumbnail.file);
+			}
+
 			const updatedCarousel: UpdateCarousel = {
 				...carousel,
 				title: titleResponse?.id ?? carousel.title,
 				description: descriptionResponse?.id ?? carousel.description,
-				media: mediaResponse?.id ?? carousel.media
+				media: mediaResponse?.id ?? carousel.media,
+				thumbnail_video: thumbnailResponse?.fullPath ?? carousel.thumbnail_video
 			};
 
 			await carouselStore.put(updatedCarousel);
@@ -137,9 +334,6 @@
 
 			goto('/carousels/1');
 		} catch (error) {
-			console.error(error);
-
-			// Revert changes if an error occurs
 			if (titleResponse && titleResponse.id) {
 				await languageStore.put(titleLanguage);
 			}
@@ -200,6 +394,29 @@
 
 <Card class="max-w-2xl mx-auto p-6 bg-white dark:bg-main-dark shadow-lg rounded-lg">
 	<form on:submit|preventDefault={handleUpdate} class="flex flex-col space-y-6">
+		{#if Object.values(fileType).some((type) => type === 'video') || Object.values(mediaUrl).some( (url) => isVideoUrl(url) )}
+			<div class="mb-4">
+				<Label for="thumbnail" class="mb-2">
+					{$_('thumbnail')}
+				</Label>
+				<Input
+					class="bg-input-light dark:bg-input-dark border-0"
+					type="file"
+					id="thumbnail"
+					accept="image/*"
+					on:change={handleThumbnailSelect}
+				/>
+				{#if thumbnail.preview}
+					<div class="mt-2 h-48">
+						<Img
+							src={thumbnail.preview}
+							alt="Video thumbnail"
+							class="w-full h-48 object-cover rounded"
+						/>
+					</div>
+				{/if}
+			</div>
+		{/if}
 		<Tabs style="pills" class="justify-center mb-6">
 			{#each Object.keys(LanguageEnum).filter((key) => key !== 'ARABIC') as key}
 				<TabItem open title={$_(key.toLowerCase())}>
@@ -233,8 +450,22 @@
 						/>
 					</div>
 					<div class="mt-4">
+						<Label for="media-url-{key.toLowerCase()}" class="mb-2">
+							{$_('media-url')} ({$_(key.toLowerCase())})
+						</Label>
+						<Input
+							class="bg-input-light dark:bg-input-dark border-0 mb-4"
+							type="url"
+							id="media-url-{key.toLowerCase()}"
+							placeholder="Enter media URL"
+							value={mediaUrl[key === 'ENGLISH' ? 'en' : key === 'KURDISH' ? 'ckb' : 'ar']}
+							on:input={(event) =>
+								handleUrlInput(event, key === 'ENGLISH' ? 'en' : key === 'KURDISH' ? 'ckb' : 'ar')}
+							disabled={!!selectedFile[key === 'ENGLISH' ? 'en' : key === 'KURDISH' ? 'ckb' : 'ar']}
+						/>
+
 						<Label for="media-{key.toLowerCase()}" class="mb-2">
-							{$_('media')} ({$_(key.toLowerCase())})
+							{$_('media-upload')} ({$_(key.toLowerCase())})
 						</Label>
 						<Input
 							class="bg-input-light dark:bg-input-dark border-0"
@@ -246,10 +477,42 @@
 									event,
 									key === 'ENGLISH' ? 'en' : key === 'KURDISH' ? 'ckb' : 'ar'
 								)}
+							disabled={!!mediaUrl[key === 'ENGLISH' ? 'en' : key === 'KURDISH' ? 'ckb' : 'ar']}
 						/>
+
 						<div class="mt-2 h-64 flex items-center justify-center overflow-hidden">
 							{#if imagePreview[key === 'ENGLISH' ? 'en' : key === 'KURDISH' ? 'ckb' : 'ar']}
-								{#if isVideoFile(selectedFile[key === 'ENGLISH' ? 'en' : key === 'KURDISH' ? 'ckb' : 'ar']?.name) || isVideoLink(imagePreview[key === 'ENGLISH' ? 'en' : key === 'KURDISH' ? 'ckb' : 'ar'] ?? '')}
+								{#if fileType[key === 'ENGLISH' ? 'en' : key === 'KURDISH' ? 'ckb' : 'ar'] === 'image'}
+									<img
+										src={imagePreview[key === 'ENGLISH' ? 'en' : key === 'KURDISH' ? 'ckb' : 'ar']}
+										alt="Selected media"
+										class="w-full h-full object-cover"
+									/>
+								{:else if mediaUrl[key === 'ENGLISH' ? 'en' : key === 'KURDISH' ? 'ckb' : 'ar']}
+									{#if getEmbedUrl(mediaUrl[key === 'ENGLISH' ? 'en' : key === 'KURDISH' ? 'ckb' : 'ar'])}
+										<iframe
+											src={getEmbedUrl(
+												mediaUrl[key === 'ENGLISH' ? 'en' : key === 'KURDISH' ? 'ckb' : 'ar']
+											)}
+											class="w-full h-full"
+											frameborder="0"
+											allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+											allowfullscreen
+											title="Embedded video"
+										></iframe>
+									{:else}
+										<!-- svelte-ignore a11y-media-has-caption -->
+										<video
+											src={imagePreview[
+												key === 'ENGLISH' ? 'en' : key === 'KURDISH' ? 'ckb' : 'ar'
+											]}
+											controls
+											class="w-full h-full object-contain"
+										>
+											{$_('your-browser-does-not-support-the-video-tag')}
+										</video>
+									{/if}
+								{:else}
 									<!-- svelte-ignore a11y-media-has-caption -->
 									<video
 										src={imagePreview[key === 'ENGLISH' ? 'en' : key === 'KURDISH' ? 'ckb' : 'ar']}
@@ -258,15 +521,9 @@
 									>
 										{$_('your-browser-does-not-support-the-video-tag')}
 									</video>
-								{:else}
-									<img
-										src={imagePreview[key === 'ENGLISH' ? 'en' : key === 'KURDISH' ? 'ckb' : 'ar']}
-										alt="Selected media"
-										class="w-full h-full object-cover"
-									/>
 								{/if}
 							{:else}
-								<p class="text-gray-400">{$_('no-image-selected')}</p>
+								<p class="text-gray-400">{$_('no-media-selected')}</p>
 							{/if}
 						</div>
 					</div>
@@ -277,7 +534,7 @@
 		<div class="flex justify-end">
 			<Button
 				type="submit"
-				class="px-6 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg transition duration-300 ease-in-out"
+				class="px-6 py-2 bg-sky-600 hover:bg-sky-700 text-white rounded-lg transition duration-300 ease-in-out"
 				disabled={isLoading}
 			>
 				{#if isLoading}

@@ -5,6 +5,7 @@ export class CarouselEntity {
 	title?: Language | null;
 	description?: Language | null;
 	media: Language | null = null;
+	thumbnail_video: string | null = null;
 	created_at: string = null!;
 	deleted_at: string | null = null;
 }
