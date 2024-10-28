@@ -172,21 +172,23 @@
 		<div class="space-y-6">
 			<div>
 				<Label class="mb-2">{$_('phone-numbers')}</Label>
-				{#each footer.phones as phone, index}
-					<div class="flex items-center space-x-2 mb-2 gap-2">
-						<Input
-							type="tel"
-							class="bg-input-light dark:bg-input-dark border-0"
-							bind:value={footer.phones[index]}
-							disabled={!isEditing}
-						/>
-						{#if isEditing}
-							<Button color="red" class="px-2 py-2" on:click={() => removePhone(index)}>
-								<Trash size="20" />
-							</Button>
-						{/if}
-					</div>
-				{/each}
+				<div class="max-h-[400px] overflow-y-auto pr-2">
+					{#each footer.phones as phone, index}
+						<div class="flex items-center space-x-2 mb-2 gap-2">
+							<Input
+								type="tel"
+								class="bg-input-light dark:bg-input-dark border-0"
+								bind:value={footer.phones[index]}
+								disabled={!isEditing}
+							/>
+							{#if isEditing}
+								<Button color="red" class="px-2 py-2" on:click={() => removePhone(index)}>
+									<Trash size="20" />
+								</Button>
+							{/if}
+						</div>
+					{/each}
+				</div>
 				{#if isEditing}
 					<Button on:click={addPhone} class="mt-2">
 						<Plus size="20" class="mr-2" />
@@ -197,65 +199,67 @@
 
 			<div>
 				<Label class="mb-2">{$_('social-media')}</Label>
-				{#each footer.socials as social, index}
-					<div class="flex space-x-2 mb-2 items-end gap-2">
-						<div class="flex flex-col w-full">
-							<Label class="ml-2 mb-1">{$_('name')}</Label>
-							<Input
-								type="text"
-								class="bg-input-light dark:bg-input-dark border-0"
-								bind:value={social.name}
-								placeholder={$_('social-name')}
-								disabled={!isEditing}
-							/>
-						</div>
-						<div class="flex flex-col w-full" dir="ltr">
-							<Label class="ml-2 mb-1">{$_('link')}</Label>
-							<Input
-								type="url"
-								class="bg-input-light dark:bg-input-dark border-0"
-								bind:value={social.link}
-								placeholder={$_('social-link')}
-								disabled={!isEditing}
-							/>
-						</div>
-						<div class="flex flex-col w-fit">
-							<Label class="ml-1 mb-1">{$_('icon')}</Label>
-							<div class="relative">
-								{#if icons[index]?.localUrl || social.icon}
-									<div class="flex items-center justify-center size-10">
-										<Img
-											src={icons[index]?.localUrl ?? social.icon ?? ''}
-											alt="Social icon"
-											class="object-cover rounded-lg"
-										/>
-									</div>
-								{/if}
-								{#if isEditing}
-									<Input
-										type="file"
-										accept="image/*"
-										class="absolute inset-0 opacity-0 cursor-pointer rounded-lg"
-										on:change={(e) => handleImageUpload(e, index)}
-										disabled={!isEditing}
-									/>
-								{/if}
-								{#if !icons[index]?.localUrl && !social.icon}
-									<div
-										class="flex items-center justify-center w-10 h-10 border-2 border-dashed border-gray-300 rounded"
-									>
-										<ArrowUp size="20" />
-									</div>
-								{/if}
+				<div class="max-h-[400px] overflow-y-auto pr-2">
+					{#each footer.socials as social, index}
+						<div class="flex space-x-2 mb-2 items-end gap-2">
+							<div class="flex flex-col w-full">
+								<Label class="ml-2 mb-1">{$_('name')}</Label>
+								<Input
+									type="text"
+									class="bg-input-light dark:bg-input-dark border-0"
+									bind:value={social.name}
+									placeholder={$_('social-name')}
+									disabled={!isEditing}
+								/>
 							</div>
+							<div class="flex flex-col w-full" dir="ltr">
+								<Label class="ml-2 mb-1">{$_('link')}</Label>
+								<Input
+									type="url"
+									class="bg-input-light dark:bg-input-dark border-0"
+									bind:value={social.link}
+									placeholder={$_('social-link')}
+									disabled={!isEditing}
+								/>
+							</div>
+							<div class="flex flex-col w-fit">
+								<Label class="ml-1 mb-1">{$_('icon')}</Label>
+								<div class="relative">
+									{#if icons[index]?.localUrl || social.icon}
+										<div class="flex items-center justify-center size-10">
+											<Img
+												src={icons[index]?.localUrl ?? social.icon ?? ''}
+												alt="Social icon"
+												class="object-cover rounded-lg"
+											/>
+										</div>
+									{/if}
+									{#if isEditing}
+										<Input
+											type="file"
+											accept="image/*"
+											class="absolute inset-0 opacity-0 cursor-pointer rounded-lg"
+											on:change={(e) => handleImageUpload(e, index)}
+											disabled={!isEditing}
+										/>
+									{/if}
+									{#if !icons[index]?.localUrl && !social.icon}
+										<div
+											class="flex items-center justify-center w-10 h-10 border-2 border-dashed border-gray-300 rounded"
+										>
+											<ArrowUp size="20" />
+										</div>
+									{/if}
+								</div>
+							</div>
+							{#if isEditing}
+								<Button color="red" on:click={() => removeSocial(index)}>
+									<Trash size="20" />
+								</Button>
+							{/if}
 						</div>
-						{#if isEditing}
-							<Button color="red" on:click={() => removeSocial(index)}>
-								<Trash size="20" />
-							</Button>
-						{/if}
-					</div>
-				{/each}
+					{/each}
+				</div>
 				{#if isEditing}
 					<Button on:click={addSocial} class="mt-2">
 						<Plus size="20" class="mr-2" />
