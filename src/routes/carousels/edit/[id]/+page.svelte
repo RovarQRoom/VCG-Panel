@@ -463,6 +463,27 @@
 								handleUrlInput(event, key === 'ENGLISH' ? 'en' : key === 'KURDISH' ? 'ckb' : 'ar')}
 							disabled={!!selectedFile[key === 'ENGLISH' ? 'en' : key === 'KURDISH' ? 'ckb' : 'ar']}
 						/>
+						{#if mediaUrl[key === 'ENGLISH' ? 'en' : key === 'KURDISH' ? 'ckb' : 'ar']}
+							<button
+								type="button"
+								class="relative right-2 top-1/2 -translate-y-1/2 text-gray-500 hover:text-gray-700"
+								on:click={() => {
+									const lang = key === 'ENGLISH' ? 'en' : key === 'KURDISH' ? 'ckb' : 'ar';
+									mediaUrl[lang] = '';
+									imagePreview[lang] = null;
+									fileType[lang] = null;
+								}}
+							>
+								<svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+									<path
+										stroke-linecap="round"
+										stroke-linejoin="round"
+										stroke-width="2"
+										d="M6 18L18 6M6 6l12 12"
+									/>
+								</svg>
+							</button>
+						{/if}
 
 						<Label for="media-{key.toLowerCase()}" class="mb-2">
 							{$_('media-upload')} ({$_(key.toLowerCase())})
@@ -479,6 +500,23 @@
 								)}
 							disabled={!!mediaUrl[key === 'ENGLISH' ? 'en' : key === 'KURDISH' ? 'ckb' : 'ar']}
 						/>
+						{#if selectedFile[key === 'ENGLISH' ? 'en' : key === 'KURDISH' ? 'ckb' : 'ar']}
+							<button
+								type="button"
+								class="relative right-2 top-1/2 -translate-y-1/2 text-gray-500 hover:text-gray-700"
+								on:click={() =>
+									clearFileInput(key === 'ENGLISH' ? 'en' : key === 'KURDISH' ? 'ckb' : 'ar')}
+							>
+								<svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+									<path
+										stroke-linecap="round"
+										stroke-linejoin="round"
+										stroke-width="2"
+										d="M6 18L18 6M6 6l12 12"
+									/>
+								</svg>
+							</button>
+						{/if}
 
 						<div class="mt-2 h-64 flex items-center justify-center overflow-hidden">
 							{#if imagePreview[key === 'ENGLISH' ? 'en' : key === 'KURDISH' ? 'ckb' : 'ar']}
