@@ -142,9 +142,9 @@
 							class="hidden peer"
 						/>
 						<div
-							class="flex flex-col items-center p-4 border-2 rounded-lg cursor-pointer transition-all duration-300 peer-checked:border-blue-600 peer-checked:bg-blue-50 hover:bg-gray-50"
+							class="flex flex-col items-center p-4 border-2 rounded-lg cursor-pointer transition-all duration-300 peer-checked:border-darkBlue peer-checked:bg-blue hover:bg-gray-50"
 						>
-							<TicketSolid class="w-8 h-8 mb-2 text-gray-500 peer-checked:text-blue-600" />
+							<TicketSolid class="w-8 h-8 mb-2 text-gray-500 peer-checked:text-blue" />
 							<span class="text-sm font-medium">{$_('free')}</span>
 						</div>
 					</label>
@@ -158,9 +158,9 @@
 							class="hidden peer"
 						/>
 						<div
-							class="flex flex-col items-center p-4 border-2 rounded-lg cursor-pointer transition-all duration-300 peer-checked:border-blue-600 peer-checked:bg-blue-50 hover:bg-gray-50"
+							class="flex flex-col items-center p-4 border-2 rounded-lg cursor-pointer transition-all duration-300 peer-checked:border-darkBlue peer-checked:bg-blue hover:bg-gray-50"
 						>
-							<CashSolid class="w-8 h-8 mb-2 text-gray-500 peer-checked:text-blue-600" />
+							<CashSolid class="w-8 h-8 mb-2 text-gray-500 peer-checked:text-blue" />
 							<span class="text-sm font-medium">{$_('paid')}</span>
 						</div>
 					</label>
@@ -174,9 +174,9 @@
 							class="hidden peer"
 						/>
 						<div
-							class="flex flex-col items-center p-4 border-2 rounded-lg cursor-pointer transition-all duration-300 peer-checked:border-blue-600 peer-checked:bg-blue-50 hover:bg-gray-50"
+							class="flex flex-col items-center p-4 border-2 rounded-lg cursor-pointer transition-all duration-300 peer-checked:border-darkBlue peer-checked:bg-blue hover:bg-gray-50"
 						>
-							<EnvelopeOpenSolid class="w-8 h-8 mb-2 text-gray-500 peer-checked:text-blue-600" />
+							<EnvelopeOpenSolid class="w-8 h-8 mb-2 text-gray-500 peer-checked:text-blue" />
 							<span class="text-sm font-medium">{$_('invitation-only')}</span>
 						</div>
 					</label>
