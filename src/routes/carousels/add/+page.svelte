@@ -423,7 +423,7 @@
 							{#if selectedFile[key === 'ENGLISH' ? 'en' : key === 'KURDISH' ? 'ckb' : 'ar']}
 								<button
 									type="button"
-									class="absolute right-2 top-1/2 -translate-y-1/2 text-gray-500 hover:text-gray-700"
+									class="relative right-2 top-1/2 -translate-y-1/2 text-gray-500 hover:text-gray-700"
 									on:click={() =>
 										clearFileInput(key === 'ENGLISH' ? 'en' : key === 'KURDISH' ? 'ckb' : 'ar')}
 								>
