@@ -22,18 +22,18 @@
 	let isEditing = false;
 
 	onMount(async () => {
-		const response = await eventStore.fetchLatest();
+		await eventStore.fetchLatest();
 		if ($eventStore) {
 			placeLanguage = {
-				en: response.place?.en || '',
-				ckb: response.place?.ckb || '',
-				ar: response.place?.ar || ''
+				en: $eventStore.place?.en || '',
+				ckb: $eventStore.place?.ckb || '',
+				ar: $eventStore.place?.ar || ''
 			};
-			event.id = response.id;
-			event.place = response.place?.id;
-			event.ticket = response.ticket;
-			dateTime = moment(response.date).format('YYYY-MM-DDTHH:mm');
-			ticketType = response.ticket || '';
+			event.id = $eventStore.id;
+			event.place = $eventStore.place?.id;
+			event.ticket = $eventStore.ticket;
+			dateTime = moment($eventStore.date).format('YYYY-MM-DDTHH:mm');
+			ticketType = $eventStore.ticket || '';
 		}
 	});
 
@@ -51,14 +51,27 @@
 			event.ticket = ticketType;
 
 			if (!event.place || !event.date) {
-				throw new Error('Place and date are required');
+				toastStore.showToast($_('place-and-date-are-required'), 'warning');
+				throw new Error($_('place-and-date-are-required'));
 			}
 
 			event.id
 				? await eventStore.put(event as Required<UpdateEvent>)
 				: await eventStore.insert(event as Required<UpdateEvent>);
+			await eventStore.fetchLatest();
+			if ($eventStore) {
+				placeLanguage = {
+					en: $eventStore.place?.en || '',
+					ckb: $eventStore.place?.ckb || '',
+					ar: $eventStore.place?.ar || ''
+				};
+				event.id = $eventStore.id;
+				event.place = $eventStore.place?.id;
+				event.ticket = $eventStore.ticket;
+				dateTime = moment($eventStore.date).format('YYYY-MM-DDTHH:mm');
+				ticketType = $eventStore.ticket || '';
+			}
 		} catch (error) {
-			console.error(error);
 			if (placeResponse && placeResponse.id) {
 				await languageStore.remove(placeResponse.id);
 			}
@@ -67,6 +80,10 @@
 			} else {
 				toastStore.showToast($_('unknown-error-occurred'), 'error');
 			}
+			placeLanguage = { en: '' };
+			event = {};
+			dateTime = '';
+			ticketType = '';
 		}
 	}
 
@@ -74,9 +91,12 @@
 		try {
 			if (event.id) {
 				await eventStore.remove(event.id);
-				// Optionally redirect or show success message
-				toastStore.showToast($_('event-deleted-successfully'), 'success');
+				placeLanguage = { en: '' };
+				event = {};
+				dateTime = '';
+				ticketType = '';
 			}
+			isEditing = false;
 		} catch (error) {
 			console.error(error);
 			if (error instanceof Error) {

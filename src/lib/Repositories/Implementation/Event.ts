@@ -3,6 +3,9 @@ import type { Event, InsertEvent, UpdateEvent } from '$lib/Supabase/Types/databa
 import type { IEvent } from '../Interface/IEvent';
 import { supabase } from '$lib/Supabase/supabase';
 import type { EventEntity } from '$lib/Models/Entities/Event';
+import { toastStore } from '$lib/Stores/Toast';
+import { get } from 'svelte/store';
+import { _ } from 'svelte-i18n';
 
 export class EventRepository implements IEvent {
 	async createEventAsync(event: InsertEvent): Promise<EventEntity> {
@@ -58,7 +61,7 @@ export class EventRepository implements IEvent {
 		await supabase.from('Event').update({ deleted_at: new Date().toUTCString() }).eq('id', id);
 	}
 
-	async getLatestEventAsync(): Promise<EventEntity> {
+	async getLatestEventAsync(): Promise<EventEntity | null> {
 		const response = await supabase
 			.from('Event')
 			.select('*,place(*)')
@@ -69,7 +72,8 @@ export class EventRepository implements IEvent {
 			.single();
 
 		if (response.error) {
-			throw response.error;
+			toastStore.showToast(get(_)('no-event-found'), 'default');
+			return null;
 		}
 		return response.data;
 	}

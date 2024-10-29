@@ -8,5 +8,5 @@ export interface IEvent {
 	getEventsAsync(option?: ListOption): Promise<EventEntity[]>;
 	updateEventAsync(event: UpdateEvent): Promise<EventEntity>;
 	deleteEventAsync(id: number): Promise<void>;
-	getLatestEventAsync(): Promise<EventEntity>;
+	getLatestEventAsync(): Promise<EventEntity | null>;
 }
