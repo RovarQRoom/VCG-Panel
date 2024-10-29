@@ -81,8 +81,8 @@ export class SocialRepository implements ISocial {
 	async deleteSocialAsync(id: number): Promise<void> {
 		await supabase.from('Social').update({ deleted_at: new Date().toUTCString() }).eq('id', id);
 	}
-	async deleteSocialsAsync(ids: string[]): Promise<void> {
+	async deleteSocialsAsync(id: number): Promise<void> {
 		// delete all socials
-		await supabase.from('Social').delete().in('id', ids);
+		await supabase.from('Social').delete().eq('footer', id);
 	}
 }

@@ -24,8 +24,8 @@ const createSocialStore = () => {
 			if (socials.length > 0) {
 				// if id is not null, delete it
 				const ids = socials.filter((s) => s.id !== null).map((s) => s.id?.toString() ?? '');
-				if (ids.length > 0) {
-					await socialRepository.deleteSocialsAsync(ids);
+				if (socials[0].footer) {
+					await socialRepository.deleteSocialsAsync(socials[0].footer);
 				}
 			}
 			const response = await socialRepository.createSocialsAsync(socials);
