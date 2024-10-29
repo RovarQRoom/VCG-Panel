@@ -176,7 +176,7 @@
 						<input
 							type="radio"
 							name="ticket"
-							value="free"
+							value="online"
 							bind:group={ticketType}
 							disabled={!isEditing}
 							class="hidden peer"
@@ -185,7 +185,7 @@
 							class="flex flex-col items-center p-4 border-2 rounded-lg cursor-pointer transition-all duration-300 peer-checked:border-darkBlue peer-checked:bg-blue hover:bg-gray-50"
 						>
 							<TicketSolid class="w-8 h-8 mb-2 text-gray-500 peer-checked:text-blue" />
-							<span class="text-sm font-medium">{$_('free')}</span>
+							<span class="text-sm font-medium">{$_('online')}</span>
 						</div>
 					</label>
 					<label class="w-full">
@@ -208,7 +208,7 @@
 						<input
 							type="radio"
 							name="ticket"
-							value="invitation"
+							value="lifetime_support"
 							bind:group={ticketType}
 							disabled={!isEditing}
 							class="hidden peer"
@@ -217,7 +217,7 @@
 							class="flex flex-col items-center p-4 border-2 rounded-lg cursor-pointer transition-all duration-300 peer-checked:border-darkBlue peer-checked:bg-blue hover:bg-gray-50"
 						>
 							<EnvelopeOpenSolid class="w-8 h-8 mb-2 text-gray-500 peer-checked:text-blue" />
-							<span class="text-sm font-medium">{$_('invitation-only')}</span>
+							<span class="text-sm font-medium">{$_('lifetime-support')}</span>
 						</div>
 					</label>
 				</div>

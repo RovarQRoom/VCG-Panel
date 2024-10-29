@@ -104,5 +104,7 @@
   "place-and-date-are-required": "شوێن و بەروار پێویستە",
   "event-created-successfully": "ڕووداوێک بە سەرکەوتوویی دروستکرا",
   "event-updated-successfully": "ڕووداوەکە بە سەرکەوتوویی نوێکرایەوە",
-  "no-event-found": "هیچ ئیڤێنتێک نەدۆزراوەتەوە"
+  "no-event-found": "هیچ ئیڤێنتێک نەدۆزراوەتەوە",
+  "lifetime-support": "بەشداریکردنی بێ کۆتا",
+  "online": "ئۆنڵاین"
 }

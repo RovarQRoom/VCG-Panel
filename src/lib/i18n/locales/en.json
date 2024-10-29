@@ -105,5 +105,7 @@
   "place-and-date-are-required": "Place and date are required",
   "event-created-successfully": "Event created successfully",
   "event-updated-successfully": "Event updated successfully",
-  "no-event-found": "No event found"
+  "no-event-found": "No event found",
+  "lifetime-support": "Lifetime Support",
+  "online": "Online"
 }

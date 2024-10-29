@@ -104,5 +104,7 @@
   "place-and-date-are-required": "المكان والتاريخ مطلوبان",
   "event-created-successfully": "تم إنشاء الحدث بنجاح",
   "event-updated-successfully": "تم تحديث الحدث بنجاح",
-  "no-event-found": "لم يتم العثور على أي حدث"
+  "no-event-found": "لم يتم العثور على أي حدث",
+  "lifetime-support": "دعم مدى الحياة",
+  "online": "متصل"
 }
