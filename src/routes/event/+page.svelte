@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { Card, Button, Label, Input, Tabs, TabItem } from 'flowbite-svelte';
 	import { PencilSquare, DocumentCheck, Trash } from 'svelte-heros-v2';
-	import { TicketSolid, CashSolid, EnvelopeOpenSolid } from 'flowbite-svelte-icons';
+	import { ComputerSpeakerSolid, CashSolid, AwardSolid } from 'flowbite-svelte-icons';
 	import { _ } from 'svelte-i18n';
 	import { onMount } from 'svelte';
 	import { eventStore } from '$lib/Stores/Event';
@@ -171,7 +171,7 @@
 
 			<div>
 				<Label class="mb-2">{$_('ticket-type')}</Label>
-				<div class="flex gap-2">
+				<div class="flex gap-2 {isEditing ? '' : 'opacity-50 cursor-not-allowed'}">
 					<label class="w-full">
 						<input
 							type="radio"
@@ -180,11 +180,12 @@
 							bind:group={ticketType}
 							disabled={!isEditing}
 							class="hidden peer"
+							on:click={() => ticketType === 'online' ? ticketType = '' : null}
 						/>
 						<div
 							class="flex flex-col items-center p-4 border-2 rounded-lg cursor-pointer transition-all duration-300 peer-checked:border-darkBlue peer-checked:bg-blue hover:bg-gray-50"
 						>
-							<TicketSolid class="w-8 h-8 mb-2 text-gray-500 peer-checked:text-blue" />
+							<ComputerSpeakerSolid class="w-8 h-8 mb-2 text-gray-500 peer-checked:text-blue" />
 							<span class="text-sm font-medium">{$_('online')}</span>
 						</div>
 					</label>
@@ -196,6 +197,7 @@
 							bind:group={ticketType}
 							disabled={!isEditing}
 							class="hidden peer"
+							on:click={() => ticketType === 'paid' ? ticketType = '' : null}
 						/>
 						<div
 							class="flex flex-col items-center p-4 border-2 rounded-lg cursor-pointer transition-all duration-300 peer-checked:border-darkBlue peer-checked:bg-blue hover:bg-gray-50"
@@ -212,11 +214,12 @@
 							bind:group={ticketType}
 							disabled={!isEditing}
 							class="hidden peer"
+							on:click={() => ticketType === 'lifetime_support' ? ticketType = '' : null}
 						/>
 						<div
 							class="flex flex-col items-center p-4 border-2 rounded-lg cursor-pointer transition-all duration-300 peer-checked:border-darkBlue peer-checked:bg-blue hover:bg-gray-50"
 						>
-							<EnvelopeOpenSolid class="w-8 h-8 mb-2 text-gray-500 peer-checked:text-blue" />
+							<AwardSolid class="w-8 h-8 mb-2 text-gray-500 peer-checked:text-blue" />
 							<span class="text-sm font-medium">{$_('lifetime-support')}</span>
 						</div>
 					</label>
