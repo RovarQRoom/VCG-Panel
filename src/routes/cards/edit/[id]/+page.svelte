@@ -132,7 +132,11 @@
 </script>
 
 <div class="mb-6">
-	<Button color="light" on:click={goBack} class="px-4 py-2 bg-input-light dark:bg-input-dark border-0 m-4">
+	<Button
+		color="light"
+		on:click={goBack}
+		class="px-4 py-2 bg-input-light dark:bg-input-dark border-0 m-4"
+	>
 		<svg
 			class="w-4 h-4 mr-2"
 			fill="none"
@@ -157,12 +161,24 @@
 	<form on:submit|preventDefault={handleUpdate} class="flex flex-col space-y-6">
 		<div>
 			<Label for="link" class="mb-2">{$_('link')}</Label>
-			<Input type="url" class="bg-input-light dark:bg-input-dark border-0" id="link" placeholder={$_('enter-card-link')} bind:value={card.link} />
+			<Input
+				type="url"
+				class="bg-input-light dark:bg-input-dark border-0"
+				id="link"
+				placeholder={$_('enter-card-link')}
+				bind:value={card.link}
+			/>
 		</div>
 
 		<div>
 			<Label for="icon" class="mb-2">{$_('icon')}</Label>
-			<Input type="file" class="bg-input-light dark:bg-input-dark border-0" id="icon" accept="image/*" on:change={handleFileSelect} />
+			<Input
+				type="file"
+				class="bg-input-light dark:bg-input-dark border-0"
+				id="icon"
+				accept="image/*"
+				on:change={handleFileSelect}
+			/>
 			<div class="mt-2 h-48 flex items-center justify-center overflow-hidden">
 				{#if imagePreview && imagePreview !== `${VITE_SUPABASE_STORAGE_URL}null`}
 					<img
@@ -205,7 +221,7 @@
 							>{$_('description')} ({$_(key.toLowerCase())})</Label
 						>
 						<Textarea
-						 	class="bg-input-light dark:bg-input-dark border-0"
+							class="bg-input-light dark:bg-input-dark border-0"
 							id="description-{key.toLowerCase()}"
 							placeholder="Enter card description"
 							bind:value={descriptionLanguage[
@@ -227,7 +243,7 @@
 		<div class="flex justify-end">
 			<Button
 				type="submit"
-				class="px-6 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg transition duration-300 ease-in-out"
+				class="px-6 py-2 bg-orange-500 hover:bg-orange-600 text-white rounded-lg transition duration-300 ease-in-out"
 				disabled={isLoading}
 			>
 				{#if isLoading}
