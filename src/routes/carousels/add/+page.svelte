@@ -30,7 +30,7 @@
 	};
 
 	let titleLanguage: {
-		en: string;
+		en?: string;
 		ckb?: string;
 		ar?: string;
 	} = {
@@ -38,7 +38,7 @@
 	};
 
 	let descriptionLanguage: {
-		en: string;
+		en?: string;
 		ckb?: string;
 		ar?: string;
 	} = {
@@ -46,7 +46,7 @@
 	};
 
 	let selectedFile: {
-		en: File | null;
+		en?: File | null;
 		ckb?: File | null;
 		ar?: File | null;
 	} = {
@@ -54,7 +54,7 @@
 	};
 
 	let mediaUrl: {
-		en: string;
+		en?: string;
 		ckb?: string;
 		ar?: string;
 	} = {
@@ -62,7 +62,7 @@
 	};
 
 	let imagePreview: {
-		en: string | null;
+		en?: string | null;
 		ckb?: string | null;
 		ar?: string | null;
 	} = {
@@ -70,7 +70,7 @@
 	};
 
 	let fileType: {
-		en: 'image' | 'video' | null;
+		en?: 'image' | 'video' | null;
 		ckb?: 'image' | 'video' | null;
 		ar?: 'image' | 'video' | null;
 	} = {
@@ -195,8 +195,8 @@
 			fullPath: string;
 		} | null = null;
 		try {
-			titleResponse = await languageStore.insert(titleLanguage);
-			descriptionResponse = await languageStore.insert(descriptionLanguage);
+			titleResponse = await languageStore.insert(titleLanguage as Language);
+			descriptionResponse = await languageStore.insert(descriptionLanguage as Language);
 
 			// Handle both file uploads and URLs
 			const mediaUrls = {
@@ -227,7 +227,7 @@
 				thumbnailResponse = await storageStore.uploadFile(thumbnail.file);
 			}
 
-			mediaResponse = await languageStore.insert(mediaUrls);
+			mediaResponse = await languageStore.insert(mediaUrls as Language);
 
 			createCarousel.title = titleResponse.id;
 			createCarousel.description = descriptionResponse.id;

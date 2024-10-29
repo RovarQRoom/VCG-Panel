@@ -107,5 +107,9 @@
   "event-updated-successfully": "Event updated successfully",
   "no-event-found": "No event found",
   "lifetime-support": "Lifetime Support",
-  "online": "Online"
+  "online": "Online",
+  "ticket-title-required": "Ticket title is required",
+  "ticket-created": "Ticket Created",
+  "ticket-updated": "Ticket Updated",
+  "ticket-deleted": "Ticket Deleted"
 }

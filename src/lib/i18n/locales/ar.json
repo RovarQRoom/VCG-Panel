@@ -106,5 +106,9 @@
   "event-updated-successfully": "تم تحديث الحدث بنجاح",
   "no-event-found": "لم يتم العثور على أي حدث",
   "lifetime-support": "دعم مدى الحياة",
-  "online": "متصل"
+  "online": "متصل",
+  "ticket-title-required": "عنوان التذكرة مطلوب",
+  "ticket-created": "تم إنشاء التذكرة",
+  "ticket-updated": "تم تحديث التذكرة",
+  "ticket-deleted": "تم حذف التذكرة"
 }

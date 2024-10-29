@@ -9,7 +9,8 @@
 	import {
 		LanguageEnum,
 		type UpdateEvent,
-		type Language
+		type Language,
+		type InsertLanguage
 	} from '$lib/Supabase/Types/database.types';
 	import moment from 'moment';
 	import { toastStore } from '$lib/Stores/Toast';
@@ -45,7 +46,7 @@
 		isEditing = false;
 		let placeResponse: Language | null = null;
 		try {
-			placeResponse = await languageStore.insert(placeLanguage);
+			placeResponse = await languageStore.insert(placeLanguage as InsertLanguage);
 			event.place = placeResponse.id;
 			event.date = new Date(dateTime).toISOString();
 			event.ticket = ticketType;
@@ -117,9 +118,11 @@
 					<Button on:click={handleSave} class="px-2 py-2 rounded-full" color="green">
 						<DocumentCheck size="20" />
 					</Button>
-					<Button on:click={handleDelete} class="px-2 py-2 rounded-full" color="red">
-						<Trash size="20" />
-					</Button>
+					{#if event.id}
+						<Button on:click={handleDelete} class="px-2 py-2 rounded-full" color="red">
+							<Trash size="20" />
+						</Button>
+					{/if}
 				{/if}
 				<Button on:click={toggleEdit} class="px-2 py-2 rounded-full">
 					<PencilSquare size="20" class={isEditing ? 'text-gray-300' : ''} />
@@ -180,7 +183,7 @@
 							bind:group={ticketType}
 							disabled={!isEditing}
 							class="hidden peer"
-							on:click={() => ticketType === 'online' ? ticketType = '' : null}
+							on:click={() => (ticketType === 'online' ? (ticketType = '') : null)}
 						/>
 						<div
 							class="flex flex-col items-center p-4 border-2 rounded-lg cursor-pointer transition-all duration-300 peer-checked:border-darkBlue peer-checked:bg-blue hover:bg-gray-50"
@@ -197,7 +200,7 @@
 							bind:group={ticketType}
 							disabled={!isEditing}
 							class="hidden peer"
-							on:click={() => ticketType === 'paid' ? ticketType = '' : null}
+							on:click={() => (ticketType === 'paid' ? (ticketType = '') : null)}
 						/>
 						<div
 							class="flex flex-col items-center p-4 border-2 rounded-lg cursor-pointer transition-all duration-300 peer-checked:border-darkBlue peer-checked:bg-blue hover:bg-gray-50"
@@ -214,7 +217,7 @@
 							bind:group={ticketType}
 							disabled={!isEditing}
 							class="hidden peer"
-							on:click={() => ticketType === 'lifetime_support' ? ticketType = '' : null}
+							on:click={() => (ticketType === 'lifetime_support' ? (ticketType = '') : null)}
 						/>
 						<div
 							class="flex flex-col items-center p-4 border-2 rounded-lg cursor-pointer transition-all duration-300 peer-checked:border-darkBlue peer-checked:bg-blue hover:bg-gray-50"

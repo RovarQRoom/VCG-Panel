@@ -162,26 +162,26 @@ export type Database = {
 			Language: {
 				Row: {
 					ar: string | null;
-					ckb: string | null;
+					ckb: string;
 					created_at: string;
 					deleted_at: string | null;
-					en: string;
+					en: string | null;
 					id: number;
 				};
 				Insert: {
 					ar?: string | null;
-					ckb?: string | null;
+					ckb: string;
 					created_at?: string;
 					deleted_at?: string | null;
-					en: string;
+					en?: string | null;
 					id?: number;
 				};
 				Update: {
 					ar?: string | null;
-					ckb?: string | null;
+					ckb?: string;
 					created_at?: string;
 					deleted_at?: string | null;
-					en?: string;
+					en?: string | null;
 					id?: number;
 				};
 				Relationships: [];
@@ -313,6 +313,38 @@ export type Database = {
 						columns: ['footer'];
 						isOneToOne: false;
 						referencedRelation: 'Footer';
+						referencedColumns: ['id'];
+					}
+				];
+			};
+			Ticket: {
+				Row: {
+					created_at: string;
+					deleted_at: string | null;
+					icon: string | null;
+					id: number;
+					title: number;
+				};
+				Insert: {
+					created_at?: string;
+					deleted_at?: string | null;
+					icon?: string | null;
+					id?: number;
+					title: number;
+				};
+				Update: {
+					created_at?: string;
+					deleted_at?: string | null;
+					icon?: string | null;
+					id?: number;
+					title?: number;
+				};
+				Relationships: [
+					{
+						foreignKeyName: 'Ticket_title_fkey';
+						columns: ['title'];
+						isOneToOne: false;
+						referencedRelation: 'Language';
 						referencedColumns: ['id'];
 					}
 				];
@@ -469,3 +501,7 @@ export type UpdateRepresentative = Database['public']['Tables']['Representative'
 export type Social = Database['public']['Tables']['Social']['Row'];
 export type InsertSocial = Database['public']['Tables']['Social']['Insert'];
 export type UpdateSocial = Database['public']['Tables']['Social']['Update'];
+
+export type Ticket = Database['public']['Tables']['Ticket']['Row'];
+export type InsertTicket = Database['public']['Tables']['Ticket']['Insert'];
+export type UpdateTicket = Database['public']['Tables']['Ticket']['Update'];

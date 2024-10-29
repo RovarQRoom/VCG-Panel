@@ -106,5 +106,9 @@
   "event-updated-successfully": "ڕووداوەکە بە سەرکەوتوویی نوێکرایەوە",
   "no-event-found": "هیچ ئیڤێنتێک نەدۆزراوەتەوە",
   "lifetime-support": "بەشداریکردنی بێ کۆتا",
-  "online": "ئۆنڵاین"
+  "online": "ئۆنڵاین",
+  "ticket-title-required": "ناونیشانی بلیت پێویستە",
+  "ticket-created": "بلیت دروستکراوە",
+  "ticket-updated": "بلیت نوێکراوەتەوە",
+  "ticket-deleted": "بلیت سڕاوەتەوە"
 }
