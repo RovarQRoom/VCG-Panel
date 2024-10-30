@@ -528,7 +528,7 @@
 			>
 				{#if isLoading}
 					<Spinner class="mr-3" size="4" color="white" />
-					{$_('loading')}... {$progressLoading ?? 0}%
+					{$progressLoading ?? 0}%
 				{/if}
 				{$_('add-carousel')}
 			</Button>

@@ -25,6 +25,9 @@
 	import { VITE_SUPABASE_STORAGE_URL } from '$env/static/public';
 	import { isVideoFile } from '$lib/utils/fileUtils';
 	import { toastStore } from '$lib/Stores/Toast';
+	// @ts-ignore
+	import ProgressBar from 'svelte-progress-bar';
+	import { writable } from 'svelte/store';
 
 	let carousel: UpdateCarousel | null = null;
 	let titleLanguage: { en: string; ckb?: string; ar?: string } = { en: '' };
@@ -32,6 +35,7 @@
 
 	let selectedFile: { en: File | null; ckb?: File | null; ar?: File | null } = { en: null };
 	let imagePreview: { en: string | null; ckb?: string | null; ar?: string | null } = { en: null };
+	let progressLoading = writable(0);
 
 	let isLoading = false;
 	let thumbnail: {
@@ -58,12 +62,15 @@
 		en: null
 	};
 
+	let progress: any;
+
 	// Add this helper function
 	function isSupabasePath(path: string): boolean {
 		return path.startsWith('files/') || path.startsWith('/files/');
 	}
 
 	onMount(async () => {
+		progress.setWidthRatio(0);
 		const response = await carouselStore.fetch(Number($page.params.id));
 		carousel = {
 			title: response.title?.id,
@@ -229,15 +236,27 @@
 				...titleLanguage,
 				id: carousel.title
 			});
+			const progress1 = Number((Math.random() * (0.2 - 0.1) + 0.1).toFixed(2));
+			progress.setWidthRatio(progress1);
+			progressLoading.set(progress1 * 100);
+
 			descriptionResponse = await languageStore.put({
 				...descriptionLanguage,
 				id: carousel.description ?? 0
 			});
 
+			const progress2 = Number((Math.random() * (0.6 - 0.5) + 0.5).toFixed(2));
+			progress.setWidthRatio(progress2);
+			progressLoading.set(progress2 * 100);
+
 			if (oldMedia) {
 				const existingMediaPaths = await languageStore.fetch(oldMedia);
 				mediaResponse = { ...existingMediaPaths, id: oldMedia };
 			}
+
+			const progress3 = Number((Math.random() * (0.7 - 0.6) + 0.6).toFixed(2));
+			progress.setWidthRatio(progress3);
+			progressLoading.set(progress3 * 100);
 
 			for (const lang of ['en', 'ar', 'ckb'] as const) {
 				if (selectedFile[lang] && selectedFile[lang]!.size > 0) {
@@ -252,6 +271,10 @@
 					}
 				}
 			}
+
+			const progress4 = Number((Math.random() * (0.8 - 0.7) + 0.7).toFixed(2));
+			progress.setWidthRatio(progress4);
+			progressLoading.set(progress4 * 100);
 
 			// Handle media paths - only store Supabase paths for uploaded files, full URLs for external media
 			const mediaUrls = {
@@ -290,6 +313,10 @@
 							: '')
 			};
 
+			const progress5 = Number((Math.random() * (0.95 - 0.85) + 0.85).toFixed(2));
+			progress.setWidthRatio(progress5);
+			progressLoading.set(progress5 * 100);
+
 			mediaResponse = await languageStore.put({
 				...mediaUrls,
 				id: carousel.media ?? 0
@@ -306,6 +333,10 @@
 				);
 			}
 
+			const progress6 = Number((Math.random() * (1 - 0.95) + 0.95).toFixed(2));
+			progress.setWidthRatio(progress6);
+			progressLoading.set(progress6 * 100);
+
 			if (thumbnail.file && thumbnail.file.size > 0) {
 				thumbnailResponse = await storageStore.uploadFile(thumbnail.file);
 			}
@@ -320,6 +351,9 @@
 
 			await carouselStore.put(updatedCarousel);
 
+			const progress7 = 1;
+			progress.setWidthRatio(progress7);
+			progressLoading.set(progress7 * 100);
 			// Delete old media files if they were replaced
 			if (oldMedia && mediaResponse) {
 				const oldMediaPaths = await languageStore.fetch(oldMedia);
@@ -357,6 +391,8 @@
 			}
 		} finally {
 			isLoading = false;
+			progressLoading.set(0);
+			progress.setWidthRatio(0);
 		}
 	}
 
@@ -369,6 +405,8 @@
 		return videoExtensions.some((ext) => link.toLowerCase().endsWith(ext));
 	}
 </script>
+
+<ProgressBar bind:this={progress} color="#f17f18" />
 
 <div class="mb-6">
 	<Button color="light" on:click={goBack} class="px-4 py-2 border-0 dark:bg-input-dark">
@@ -577,6 +615,7 @@
 			>
 				{#if isLoading}
 					<Spinner class="mr-3" size="4" color="white" />
+					{$progressLoading ?? 0}%
 				{/if}
 				{$_('update-carousel')}
 			</Button>

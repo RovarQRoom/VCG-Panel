@@ -19,7 +19,6 @@ const createLanguageStore = () => {
 			return response;
 		},
 		put: async (language: UpdateLanguage) => {
-			console.log('language', language);
 			const response = await languageRepository.updateLanguageAsync(language);
 			update((languages) => languages.map((l) => (l.id === response.id ? response : l)));
 			return response;
