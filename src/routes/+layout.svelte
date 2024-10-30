@@ -15,7 +15,6 @@
 	import { cubicInOut } from 'svelte/easing';
 
 	import Toast from '$lib/Components/Toast.svelte';
-	import { toastStore } from '$lib/Stores/Toast';
 	import { DarkMode } from 'flowbite-svelte';
 	import { _, locale } from 'svelte-i18n';
 	import { Dropdown, DropdownItem } from 'flowbite-svelte';
