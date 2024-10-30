@@ -127,5 +127,6 @@
   "cancel": "Cancel",
   "exporting": "Exporting",
   "export": "Export",
-  "no-media": "No Media"
+  "no-media": "No Media",
+  "sign-in-successful": "Signed in Successfully"
 }
