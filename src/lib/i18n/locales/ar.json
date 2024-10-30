@@ -125,5 +125,6 @@
   "select-range-to-export": "حدد نطاقًا للتصدير",
   "cancel": "يلغي",
   "exporting": "تصدير",
-  "export": "يصدّر"
+  "export": "يصدّر",
+  "no-media": "لا وسائل الإعلام"
 }

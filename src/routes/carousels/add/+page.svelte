@@ -21,6 +21,10 @@
 	import { storageStore } from '$lib/Stores/Storage';
 	import { carouselStore } from '$lib/Stores/Carousel';
 	import { toastStore } from '$lib/Stores/Toast';
+	// @ts-ignore
+	import ProgressBar from 'svelte-progress-bar';
+	import { onMount } from 'svelte';
+	import { writable } from 'svelte/store';
 
 	let createCarousel: InsertCarousel = {
 		title: 0,
@@ -28,6 +32,7 @@
 		media: null,
 		thumbnail_video: null
 	};
+	let progressLoading = writable(0);
 
 	let titleLanguage: {
 		en?: string;
@@ -78,6 +83,11 @@
 	};
 
 	let isLoading = false;
+	let progress: any;
+
+	onMount(() => {
+		progress.setWidthRatio(0);
+	});
 
 	function handleFileSelect(event: Event, lang: string) {
 		const input = event.target as HTMLInputElement;
@@ -194,9 +204,14 @@
 			path: string;
 			fullPath: string;
 		} | null = null;
+		console.log('progress', progress.getState().width);
 		try {
 			titleResponse = await languageStore.insert(titleLanguage as Language);
 			descriptionResponse = await languageStore.insert(descriptionLanguage as Language);
+
+			const progress1 = Number((Math.random() * (0.2 - 0.1) + 0.1).toFixed(2));
+			progress.setWidthRatio(progress1);
+			progressLoading.set(progress1 * 100);
 
 			// Handle both file uploads and URLs
 			const mediaUrls = {
@@ -207,13 +222,6 @@
 								.uploadFileWithLanguage(selectedFile.en, 'en')
 								.then((r) => r.en.fullPath)
 						: ''),
-				ar:
-					mediaUrl.ar ||
-					(selectedFile.ar
-						? await storageStore
-								.uploadFileWithLanguage(selectedFile.ar, 'ar')
-								.then((r) => r.ar.fullPath)
-						: ''),
 				ckb:
 					mediaUrl.ckb ||
 					(selectedFile.ckb
@@ -223,24 +231,42 @@
 						: '')
 			};
 
+			const progress2 = Number((Math.random() * (0.6 - 0.5) + 0.5).toFixed(2));
+			progress.setWidthRatio(progress2);
+			progressLoading.set(progress2 * 100);
+
 			if (thumbnail.file && thumbnail.file.size > 0) {
 				thumbnailResponse = await storageStore.uploadFile(thumbnail.file);
 			}
 
+			const progress3 = Number((Math.random() * (0.7 - 0.6) + 0.6).toFixed(2));
+			progress.setWidthRatio(progress3);
+			progressLoading.set(progress3 * 100);
+
 			mediaResponse = await languageStore.insert(mediaUrls as Language);
+
+			const progress4 = Number((Math.random() * (0.8 - 0.7) + 0.7).toFixed(2));
+			progress.setWidthRatio(progress4);
+			progressLoading.set(progress4 * 100);
 
 			createCarousel.title = titleResponse.id;
 			createCarousel.description = descriptionResponse.id;
 			createCarousel.media = mediaResponse.id;
 			createCarousel.thumbnail_video = thumbnailResponse?.fullPath ?? null;
-
 			const response = await carouselStore.insert(createCarousel);
+
+			const progress5 = Number((Math.random() * (0.95 - 0.85) + 0.85).toFixed(2));
+			progress.setWidthRatio(progress5);
+			progressLoading.set(progress5 * 100);
+
+			progress.setWidthRatio(1);
+			progressLoading.set(100);
+
 			if (response && response.id) {
 				toastStore.showToast('Carousel added successfully!', 'success');
 				goto('/carousels/1');
 			}
 		} catch (error) {
-			console.error(error);
 			// Cleanup logic remains the same
 			if (titleResponse && titleResponse.id) {
 				await languageStore.remove(titleResponse.id);
@@ -270,6 +296,8 @@
 			}
 		} finally {
 			isLoading = false;
+			progress.setWidthRatio(0);
+			progressLoading.set(0);
 		}
 	}
 
@@ -277,6 +305,8 @@
 		goto('/carousels/1');
 	}
 </script>
+
+<ProgressBar bind:this={progress} color="#f17f18" />
 
 <div class="mb-6">
 	<Button
@@ -498,10 +528,10 @@
 			>
 				{#if isLoading}
 					<Spinner class="mr-3" size="4" color="white" />
+					{$_('loading')}... {$progressLoading ?? 0}%
 				{/if}
 				{$_('add-carousel')}
 			</Button>
 		</div>
 	</form>
 </Card>
-

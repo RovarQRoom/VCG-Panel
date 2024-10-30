@@ -72,7 +72,7 @@ export class EventRepository implements IEvent {
 			.single();
 
 		if (response.error) {
-			toastStore.showToast(get(_)('no-event-found'), 'default');
+			toastStore.showToast(get(_)('no-event-found'), 'warning');
 			return null;
 		}
 		return response.data;

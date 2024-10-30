@@ -126,5 +126,6 @@
   "select-range-to-export": "Select a range to export",
   "cancel": "Cancel",
   "exporting": "Exporting",
-  "export": "Export"
+  "export": "Export",
+  "no-media": "No Media"
 }
