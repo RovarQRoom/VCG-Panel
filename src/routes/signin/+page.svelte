@@ -31,14 +31,15 @@
 	}
 </script>
 
-<div class="flex items-center justify-center min-h-screen bg-gray-100">
-	<Card class="w-full max-w-md">
-		<h2 class="text-2xl font-bold mb-6 text-center">{$_('sign-in')}</h2>
+<div class="flex items-center justify-center min-h-screen bg-white">
+	<Card class="w-full max-w-md bg-[#f1f1f1] dark:bg-darkBlue">
+		<h2 class="text-2xl font-bold mb-6 text-center dark:text-white">{$_('sign-in')}</h2>
 
 		<form on:submit|preventDefault={handleSubmit}>
 			<div class="mb-4">
-				<Label for="email" class="mb-2">{$_('email')}</Label>
+				<Label for="email" class="mb-2 dark:text-white">{$_('email')}</Label>
 				<Input
+				    class="bg-white dark:bg-[#1a2232] dark:text-white border-0"
 					type="email"
 					id="email"
 					placeholder={$_('enter-your-email')}
@@ -48,8 +49,9 @@
 			</div>
 
 			<div class="mb-6">
-				<Label for="password" class="mb-2">{$_('password')}</Label>
+				<Label for="password" class="mb-2 dark:text-white">{$_('password')}</Label>
 				<Input
+				class="bg-white dark:bg-[#1a2232] dark:text-white border-0"
 					type="password"
 					id="password"
 					placeholder={$_('enter-your-password')}
@@ -58,7 +60,7 @@
 				/>
 			</div>
 
-			<Button type="submit" class="w-full" disabled={isLoading}>
+			<Button type="submit" class="w-full bg-blue hover:bg-sky-500 duration-300 ease-in-out" disabled={isLoading}>
 				{isLoading ? $_('signing-in') : $_('sign-in')}
 			</Button>
 		</form>
