@@ -1,8 +1,10 @@
-import { writable } from 'svelte/store';
+import { get, writable } from 'svelte/store';
 
 import type { User } from '@supabase/supabase-js';
 
 import { AuthenticationRepository } from '$lib/Repositories/Implementation/Authentication';
+import { toastStore } from './Toast';
+import { _ } from 'svelte-i18n';
 
 function createAuthStore() {
 	const { subscribe, set } = writable<User | null>(null);
@@ -24,7 +26,7 @@ function createAuthStore() {
 
 		signOut: async () => {
 			await authRepo.signOutAsync();
-
+			toastStore.showToast(get(_)('sign-out-successful'), 'success');
 			set(null);
 		},
 

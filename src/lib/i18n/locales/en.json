@@ -128,5 +128,6 @@
   "exporting": "Exporting",
   "export": "Export",
   "no-media": "No Media",
-  "sign-in-successful": "Signed in Successfully"
+  "sign-in-successful": "Signed in Successfully",
+  "sign-out-successful": "Signout Successfully"
 }

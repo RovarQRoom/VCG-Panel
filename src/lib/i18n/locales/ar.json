@@ -127,5 +127,6 @@
   "exporting": "تصدير",
   "export": "يصدّر",
   "no-media": "لا وسائل الإعلام",
-  "sign-in-successful": "تم تسجيل الدخول بنجاح"
+  "sign-in-successful": "تم تسجيل الدخول بنجاح",
+  "sign-out-successful": "تم تسجيل الخروج بنجاح"
 }

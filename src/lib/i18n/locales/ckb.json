@@ -127,5 +127,6 @@
   "exporting": "هەناردەکردن",
   "export": "هەناردە",
   "no-media": "بێ رەسم و ڤیدیۆ",
-  "sign-in-successful": "بە سەرکەوتوویی هاتە ژوورەوە"
+  "sign-in-successful": "بە سەرکەوتوویی هاتە ژوورەوە",
+  "sign-out-successful": "چوونەژوورەوە بە سەرکەوتوویی"
 }
