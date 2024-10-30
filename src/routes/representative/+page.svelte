@@ -294,9 +294,8 @@
 					<Input
 						type="text"
 						dir="rtl"
-						class="w-full px-3 py-2 rounded-lg border border-gray-200 dark:border-gray-600
-							   bg-white dark:bg-gray-700 text-gray-900 dark:text-white
-							   focus:ring-2 focus:ring-primary focus:border-transparent
+						class="w-full px-3 py-2 rounded-lg bg-[#f1f1f1] dark:bg-[#212121]
+							   text-gray-900 dark:text-white
 							   transition-all duration-200 ease-in-out
 							   placeholder:text-gray-400 dark:placeholder:text-gray-300 disabled:bg-gray-200 dark:disabled:bg-gray-600 disabled:cursor-not-allowed"
 						placeholder="Enter Kurdish title"
