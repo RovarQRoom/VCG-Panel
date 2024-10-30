@@ -159,6 +159,38 @@ export type Database = {
 				};
 				Relationships: [];
 			};
+			Heading: {
+				Row: {
+					created_at: string;
+					deleted_at: string | null;
+					heading_type: Database['public']['Enums']['HeadingEnum'];
+					id: number;
+					title: number | null;
+				};
+				Insert: {
+					created_at?: string;
+					deleted_at?: string | null;
+					heading_type: Database['public']['Enums']['HeadingEnum'];
+					id?: number;
+					title?: number | null;
+				};
+				Update: {
+					created_at?: string;
+					deleted_at?: string | null;
+					heading_type?: Database['public']['Enums']['HeadingEnum'];
+					id?: number;
+					title?: number | null;
+				};
+				Relationships: [
+					{
+						foreignKeyName: 'Heading_title_fkey';
+						columns: ['title'];
+						isOneToOne: false;
+						referencedRelation: 'Language';
+						referencedColumns: ['id'];
+					}
+				];
+			};
 			Language: {
 				Row: {
 					ar: string | null;
@@ -357,6 +389,7 @@ export type Database = {
 			[_ in never]: never;
 		};
 		Enums: {
+			HeadingEnum: 'CARD' | 'REPRESENTATIVE';
 			Knowledge: 'BEGINNER' | 'INTERMEDIATE' | 'ADVANCE';
 			LanguageEnum: 'ENGLISH' | 'ARABIC' | 'KURDISH';
 		};
@@ -457,6 +490,11 @@ export type CompositeTypes<
 
 // Schema: public
 // Enums
+export enum HeadingEnum {
+	CARD = 'CARD',
+	REPRESENTATIVE = 'REPRESENTATIVE'
+}
+
 export enum Knowledge {
 	BEGINNER = 'BEGINNER',
 	INTERMEDIATE = 'INTERMEDIATE',
@@ -485,6 +523,10 @@ export type UpdateEvent = Database['public']['Tables']['Event']['Update'];
 export type Footer = Database['public']['Tables']['Footer']['Row'];
 export type InsertFooter = Database['public']['Tables']['Footer']['Insert'];
 export type UpdateFooter = Database['public']['Tables']['Footer']['Update'];
+
+export type Heading = Database['public']['Tables']['Heading']['Row'];
+export type InsertHeading = Database['public']['Tables']['Heading']['Insert'];
+export type UpdateHeading = Database['public']['Tables']['Heading']['Update'];
 
 export type Language = Database['public']['Tables']['Language']['Row'];
 export type InsertLanguage = Database['public']['Tables']['Language']['Insert'];

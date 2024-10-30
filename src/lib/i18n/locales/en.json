@@ -111,5 +111,20 @@
   "ticket-title-required": "Ticket title is required",
   "ticket-created": "Ticket Created",
   "ticket-updated": "Ticket Updated",
-  "ticket-deleted": "Ticket Deleted"
+  "ticket-deleted": "Ticket Deleted",
+  "heading-created": "Heading created",
+  "heading-updated": "Heading updated",
+  "heading-deleted": "Heading deleted",
+  "edit": "Edit",
+  "no-heading-found": "No heading found",
+  "error-occurred": "Error occurred",
+  "export-to-excel": "Export to Excel",
+  "export-success": "Export Success",
+  "export-failed": "Export Failed",
+  "from": "From",
+  "to": "To",
+  "select-range-to-export": "Select a range to export",
+  "cancel": "Cancel",
+  "exporting": "Exporting",
+  "export": "Export"
 }

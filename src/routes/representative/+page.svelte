@@ -4,7 +4,12 @@
 	import {
 		LanguageEnum,
 		type Language,
-		type UpdateRepresentative
+		type UpdateRepresentative,
+		HeadingEnum,
+		type InsertHeading,
+		type UpdateHeading,
+		type InsertLanguage,
+		type UpdateLanguage
 	} from '$lib/Supabase/Types/database.types';
 	import { _, locale } from 'svelte-i18n';
 	import { PencilSquare, DocumentCheck } from 'svelte-heros-v2';
@@ -15,6 +20,7 @@
 	import { VITE_SUPABASE_STORAGE_URL } from '$env/static/public';
 	import { fade } from 'svelte/transition';
 	import { toastStore } from '$lib/Stores/Toast';
+	import { headingStore } from '$lib/Stores/Heading';
 
 	let nameLanguage: { en: string; ckb?: string; ar?: string } = { en: '' };
 	let descriptionLanguage: { en: string; ckb?: string; ar?: string } = { en: '' };
@@ -26,6 +32,15 @@
 	let isEditing = false;
 	let isSmallScreen: boolean;
 	let isSaving = false; // New variable to track saving state
+
+	let titleLanguage = {
+		en: '',
+		ckb: ''
+	};
+	let createHeading: UpdateHeading = {
+		title: 0,
+		heading_type: HeadingEnum.REPRESENTATIVE
+	};
 
 	onMount(() => {
 		(async () => {
@@ -46,6 +61,13 @@
 				representative.name = $representativeStore.name?.id;
 				representative.description = $representativeStore.description?.id;
 				imagePreview = `${VITE_SUPABASE_STORAGE_URL}${$representativeStore.image}`;
+			}
+			await headingStore.fetchByType(HeadingEnum.REPRESENTATIVE);
+			if ($headingStore) {
+				titleLanguage.en = $headingStore.title?.en ?? '';
+				titleLanguage.ckb = $headingStore.title?.ckb ?? '';
+				createHeading.id = $headingStore.id;
+				createHeading.title = $headingStore.title?.id ?? 0;
 			}
 			checkScreenSize();
 			window.addEventListener('resize', checkScreenSize);
@@ -78,17 +100,49 @@
 			fullPath: string;
 		} | null = null;
 		try {
-			descriptionResponse = await languageStore.insert(descriptionLanguage);
-			nameResponse = await languageStore.insert(nameLanguage);
+			descriptionResponse = representative.description
+				? await languageStore.put({
+						...descriptionLanguage,
+						id: representative.description
+					})
+				: await languageStore.insert(descriptionLanguage as InsertLanguage);
+			nameResponse = representative.name
+				? await languageStore.put({
+						...nameLanguage,
+						id: representative.name
+					} as UpdateLanguage)
+				: await languageStore.insert(nameLanguage as InsertLanguage);
 			if (selectedFile && selectedFile.size > 0) {
 				imageResponse = await storageStore.uploadFile(selectedFile);
 			}
 			representative.description = descriptionResponse?.id;
 			representative.name = nameResponse?.id;
 			representative.image = imageResponse?.fullPath;
-			representative.id
-				? await representativeStore.put(representative)
+			const response = representative.id
+				? await representativeStore.put({
+						...representative,
+						id: representative.id
+					} as UpdateRepresentative)
 				: await representativeStore.insert(representative);
+			if (response && response.id) {
+				representative = {
+					id: response.id,
+					image: response.image,
+					name: response.name?.id,
+					description: response.description?.id
+				};
+				imagePreview = `${VITE_SUPABASE_STORAGE_URL}${response.image}`;
+				nameLanguage = {
+					en: nameLanguage.en,
+					ckb: nameLanguage.ckb,
+					ar: nameLanguage.ar
+				};
+				descriptionLanguage = {
+					en: descriptionLanguage.en,
+					ckb: descriptionLanguage.ckb,
+					ar: descriptionLanguage.ar
+				};
+			}
 		} catch (error) {
 			console.error(error);
 			if (descriptionResponse && descriptionResponse.id) {
@@ -107,6 +161,49 @@
 			}
 		} finally {
 			isSaving = false; // Reset saving state
+		}
+	}
+
+	async function saveHeading() {
+		if (isSaving) return;
+		isSaving = true;
+		let titleResponse: Language | null = null;
+		try {
+			titleResponse = createHeading.title
+				? await languageStore.put({
+						...titleLanguage,
+						id: createHeading.title
+					} as UpdateLanguage)
+				: await languageStore.insert(titleLanguage as InsertLanguage);
+			createHeading.title = titleResponse.id;
+			const response = createHeading.id
+				? await headingStore.put({
+						...createHeading,
+						id: createHeading.id
+					} as UpdateHeading)
+				: await headingStore.insert(createHeading as InsertHeading);
+			if (response && response.id) {
+				createHeading = {
+					id: response.id,
+					title: response.title?.id ?? 0,
+					heading_type: HeadingEnum.REPRESENTATIVE
+				};
+				titleLanguage = {
+					en: titleLanguage.en,
+					ckb: titleLanguage.ckb
+				};
+			}
+		} catch (error) {
+			if (titleResponse && titleResponse.id) {
+				languageStore.remove(titleResponse.id);
+			}
+			if (error instanceof Error) {
+				toastStore.showToast(error.message, 'error');
+			} else {
+				toastStore.showToast($_('error-occurred'), 'error');
+			}
+		} finally {
+			isSaving = false;
 		}
 	}
 
@@ -145,6 +242,72 @@
 		isSmallScreen = window.innerWidth < 768;
 	}
 </script>
+
+<div class="mb-8 max-w-2xl mx-auto">
+	<div class="bg-gray-100 dark:bg-gray-800 rounded-lg p-4">
+		<div class="flex justify-between items-center mb-3">
+			<h2 class="text-lg font-semibold">{$_('title')}</h2>
+			<div class="flex gap-2">
+				<Button size="xs" color="primary" on:click={toggleEdit}>
+					{$_('edit')}
+				</Button>
+				{#if isEditing}
+					<Button size="xs" color="green" on:click={saveHeading}>
+						{$_('save')}
+					</Button>
+				{/if}
+			</div>
+		</div>
+
+		<Tabs style="pill" class="flex justify-center rounded-lg p-2">
+			<TabItem
+				open
+				class="bg-slate-200/90 dark:bg-slate-700/90 backdrop-blur-sm shadow-sm rounded-lg transition-all duration-200 hover:bg-slate-300 dark:hover:bg-slate-800"
+			>
+				<div slot="title" class="py-1 px-3">
+					<span>{$_('english')}</span>
+				</div>
+				<div class="py-2" dir="ltr">
+					<Input
+						type="text"
+						dir="ltr"
+						class="w-full px-3 py-2 rounded-lg border border-gray-200 dark:border-gray-600
+							   bg-white dark:bg-gray-700 text-gray-900 dark:text-white
+							   focus:ring-2 focus:ring-primary focus:border-transparent
+							   transition-all duration-200 ease-in-out
+							   placeholder:text-gray-400 dark:placeholder:text-gray-300 disabled:bg-gray-200 dark:disabled:bg-gray-600 disabled:cursor-not-allowed"
+						placeholder="Enter English title"
+						bind:value={titleLanguage.en}
+						disabled={!isEditing}
+					/>
+				</div>
+			</TabItem>
+
+			<TabItem
+				open
+				class="bg-slate-200/90 dark:bg-slate-700/90 backdrop-blur-sm shadow-sm rounded-lg transition-all duration-200 hover:bg-slate-300 dark:hover:bg-slate-800"
+			>
+				<div slot="title" class="py-1 px-3">
+					<span>{$_('kurdish')}</span>
+				</div>
+				<div class="py-2" dir="rtl">
+					<Input
+						type="text"
+						dir="rtl"
+						class="w-full px-3 py-2 rounded-lg border border-gray-200 dark:border-gray-600
+							   bg-white dark:bg-gray-700 text-gray-900 dark:text-white
+							   focus:ring-2 focus:ring-primary focus:border-transparent
+							   transition-all duration-200 ease-in-out
+							   placeholder:text-gray-400 dark:placeholder:text-gray-300 disabled:bg-gray-200 dark:disabled:bg-gray-600 disabled:cursor-not-allowed"
+						placeholder="Enter Kurdish title"
+						bind:value={titleLanguage.ckb}
+						disabled={!isEditing}
+					/>
+				</div>
+			</TabItem>
+		</Tabs>
+	</div>
+</div>
 
 <div class="container mx-auto px-4 py-8">
 	<Card class="max-w-4xl mx-auto p-4 sm:p-6 bg-white dark:bg-main-dark shadow-lg rounded-lg">

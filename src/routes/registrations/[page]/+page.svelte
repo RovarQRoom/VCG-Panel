@@ -8,20 +8,38 @@
 		TableHead,
 		TableHeadCell,
 		Button,
-		Badge
+		Badge,
+		Modal,
+		Label,
+		Input,
+		Spinner
 	} from 'flowbite-svelte';
-	import { CheckCircleSolid, CircleMinusSolid, TrashBinOutline } from 'flowbite-svelte-icons';
+	import {
+		CheckCircleSolid,
+		CircleMinusSolid,
+		TrashBinOutline,
+		PrinterSolid
+	} from 'flowbite-svelte-icons';
 	import { registerStore } from '$lib/Stores/Register';
 	import { _ } from 'svelte-i18n';
 	import Pagination from '$lib/Components/Pagination.svelte';
 	import type { ListOption } from '$lib/Models/Common/ListOption';
 	import { page } from '$app/stores';
 	import { toastStore } from '$lib/Stores/Toast';
+	import { exportToExcel } from '$lib/utils/exportToExcel';
 
 	let filter: ListOption = {
 		page: 1,
 		limit: 9
 	};
+
+	let excelOption = {
+		from: 1,
+		to: 100
+	};
+
+	let showExportModal = false;
+	let isExporting = false;
 
 	onMount(async () => {
 		await fetchRegistrations();
@@ -84,10 +102,97 @@
 			toastStore.showToast(`${$_('failed-to-delete-registration')}: ${errorMessage}`, 'error');
 		}
 	}
+
+	async function handleExport() {
+		try {
+			isExporting = true;
+			const registers = await registerStore.export(excelOption.from, excelOption.to, filter);
+			exportToExcel(registers.data ?? [], 'Registrations');
+			showExportModal = false;
+			toastStore.showToast($_('export-success'), 'success');
+		} catch (error) {
+			const errorMessage = error instanceof Error ? error.message : 'An unknown error occurred';
+			toastStore.showToast(`${$_('export-failed')}: ${errorMessage}`, 'error');
+		} finally {
+			isExporting = false;
+		}
+	}
 </script>
 
 <div class="p-4">
-	<h1 class="text-3xl font-bold mb-6">{$_('registrations')}</h1>
+	<div class="flex justify-between items-center mb-6">
+		<h1 class="text-3xl font-bold">{$_('registrations')}</h1>
+		<button
+			on:click={() => (showExportModal = true)}
+			class="inline-flex items-center gap-2 px-4 py-2 text-sm font-medium text-white bg-gradient-to-r from-sky-600 to-indigo-700 rounded-lg shadow-md hover:from-sky-700 hover:to-indigo-800 focus:ring-4 focus:ring-sky-300 focus:outline-none transition-all duration-300 ease-in-out transform hover:-translate-y-0.5"
+		>
+			<PrinterSolid class="w-4 h-4" />
+			<span>{$_('export-to-excel')}</span>
+		</button>
+	</div>
+
+	<Modal
+		bind:open={showExportModal}
+		size="sm"
+		class="w-full"
+		autoclose={false}
+		backdropClass="bg-sky-900/80 backdrop-blur-sm"
+	>
+		<div class="relative p-4">
+			<div class="text-center mb-6">
+				<h3 class="text-xl font-semibold text-slate-900 dark:text-white mb-2">
+					{$_('export-to-excel')}
+				</h3>
+				<p class="text-sm text-slate-500 dark:text-slate-400">
+					{$_('select-range-to-export')}
+				</p>
+			</div>
+
+			<div class="space-y-4">
+				<div>
+					<Label for="from">{$_('from')}</Label>
+					<Input id="from" type="number" bind:value={excelOption.from} min="1" class="mt-1" />
+				</div>
+
+				<div>
+					<Label for="to">{$_('to')}</Label>
+					<Input
+						id="to"
+						type="number"
+						bind:value={excelOption.to}
+						min={excelOption.from}
+						class="mt-1"
+					/>
+				</div>
+			</div>
+
+			<div class="flex justify-end gap-3 mt-6">
+				<button
+					type="button"
+					class="px-4 py-2 text-sm font-medium text-slate-500 bg-white border border-gray-300 rounded-lg hover:bg-slate-100 focus:ring-4 focus:ring-slate-200"
+					on:click={() => (showExportModal = false)}
+					disabled={isExporting}
+				>
+					{$_('cancel')}
+				</button>
+
+				<button
+					type="button"
+					class="inline-flex items-center px-4 py-2 text-sm font-medium text-white bg-gradient-to-r from-sky-600 to-indigo-700 rounded-lg shadow-md hover:from-sky-700 hover:to-indigo-800 focus:ring-4 focus:ring-sky-300 disabled:opacity-50 disabled:cursor-not-allowed"
+					on:click={handleExport}
+					disabled={isExporting}
+				>
+					{#if isExporting}
+						<Spinner class="mr-2 w-4 h-4" />
+						{$_('exporting')}...
+					{:else}
+						<PrinterSolid class="mr-2 w-4 h-4" />
+						{$_('export')}
+					{/if}
+				</button>
+			</div>
+		</div>
+	</Modal>
 
 	<div class="overflow-x-auto relative shadow-md sm:rounded-lg">
 		<Table hoverable={true}>

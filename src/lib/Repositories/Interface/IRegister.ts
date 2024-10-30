@@ -6,6 +6,11 @@ export interface IRegister {
 	createRegisterAsync(register: InsertRegister): Promise<Register>;
 	getRegisterAsync(id: number): Promise<Register>;
 	getRegistersAsync(option?: ListOption): Promise<PostgrestSingleResponse<Register[]>>;
+	getRegisterExportAsync(
+		from: number,
+		to: number,
+		option?: ListOption
+	): Promise<PostgrestSingleResponse<Register[]>>;
 	updateRegisterAsync(register: UpdateRegister): Promise<Register>;
 	deleteRegisterAsync(id: number): Promise<void>;
 }

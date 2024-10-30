@@ -36,6 +36,22 @@ export class RegisterRepository implements IRegister {
 		}
 		return response;
 	}
+	async getRegisterExportAsync(
+		from: number,
+		to: number,
+		option?: ListOption
+	): Promise<PostgrestSingleResponse<Register[]>> {
+		const response = await supabase
+			.from('Register')
+			.select('*')
+			.is('deleted_at', null)
+			.order('id', { ascending: false })
+			.range(from - 1, to);
+		if (response.error) {
+			throw response.error;
+		}
+		return response;
+	}
 	async updateRegisterAsync(register: UpdateRegister): Promise<Register> {
 		const response = await supabase
 			.from('Register')

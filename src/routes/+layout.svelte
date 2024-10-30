@@ -111,11 +111,14 @@
 </script>
 
 {#if isLoading}
-	<div class="flex items-center justify-center min-h-screen">
+	<div class="flex items-center justify-center min-h-screen dark:text-white text-black">
 		<Spinner size="12" />
 	</div>
 {:else if !isSigninPage}
-	<div class="flex flex-col min-h-screen" dir={$locale === 'en' ? 'ltr' : 'rtl'}>
+	<div
+		class="flex flex-col min-h-screen dark:text-white text-black"
+		dir={$locale === 'en' ? 'ltr' : 'rtl'}
+	>
 		<Navbar
 			class="bg-secondary-light dark:bg-secondary-dark text-primary-dark dark:text-primary-light p-2 rounded-full max-w-fit mx-auto mt-4 transition-all duration-300 ease-in-out"
 		>
@@ -189,9 +192,7 @@
 						src={$locale === 'en' ? '/images/usa.jpg' : '/images/kurdish.svg'}
 					/>
 					{$locale === 'en' ? $_('english') : $_('kurdish')}
-					<ChevronDownOutline
-						class="w-auto h-6 ms-2 text-white dark:text-white"
-					/>
+					<ChevronDownOutline class="w-auto h-6 ms-2 text-white dark:text-white" />
 				</Button>
 
 				<Dropdown

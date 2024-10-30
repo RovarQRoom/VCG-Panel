@@ -110,5 +110,20 @@
   "ticket-title-required": "عنوان التذكرة مطلوب",
   "ticket-created": "تم إنشاء التذكرة",
   "ticket-updated": "تم تحديث التذكرة",
-  "ticket-deleted": "تم حذف التذكرة"
+  "ticket-deleted": "تم حذف التذكرة",
+  "heading-created": "تم إنشاء العنوان",
+  "heading-deleted": "تم حذف العنوان",
+  "heading-updated": "تم تحديث العنوان",
+  "edit": "يحرر",
+  "no-heading-found": "لم يتم العثور على عنوان",
+  "error-occurred": "حدث خطأ",
+  "export-to-excel": "تصدير إلى إكسل",
+  "export-success": "نجاح التصدير",
+  "export-failed": "فشل التصدير",
+  "from": "من",
+  "to": "ل",
+  "select-range-to-export": "حدد نطاقًا للتصدير",
+  "cancel": "يلغي",
+  "exporting": "تصدير",
+  "export": "يصدّر"
 }

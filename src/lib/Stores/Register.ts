@@ -33,6 +33,10 @@ const createRegisterStore = () => {
 				remainingData: response.data?.length
 			};
 		},
+		export: async (from: number, to: number, _options?: ListOption) => {
+			const response = await registerRepository.getRegisterExportAsync(from, to, _options);
+			return response;
+		},
 		insert: async (register: InsertRegister) => {
 			const response = await registerRepository.createRegisterAsync(register);
 			update((registers) => ({

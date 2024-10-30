@@ -110,5 +110,20 @@
   "ticket-title-required": "ناونیشانی بلیت پێویستە",
   "ticket-created": "بلیت دروستکراوە",
   "ticket-updated": "بلیت نوێکراوەتەوە",
-  "ticket-deleted": "بلیت سڕاوەتەوە"
+  "ticket-deleted": "بلیت سڕاوەتەوە",
+  "heading-created": "سەردێڕ دروست کراوە",
+  "heading-deleted": "سەردێڕەکە سڕاوەتەوە",
+  "heading-updated": "سەردێڕ نوێکرایەوە",
+  "edit": "نوێکردنەوە",
+  "no-heading-found": "هیچ سەردێڕێک نەدۆزراوەتەوە",
+  "error-occurred": "هەڵە ڕوویدا",
+  "export-to-excel": "هەناردەکردن بۆ ئێکسڵ",
+  "export-success": "سەرکەوتنی هەناردەکردن",
+  "export-failed": "هەناردەکردن شکستی هێنا",
+  "from": "لە",
+  "to": "بۆ",
+  "select-range-to-export": "مەودایەک هەڵبژێرە بۆ هەناردەکردن",
+  "cancel": "ڕەتکردنەوە",
+  "exporting": "هەناردەکردن",
+  "export": "هەناردە"
 }
