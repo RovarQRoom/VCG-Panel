@@ -244,7 +244,7 @@
 </script>
 
 <div class="mb-8 max-w-2xl mx-auto">
-	<div class="bg-gray-100 dark:bg-gray-800 rounded-lg p-4">
+	<div class="bg-[#f1f1f1] dark:bg-[#212121] rounded-lg p-4">
 		<div class="flex justify-between items-center mb-3">
 			<h2 class="text-lg font-semibold">{$_('title')}</h2>
 			<div class="flex gap-2">
@@ -271,9 +271,9 @@
 					<Input
 						type="text"
 						dir="ltr"
-						class="w-full px-3 py-2 rounded-lg border border-gray-200 dark:border-gray-600
-							   bg-white dark:bg-gray-700 text-gray-900 dark:text-white
-							   focus:ring-2 focus:ring-primary focus:border-transparent
+						class="w-full px-3 py-2 rounded-lg 
+							    text-gray-900 dark:text-white
+							   bg-white dark:bg-[#1a2232]
 							   transition-all duration-200 ease-in-out
 							   placeholder:text-gray-400 dark:placeholder:text-gray-300 disabled:bg-gray-200 dark:disabled:bg-gray-600 disabled:cursor-not-allowed"
 						placeholder="Enter English title"
