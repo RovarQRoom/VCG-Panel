@@ -1,7 +1,7 @@
 <script lang="ts">
 	import '../app.css';
 
-	import { Navbar, NavBrand, NavLi, NavUl, NavHamburger, Button, Spinner } from 'flowbite-svelte';
+	import { Navbar, NavLi, NavUl, Button, Spinner } from 'flowbite-svelte';
 
 	import { onMount } from 'svelte';
 
