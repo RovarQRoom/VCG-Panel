@@ -5,7 +5,9 @@
 
 {#if $toastStore.visible}
 	<Toast
-		class="fixed bottom-5 right-5 z-50 w-full max-w-xs p-4 text-gray-500 bg-white rounded-lg shadow dark:bg-gray-800 dark:text-gray-400"
+		class="fixed top-5 right-5 z-50 w-full max-w-xs p-4 text-grey-500 bg-white rounded-lg shadow dark:text-white
+		{$toastStore.type === 'error' ? 'bg-red-500/40 dark:bg-red-500/20' : $toastStore.type === 'success' ? 'bg-green-500/40 dark:bg-green-500/20' : $toastStore.type === 'warning' ? 'bg-yellow-500/40 dark:bg-yellow-500/20' : 'bg-sky-500/40 dark:bg-sky-500/20'}"
+		
 		color={$toastStore.type === 'error'
 			? 'red'
 			: $toastStore.type === 'success'
