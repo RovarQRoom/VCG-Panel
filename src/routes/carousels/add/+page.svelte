@@ -505,14 +505,3 @@
 	</form>
 </Card>
 
-{#if $uploadProgressStore > 0}
-	<div class="w-full bg-gray-200 rounded-full h-2.5 dark:bg-gray-700 mb-4">
-		<div
-			class="bg-orange-500 h-2.5 rounded-full transition-all duration-300"
-			style="width: {$uploadProgressStore * 100}%"
-		></div>
-		<p class="text-sm text-gray-500 mt-1">
-			Uploading: {Math.round($uploadProgressStore * 100)}%
-		</p>
-	</div>
-{/if}
