@@ -14,9 +14,9 @@ export default {
 	theme: {
 		extend: {
 			colors: {
-				blue: "#356fe1",
-				darkBlue: "#212b3e",
-				gray: "#f6f7f7",
+				blue: '#356fe1',
+				darkBlue: '#212b3e',
+				gray: '#f6f7f7',
 				// flowbite-svelte
 				primary: {
 					light: '#8A70D6',

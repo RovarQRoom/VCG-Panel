@@ -13,11 +13,11 @@ export class StorageRepository implements IStorage {
 		fullPath: string;
 	}> {
 		const response = await supabase.storage
-		.from(storageName ?? 'files')
-		.upload(
-			`${folderName ?? 'public/'}${moment().format('YY-MM-DD:HH:mm:ss')}${image.name}`,
-			image
-		);
+			.from(storageName ?? 'files')
+			.upload(
+				`${folderName ?? 'public/'}${moment().format('YY-MM-DD:HH:mm:ss')}${image.name}`,
+				image
+			);
 		if (response.error) {
 			throw new Error(response.error.message);
 		}

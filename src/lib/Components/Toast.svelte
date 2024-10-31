@@ -6,8 +6,13 @@
 {#if $toastStore.visible}
 	<Toast
 		class="fixed top-16 md:top-36 right-5 z-50 w-full max-w-xs p-4 text-grey-500 bg-white rounded-lg shadow dark:text-white
-		{$toastStore.type === 'error' ? 'bg-red-500/40 dark:bg-red-500/20' : $toastStore.type === 'success' ? 'bg-green-500/40 dark:bg-green-500/20 backdrop-blur-xl' : $toastStore.type === 'warning' ? 'bg-yellow-500/40 dark:bg-yellow-500/20 backdrop-blur-xl' : 'bg-sky-500/40 dark:bg-sky-500/20 backdrop-blur-xl'}"
-		
+		{$toastStore.type === 'error'
+			? 'bg-red-500/40 dark:bg-red-500/20'
+			: $toastStore.type === 'success'
+				? 'bg-green-500/40 dark:bg-green-500/20 backdrop-blur-xl'
+				: $toastStore.type === 'warning'
+					? 'bg-yellow-500/40 dark:bg-yellow-500/20 backdrop-blur-xl'
+					: 'bg-sky-500/40 dark:bg-sky-500/20 backdrop-blur-xl'}"
 		color={$toastStore.type === 'error'
 			? 'red'
 			: $toastStore.type === 'success'

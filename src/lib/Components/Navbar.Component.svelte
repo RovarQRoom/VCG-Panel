@@ -15,7 +15,7 @@
 	}
   </script>
   
-  <Navbar class="bg-[#f1f1f1] dark:bg-darkBlue fixed z-50">
+  <Navbar class="bg-[#f1f1f1] dark:bg-darkBlue fixed z-50 duration-300 ease-in-out">
     <NavBrand href="/">
         <p
           class="text-lg md:text-2xl text-blue dark:text-blue font-bold"
@@ -78,7 +78,7 @@
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d='M4 6h16M4 10h16M4 14h16M4 18h16'
                                 ></path>
                             </svg>
-                            <div class="{activeUrl === '/carousel/1' ? "flex" : "flex md:hidden"}">
+                            <div class="{activeUrl === '/carousels/1' ? "flex" : "flex md:hidden"}">
                             <p>{$_("carousel")}</p>
                             </div>
           </div>
@@ -164,7 +164,7 @@
           </div>
     </NavLi>
 
-    <div class="flex md:hidden  gap-2 justify-center items-center">
+    <div class="flex md:hidden gap-2 justify-center items-center">
     
 
         <div

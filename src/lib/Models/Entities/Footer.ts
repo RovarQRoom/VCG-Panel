@@ -4,6 +4,6 @@ export class FooterEntity {
 	id: number = null!;
 	phones: string[] = [];
 	socials: Social[] = [];
-	created_at: string  = null!;
+	created_at: string = null!;
 	deleted_at: string | null = null;
 }

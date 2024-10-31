@@ -7,11 +7,11 @@ const storageRepository = new StorageRepository();
 
 // Compression options
 const compressionOptions = {
-	maxSizeMB: 1,          // Maximum size in MB
-	maxWidthOrHeight: 1920,// Max width/height
-	useWebWorker: true,    // Use web worker for better performance
-	preserveExif: true,    // Preserve image metadata
-	fileType: 'auto'       // Automatically determine file type
+	maxSizeMB: 1, // Maximum size in MB
+	maxWidthOrHeight: 1920, // Max width/height
+	useWebWorker: true, // Use web worker for better performance
+	preserveExif: true, // Preserve image metadata
+	fileType: 'auto' // Automatically determine file type
 };
 
 const compressImage = async (file: File): Promise<File> => {
@@ -30,7 +30,6 @@ const compressImage = async (file: File): Promise<File> => {
 const createStorageStore = () => {
 	const { subscribe, set, update } = writable<string>('');
 
-
 	return {
 		subscribe,
 		fetchFileInfo: async (path: string) => {
@@ -39,29 +38,33 @@ const createStorageStore = () => {
 		},
 		uploadFile: async (image: File | null, folderName?: string, storageName?: string) => {
 			if (!image) throw new Error(get(_)('no-image-selected'));
-			
+
 			const compressedImage = await compressImage(image);
-			const response = await storageRepository.uploadFileAsync(compressedImage, folderName, storageName);
+			const response = await storageRepository.uploadFileAsync(
+				compressedImage,
+				folderName,
+				storageName
+			);
 			set(response.fullPath);
 			return response;
 		},
 		uploadFiles: async (images: File[] | null, folderName?: string, storageName?: string) => {
 			if (!images) throw new Error(get(_)('no-image-selected'));
-			
+
 			const compressedImages = await Promise.all(
 				images.map(async (image) => await compressImage(image))
 			);
-			
+
 			const response = Promise.all(
-				compressedImages.map(async (image) => 
-					await storageRepository.uploadFileAsync(image, folderName, storageName)
+				compressedImages.map(
+					async (image) => await storageRepository.uploadFileAsync(image, folderName, storageName)
 				)
 			);
 			return response;
 		},
 		uploadFileWithLanguage: async (image: File | null, lang: string) => {
 			if (!image) throw new Error(get(_)('no-image-selected'));
-			
+
 			const compressedImage = await compressImage(image);
 			const response = await storageRepository.uploadFileAsync(compressedImage);
 			return {
