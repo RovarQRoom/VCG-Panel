@@ -42,7 +42,7 @@
 			<slot />
 		</main>
 
-		<footer class="bg-gray-100 py-4 mt-auto">
+		<footer class="bg-[#f1f1f1] dark:bg-darkBlue py-4 mt-auto">
 			<div class="container mx-auto px-4">
 				<p class="text-center text-gray-600">
 					© {new Date().getFullYear()} AhmedFX. All rights reserved

@@ -15,6 +15,30 @@
 	src: url('/fonts/Roboto-Bold.ttf') format('truetype');
 }
 
+::-webkit-scrollbar {
+	width: 8px;
+	height: 10px;
+	background-color: #b3b0e8;
+	backdrop-filter: blur(10px);
+	-webkit-backdrop-filter: blur(10px);
+	-moz-backdrop-filter: blur(10px);
+  }
+  .dark ::-webkit-scrollbar {
+	width: 8px;
+	height: 10px;
+	background-color: #25234d;
+	backdrop-filter: blur(10px);
+	-webkit-backdrop-filter: blur(10px);
+	-moz-backdrop-filter: blur(10px);
+  }
+  
+  ::-webkit-scrollbar-thumb {
+	background: #356fe1;
+	box-shadow: 0px 0px 30px 5px #356fe1;
+	width: 5px;
+  }
+  
+
 *,
 body {
 	font-family: 'Kurdish-Text', sans-serif;

@@ -24,7 +24,7 @@
 	}
 </script>
 
-<Navbar class="bg-[#f1f1f1] dark:bg-darkBlue">
+<Navbar class="bg-[#f1f1f1] dark:bg-darkBlue fixed z-50">
 	<NavBrand href="/">
 		<p class="text-lg md:text-2xl text-blue dark:text-blue font-bold" style="font-family:Logo;">
 			Ahmad Qadiir
