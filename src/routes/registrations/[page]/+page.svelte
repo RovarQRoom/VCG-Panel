@@ -119,7 +119,7 @@
 	}
 </script>
 
-<div class="p-4">
+<div class="p-4 mt-24">
 	<div class="flex justify-between items-center mb-6">
 		<h1 class="text-3xl font-bold">{$_('registrations')}</h1>
 		<button

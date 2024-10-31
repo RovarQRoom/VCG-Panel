@@ -243,7 +243,7 @@
 	}
 </script>
 
-<div class="mb-8 max-w-2xl mx-auto">
+<div class="mb-8 max-w-2xl mx-auto mt-24">
 	<div class="bg-[#f1f1f1] dark:bg-[#212121] rounded-lg p-4">
 		<div class="flex justify-between items-center mb-3">
 			<h2 class="text-lg font-semibold">{$_('title')}</h2>
