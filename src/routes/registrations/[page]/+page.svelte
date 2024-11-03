@@ -186,11 +186,21 @@
 						<TableBodyCell>
 							<div class="flex space-x-2 gap-3">
 								{#if registration.action === null}
-									<Button size="xs" color="green" class="gap-2" on:click={() => handleAccept(registration.id)}>
+									<Button
+										size="xs"
+										color="green"
+										class="gap-2"
+										on:click={() => handleAccept(registration.id)}
+									>
 										<CheckCircleSolid class="mr-2 h-4 w-4" />
 										{$_('accept')}
 									</Button>
-									<Button size="xs" color="red" class="gap-2" on:click={() => handleReject(registration.id)}>
+									<Button
+										size="xs"
+										color="red"
+										class="gap-2"
+										on:click={() => handleReject(registration.id)}
+									>
 										<CircleMinusSolid class="mr-2 h-4 w-4" />
 										{$_('reject')}
 									</Button>
