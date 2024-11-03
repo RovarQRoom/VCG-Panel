@@ -25,7 +25,7 @@
 
 	let filter: ListOption = {
 		page: 1,
-		limit: 8,
+		limit: 5,
 		language: $locale ?? 'en'
 	};
 	let titleLanguage = {
