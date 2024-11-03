@@ -129,5 +129,8 @@
   "export": "Export",
   "no-media": "No Media",
   "sign-in-successful": "Signed in Successfully",
-  "sign-out-successful": "Signout Successfully"
+  "sign-out-successful": "Signout Successfully",
+  "service_type": "Service",
+  "live_trade": "Live Trade",
+  "price_play_course": "Price Play Course"
 }

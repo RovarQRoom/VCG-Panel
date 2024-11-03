@@ -230,6 +230,7 @@ export type Database = {
 					monthly_income: string | null;
 					name: string;
 					phone: string;
+					service: Database['public']['Enums']['Service'];
 					trade_priority: boolean | null;
 					traded_before: boolean | null;
 					trading_from: string | null;
@@ -246,6 +247,7 @@ export type Database = {
 					monthly_income?: string | null;
 					name: string;
 					phone: string;
+					service?: Database['public']['Enums']['Service'];
 					trade_priority?: boolean | null;
 					traded_before?: boolean | null;
 					trading_from?: string | null;
@@ -262,6 +264,7 @@ export type Database = {
 					monthly_income?: string | null;
 					name?: string;
 					phone?: string;
+					service?: Database['public']['Enums']['Service'];
 					trade_priority?: boolean | null;
 					traded_before?: boolean | null;
 					trading_from?: string | null;
@@ -392,6 +395,7 @@ export type Database = {
 			HeadingEnum: 'CARD' | 'REPRESENTATIVE';
 			Knowledge: 'BEGINNER' | 'INTERMEDIATE' | 'ADVANCE';
 			LanguageEnum: 'ENGLISH' | 'ARABIC' | 'KURDISH';
+			Service: 'LIVE_TRADE' | 'PRICE_PLAY_COURSE';
 		};
 		CompositeTypes: {
 			[_ in never]: never;
@@ -505,6 +509,11 @@ export enum LanguageEnum {
 	ENGLISH = 'ENGLISH',
 	ARABIC = 'ARABIC',
 	KURDISH = 'KURDISH'
+}
+
+export enum Service {
+	LIVE_TRADE = 'LIVE_TRADE',
+	PRICE_PLAY_COURSE = 'PRICE_PLAY_COURSE'
 }
 
 // Tables

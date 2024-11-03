@@ -128,5 +128,8 @@
   "export": "يصدّر",
   "no-media": "لا وسائل الإعلام",
   "sign-in-successful": "تم تسجيل الدخول بنجاح",
-  "sign-out-successful": "تم تسجيل الخروج بنجاح"
+  "sign-out-successful": "تم تسجيل الخروج بنجاح",
+  "service_type": "خدمة",
+  "live_trade": "التجارة الحية",
+  "price_play_course": "دورة اللعب السعر"
 }

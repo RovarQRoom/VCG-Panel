@@ -128,5 +128,8 @@
   "export": "هەناردە",
   "no-media": "بێ رەسم و ڤیدیۆ",
   "sign-in-successful": "بە سەرکەوتوویی هاتە ژوورەوە",
-  "sign-out-successful": "چوونەژوورەوە بە سەرکەوتوویی"
+  "sign-out-successful": "چوونەژوورەوە بە سەرکەوتوویی",
+  "service_type": "خزمەتگوزاری",
+  "live_trade": "لایڤ ترەید",
+  "price_play_course": "پرایس پلەی کۆرس"
 }

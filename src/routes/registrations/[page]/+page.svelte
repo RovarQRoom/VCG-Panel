@@ -131,8 +131,6 @@
 		</button>
 	</div>
 
-
-
 	<div class="overflow-x-auto relative shadow-md sm:rounded-lg">
 		<Table hoverable={true}>
 			<TableHead class="bg-main-dark dark:bg-input-dark text-white">
@@ -144,7 +142,7 @@
 				<TableHeadCell>{$_('trading_knowledge')}</TableHeadCell>
 				<TableHeadCell>{$_('trade_priority')}</TableHeadCell>
 				<TableHeadCell>{$_('traded_before')}</TableHeadCell>
-				<TableHeadCell>{$_('trading_from')}</TableHeadCell>
+				<TableHeadCell>{$_('service_type')}</TableHeadCell>
 				<TableHeadCell>{$_('monthly_income')}</TableHeadCell>
 				<TableHeadCell>{$_('goal_income')}</TableHeadCell>
 				<TableHeadCell>{$_('actions')}</TableHeadCell>
@@ -170,7 +168,11 @@
 						</TableBodyCell>
 						<TableBodyCell>{registration.trade_priority ? $_('true') : $_('false')}</TableBodyCell>
 						<TableBodyCell>{registration.traded_before ? $_('true') : $_('false')}</TableBodyCell>
-						<TableBodyCell>{registration.trading_from ?? $_('no-data')}</TableBodyCell>
+						<TableBodyCell
+							>{registration.service
+								? $_(registration.service.toLocaleLowerCase())
+								: $_('no-data')}</TableBodyCell
+						>
 						<TableBodyCell
 							>{registration.monthly_income
 								? $_(registration.monthly_income.toLocaleLowerCase())
@@ -225,71 +227,72 @@
 	/>
 </div>
 
-
-
-
-
-
 <Modal
-		bind:open={showExportModal}
-		size="sm"
-		class="w-full"
-		autoclose={false}
-		defaultClass="bg-[#f1f1f1] dark:bg-darkBlue"
-		backdropClass="bg-white dark:bg-darkBlue backdrop-blur-sm"
-	>
-		<div class="relative p-4">
-			<div class="text-center mb-6">
-				<h3 class="text-xl font-semibold text-slate-900 dark:text-white mb-2">
-					{$_('export-to-excel')}
-				</h3>
-				<p class="text-sm text-slate-500 dark:text-slate-400">
-					{$_('select-range-to-export')}
-				</p>
+	bind:open={showExportModal}
+	size="sm"
+	class="w-full"
+	autoclose={false}
+	defaultClass="bg-[#f1f1f1] dark:bg-darkBlue"
+	backdropClass="bg-white dark:bg-darkBlue backdrop-blur-sm"
+>
+	<div class="relative p-4">
+		<div class="text-center mb-6">
+			<h3 class="text-xl font-semibold text-slate-900 dark:text-white mb-2">
+				{$_('export-to-excel')}
+			</h3>
+			<p class="text-sm text-slate-500 dark:text-slate-400">
+				{$_('select-range-to-export')}
+			</p>
+		</div>
+
+		<div class="space-y-4">
+			<div>
+				<Label for="from">{$_('from')}</Label>
+				<Input
+					id="from"
+					type="number"
+					bind:value={excelOption.from}
+					min="1"
+					class="mt-1 dark:bg-[#1a2232] border-0"
+				/>
 			</div>
 
-			<div class="space-y-4">
-				<div>
-					<Label for="from">{$_('from')}</Label>
-					<Input id="from" type="number" bind:value={excelOption.from} min="1" class="mt-1 dark:bg-[#1a2232] border-0" />
-				</div>
-
-				<div>
-					<Label for="to">{$_('to')}</Label>
-					<Input
-						id="to"
-						type="number"
-						bind:value={excelOption.to}
-						min={excelOption.from}
-						class="mt-1 dark:bg-[#1a2232] border-0"
-					/>
-				</div>
-			</div>
-
-			<div class="flex justify-end gap-3 mt-6">
-				<button
-					type="button"
-					class="px-4 py-2 text-sm font-medium text-slate-500 hover:text-white bg-white dark:bg-[#1a2232] rounded-lg hover:bg-red-500 focus:ring-4 focus:ring-slate-200 duration-300 ease-in-out"
-					on:click={() => (showExportModal = false)}
-					disabled={isExporting}
-				>
-					{$_('cancel')}
-				</button>
-
-				<button
-					type="button"
-					class="inline-flex items-center px-4 py-2 text-sm font-medium text-white bg-gradient-to-r from-sky-600 to-indigo-700 rounded-lg shadow-md hover:from-sky-700 hover:to-indigo-800 focus:ring-4 focus:ring-sky-300 disabled:opacity-50 disabled:cursor-not-allowed"
-					on:click={handleExport}
-					disabled={isExporting}
-				>
-					{#if isExporting}
-						<Spinner class="mr-2 w-4 h-4" />
-						{$_('exporting')}...
-					{:else}
-						<PrinterSolid class="mr-2 w-4 h-4" />
-						{$_('export')}
-					{/if}
-				</button>
+			<div>
+				<Label for="to">{$_('to')}</Label>
+				<Input
+					id="to"
+					type="number"
+					bind:value={excelOption.to}
+					min={excelOption.from}
+					class="mt-1 dark:bg-[#1a2232] border-0"
+				/>
 			</div>
 		</div>
-	</Modal>
+
+		<div class="flex justify-end gap-3 mt-6">
+			<button
+				type="button"
+				class="px-4 py-2 text-sm font-medium text-slate-500 hover:text-white bg-white dark:bg-[#1a2232] rounded-lg hover:bg-red-500 focus:ring-4 focus:ring-slate-200 duration-300 ease-in-out"
+				on:click={() => (showExportModal = false)}
+				disabled={isExporting}
+			>
+				{$_('cancel')}
+			</button>
+
+			<button
+				type="button"
+				class="inline-flex items-center px-4 py-2 text-sm font-medium text-white bg-gradient-to-r from-sky-600 to-indigo-700 rounded-lg shadow-md hover:from-sky-700 hover:to-indigo-800 focus:ring-4 focus:ring-sky-300 disabled:opacity-50 disabled:cursor-not-allowed"
+				on:click={handleExport}
+				disabled={isExporting}
+			>
+				{#if isExporting}
+					<Spinner class="mr-2 w-4 h-4" />
+					{$_('exporting')}...
+				{:else}
+					<PrinterSolid class="mr-2 w-4 h-4" />
+					{$_('export')}
+				{/if}
+			</button>
+		</div>
+	</div>
+</Modal>
