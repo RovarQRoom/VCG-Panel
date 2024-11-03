@@ -39,7 +39,7 @@
 			<div class="mb-4">
 				<Label for="email" class="mb-2 dark:text-white">{$_('email')}</Label>
 				<Input
-				    class="bg-white dark:bg-[#1a2232] dark:text-white border-0"
+					class="bg-white dark:bg-[#1a2232] dark:text-white border-0"
 					type="email"
 					id="email"
 					placeholder={$_('enter-your-email')}
@@ -51,7 +51,7 @@
 			<div class="mb-6">
 				<Label for="password" class="mb-2 dark:text-white">{$_('password')}</Label>
 				<Input
-				class="bg-white dark:bg-[#1a2232] dark:text-white border-0"
+					class="bg-white dark:bg-[#1a2232] dark:text-white border-0"
 					type="password"
 					id="password"
 					placeholder={$_('enter-your-password')}
@@ -60,7 +60,11 @@
 				/>
 			</div>
 
-			<Button type="submit" class="w-full bg-blue hover:bg-sky-500 duration-300 ease-in-out" disabled={isLoading}>
+			<Button
+				type="submit"
+				class="w-full bg-blue hover:bg-sky-500 duration-300 ease-in-out"
+				disabled={isLoading}
+			>
 				{isLoading ? $_('signing-in') : $_('sign-in')}
 			</Button>
 		</form>
