@@ -9,8 +9,8 @@ export const load: LayoutLoad = async () => {
 		if (savedLang) {
 			locale.set(savedLang);
 		} else {
-			locale.set(window.navigator.language);
-			localStorage.setItem('lang', window.navigator.language);
+			locale.set('ckb');
+			localStorage.setItem('lang', 'ckb');
 		}
 	}
 	await waitLocale();

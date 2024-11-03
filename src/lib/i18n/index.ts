@@ -9,5 +9,5 @@ register('ckb', () => import('./locales/ckb.json'));
 
 init({
 	fallbackLocale: defaultLocale,
-	initialLocale: browser ? window.navigator.language : defaultLocale
+	initialLocale: browser ? 'ckb' : defaultLocale
 });
