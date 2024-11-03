@@ -129,5 +129,8 @@
 	"export": "Export",
 	"no-media": "No Media",
 	"sign-in-successful": "Signed in Successfully",
-	"sign-out-successful": "Signout Successfully"
+	"sign-out-successful": "Signout Successfully",
+	"addImage": "Add Image",
+	"enter-card-title": "Enter the card title",
+	"enter-card-description": "Enter the card description"
 }

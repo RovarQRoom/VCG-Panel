@@ -1,5 +1,5 @@
 {
-	"no-image-selected": "هیچ وێنەیەک هەڵبژاردراو نییە",
+	"no-image-selected": "هیچ وێنەیەک هەڵنەبژێردراوە",
 	"title-is-required": "ناونیشان پێویستە",
 	"enter-title": "ناونیشانێک دابنێ",
 	"enter-description": "وەسفێک دابنێ",
@@ -128,5 +128,8 @@
 	"export": "هەناردە",
 	"no-media": "بێ رەسم و ڤیدیۆ",
 	"sign-in-successful": "بە سەرکەوتوویی هاتە ژوورەوە",
-	"sign-out-successful": "چوونەژوورەوە بە سەرکەوتوویی"
+	"sign-out-successful": "چوونەژوورەوە بە سەرکەوتوویی",
+	"addImage": "وێنەیەک زیاد بکە",
+	"enter-card-title": "ناوی کارت داخڵ بکە",
+	"enter-card-description": "وەسفی کارت داخڵ بکە"
 }

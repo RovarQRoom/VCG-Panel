@@ -128,5 +128,8 @@
 	"export": "يصدّر",
 	"no-media": "لا وسائل الإعلام",
 	"sign-in-successful": "تم تسجيل الدخول بنجاح",
-	"sign-out-successful": "تم تسجيل الخروج بنجاح"
+	"sign-out-successful": "تم تسجيل الخروج بنجاح",
+	"addImage": "إضافة صورة",
+	"enter-card-title": "أدخل عنوان البطاقة",
+	"enter-card-description": "أدخل وصف البطاقة"
 }
