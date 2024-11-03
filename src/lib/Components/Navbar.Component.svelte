@@ -16,6 +16,7 @@
 	import { authStore } from '$lib/Stores/Authentication';
 	import { goto } from '$app/navigation';
 	$: activeUrl = $page.url.pathname;
+	let activeClass = 'text-sky-600 font-bold';
 
 	async function handleSignOut() {
 		await authStore.signOut();
@@ -34,9 +35,10 @@
 	<NavHamburger />
 	<NavUl
 		{activeUrl}
+		{activeClass}
 		ulClass="flex justify-center items-center gap-8 flex-col md:flex-row border-0 p-4"
 	>
-		<NavLi href="/" activeClass="text-sky-600 font-bold">
+		<NavLi href="/" class={activeUrl === '/' ? activeClass : ''}>
 			<div class="flex gap-2 justify-center items-center">
 				<svg
 					class="w-6 h-6"
@@ -59,7 +61,7 @@
 			</div>
 		</NavLi>
 
-		<NavLi href="/cards/1" activeClass="text-sky-600 font-bold">
+		<NavLi href="/cards/1" class={activeUrl.startsWith('/cards') ? activeClass : ''}>
 			<div class="flex gap-2 justify-center items-center">
 				<svg
 					class="w-6 h-6"
@@ -76,13 +78,13 @@
 					></path>
 				</svg>
 
-				<div class={activeUrl === '/cards/1' ? 'flex' : 'flex md:hidden'}>
+				<div class={activeUrl.startsWith('/cards') ? 'flex' : 'flex md:hidden'}>
 					<p>{$_('cards')}</p>
 				</div>
 			</div>
 		</NavLi>
 
-		<NavLi href="/carousels/1" activeClass="text-sky-600 font-bold">
+		<NavLi href="/carousels/1" class={activeUrl.startsWith('/carousels') ? activeClass : ''}>
 			<div class="flex gap-2 justify-center items-center">
 				<svg
 					class="w-6 h-6"
@@ -98,13 +100,13 @@
 						d="M4 6h16M4 10h16M4 14h16M4 18h16"
 					></path>
 				</svg>
-				<div class={activeUrl === '/carousels/1' ? 'flex' : 'flex md:hidden'}>
+				<div class={activeUrl.startsWith('/carousels') ? 'flex' : 'flex md:hidden'}>
 					<p>{$_('carousel')}</p>
 				</div>
 			</div>
 		</NavLi>
 
-		<NavLi href="/event" activeClass="text-sky-600 font-bold">
+		<NavLi href="/event" class={activeUrl.startsWith('/event') ? activeClass : ''}>
 			<div class="flex gap-2 justify-center items-center">
 				<svg
 					class="w-6 h-6"
@@ -126,7 +128,10 @@
 			</div>
 		</NavLi>
 
-		<NavLi href="/representative" activeClass="text-sky-600 font-bold">
+		<NavLi
+			href="/representative"
+			class={activeUrl.startsWith('/representative') ? activeClass : ''}
+		>
 			<div class="flex gap-2 justify-center items-center">
 				<svg
 					class="w-6 h-6"
@@ -149,7 +154,10 @@
 			</div>
 		</NavLi>
 
-		<NavLi href="/registrations/1" activeClass="text-sky-600 font-bold">
+		<NavLi
+			href="/registrations/1"
+			class={activeUrl.startsWith('/registrations') ? activeClass : ''}
+		>
 			<div class="flex gap-2 justify-center items-center">
 				<svg
 					class="w-6 h-6"
@@ -166,13 +174,13 @@
 					></path>
 				</svg>
 
-				<div class={activeUrl === '/registrations/1' ? 'flex' : 'flex md:hidden'}>
+				<div class={activeUrl.startsWith('/registrations') ? 'flex' : 'flex md:hidden'}>
 					<p>{$_('registrations')}</p>
 				</div>
 			</div>
 		</NavLi>
 
-		<NavLi href="/footer" activeClass="text-sky-600 font-bold">
+		<NavLi href="/footer" class={activeUrl.startsWith('/footer') ? activeClass : ''}>
 			<div class="flex gap-2 justify-center items-center">
 				<svg
 					class="w-6 h-6"
@@ -275,32 +283,31 @@
 						/>
 					</g>
 				</svg>
-            </DarkMode>
+			</DarkMode>
 
-    <div class="flex md:hidden gap-2 justify-center items-center">
-    
-
-			<button
-				on:click={handleSignOut}
-				class="text-gray-700 bg-red-500 p-2 rounded-xl text-white hover:text-red-600 dark:hover:text-red-400 transition-colors duration-300"
-			>
-				<svg
-					class="w-6 h-6"
-					fill="none"
-					stroke="currentColor"
-					viewBox="0 0 24 24"
-					xmlns="http://www.w3.org/2000/svg"
+			<div class="flex md:hidden gap-2 justify-center items-center">
+				<button
+					on:click={handleSignOut}
+					class="text-gray-700 bg-red-500 p-2 rounded-xl text-white hover:text-red-600 dark:hover:text-red-400 transition-colors duration-300"
 				>
-					<path
-						stroke-linecap="round"
-						stroke-linejoin="round"
-						stroke-width="2"
-						d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"
-					></path>
-				</svg>
-			</button>
-		</div>
-	</NavUl>
+					<svg
+						class="w-6 h-6"
+						fill="none"
+						stroke="currentColor"
+						viewBox="0 0 24 24"
+						xmlns="http://www.w3.org/2000/svg"
+					>
+						<path
+							stroke-linecap="round"
+							stroke-linejoin="round"
+							stroke-width="2"
+							d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"
+						></path>
+					</svg>
+				</button>
+			</div>
+		</div></NavUl
+	>
 	<div class="hidden md:flex gap-2 justify-center items-center">
 		<div class="w-auto h-10 rounded-lg bg-[#f1f1f1] dark:bg-blue flex justify-center items-center">
 			<Button

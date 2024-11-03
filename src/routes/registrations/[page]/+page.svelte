@@ -142,7 +142,7 @@
 				<TableHeadCell>{$_('trading_knowledge')}</TableHeadCell>
 				<TableHeadCell>{$_('trade_priority')}</TableHeadCell>
 				<TableHeadCell>{$_('traded_before')}</TableHeadCell>
-				<TableHeadCell>{$_('trading_from')}</TableHeadCell>
+				<TableHeadCell>{$_('service_type')}</TableHeadCell>
 				<TableHeadCell>{$_('monthly_income')}</TableHeadCell>
 				<TableHeadCell>{$_('goal_income')}</TableHeadCell>
 				<TableHeadCell>{$_('actions')}</TableHeadCell>
@@ -168,7 +168,11 @@
 						</TableBodyCell>
 						<TableBodyCell>{registration.trade_priority ? $_('true') : $_('false')}</TableBodyCell>
 						<TableBodyCell>{registration.traded_before ? $_('true') : $_('false')}</TableBodyCell>
-						<TableBodyCell>{registration.trading_from ?? $_('no-data')}</TableBodyCell>
+						<TableBodyCell
+							>{registration.service
+								? $_(registration.service.toLocaleLowerCase())
+								: $_('no-data')}</TableBodyCell
+						>
 						<TableBodyCell
 							>{registration.monthly_income
 								? $_(registration.monthly_income.toLocaleLowerCase())

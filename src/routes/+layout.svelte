@@ -5,7 +5,7 @@
 	import { goto } from '$app/navigation';
 	import { page } from '$app/stores';
 	import { authStore } from '$lib/Stores/Authentication';
-	import NavBar from '$lib/Components/Navbar.Component.svelte';
+	import Navbar from '$lib/Components/Navbar.Component.svelte';
 	import Toast from '$lib/Components/Toast.svelte';
 	import { _, locale } from 'svelte-i18n';
 
@@ -37,7 +37,7 @@
 		class="flex flex-col min-h-screen dark:text-white text-black"
 		dir={$locale === 'en' ? 'ltr' : 'rtl'}
 	>
-		<NavBar />
+		<Navbar />
 		<main class="container mx-auto mt-4 px-4 flex-grow text-main-dark dark:text-main-light">
 			<slot />
 		</main>

@@ -132,5 +132,8 @@
 	"sign-out-successful": "Signout Successfully",
 	"addImage": "Add Image",
 	"enter-card-title": "Enter the card title",
-	"enter-card-description": "Enter the card description"
+	"enter-card-description": "Enter the card description",
+	"service_type": "Service",
+	"live_trade": "Live Trade",
+	"price_play_course": "Price Play Course"
 }
