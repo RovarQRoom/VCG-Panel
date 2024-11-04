@@ -48,22 +48,22 @@
 			<p class="text-2xl text-gray-400 dark:text-gray-500">Quick Actions</p>
 		</div>
 		<div class="grid grid-cols-2 gap-4 mb-4">
-			<a href="/cards/1" class="text-xl text-blue-600 dark:text-blue-500 ">
-			<div
-				class="flex items-center justify-center rounded bg-blue text-white h-28 dark:bg-darkBlue hover:bg-blue/80 dark:hover:bg-darkBlue/80"
-			>
+			<a href="/cards/1" class="text-xl text-blue-600 dark:text-blue-500">
+				<div
+					class="flex items-center justify-center rounded bg-blue text-white h-28 dark:bg-darkBlue hover:bg-blue/80 dark:hover:bg-darkBlue/80"
+				>
 					Manage Cards
 				</div>
 			</a>
 
-			<a href="/event" class="text-xl text-blue-600 dark:text-blue-500 ">
-			<div
-				class="flex items-center justify-center rounded bg-blue text-white h-28 dark:bg-darkBlue hover:bg-blue/80 dark:hover:bg-darkBlue/80"
-			>
+			<a href="/event" class="text-xl text-blue-600 dark:text-blue-500">
+				<div
+					class="flex items-center justify-center rounded bg-blue text-white h-28 dark:bg-darkBlue hover:bg-blue/80 dark:hover:bg-darkBlue/80"
+				>
 					Manage Events
 				</div>
 			</a>
-			</div>
+		</div>
 		<div
 			class="flex items-center justify-center h-48 mb-4 rounded bg-blue text-white dark:bg-darkBlue"
 		>

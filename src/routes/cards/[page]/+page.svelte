@@ -133,7 +133,13 @@
 		<div class="flex justify-between items-center mb-3">
 			<h2 class="text-lg font-semibold">{$_('title')}</h2>
 			<div class="flex gap-2">
-				<Button size="xs" class="w-12 h-8 {isEditing ? "bg-red-500 dark:bg-red-500 hover:bg-red dark:hover:bg-red" :"bg-blue dark:bg-blue hover:bg-blue dark:hover:bg-blue"} focus:ring-0" on:click={toggleEdit}>
+				<Button
+					size="xs"
+					class="w-12 h-8 {isEditing
+						? 'bg-red-500 dark:bg-red-500 hover:bg-red dark:hover:bg-red'
+						: 'bg-blue dark:bg-blue hover:bg-blue dark:hover:bg-blue'} focus:ring-0"
+					on:click={toggleEdit}
+				>
 					{isEditing ? $_('cancel') : $_('edit')}
 				</Button>
 				{#if isEditing}
@@ -144,8 +150,7 @@
 			</div>
 		</div>
 
-		<Tabs style="pill" class="flex justify-center items-center  rounded-lg p-2"
-		>
+		<Tabs style="pill" class="flex justify-center items-center  rounded-lg p-2">
 			<TabItem
 				open
 				activeClasses="w-24 h-12 text-blue flex justify-center items-center"
@@ -172,7 +177,7 @@
 			</TabItem>
 
 			<TabItem
-			activeClasses="w-24 h-12 text-blue flex justify-center items-center"
+				activeClasses="w-24 h-12 text-blue flex justify-center items-center"
 				inactiveClasses="w-24 h-12 dark:text-white flex justify-center items-center"
 				class="bg-zinc-200 dark:bg-zinc-900 backdrop-blur-sm shadow-sm rounded-lg transition-all duration-200 hover:bg-slate-300 dark:hover:bg-slate-800"
 			>

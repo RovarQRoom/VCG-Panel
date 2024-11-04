@@ -248,7 +248,13 @@
 		<div class="flex justify-between items-center mb-3">
 			<h2 class="text-lg font-semibold">{$_('title')}</h2>
 			<div class="flex gap-2">
-				<Button size="xs" class="{isEditing ? "bg-red-500" : "bg-blue dark:bg-blue hover:bg-blue dark:hover:bg-blue"} focus:ring-0" on:click={toggleEdit}>
+				<Button
+					size="xs"
+					class="{isEditing
+						? 'bg-red-500'
+						: 'bg-blue dark:bg-blue hover:bg-blue dark:hover:bg-blue'} focus:ring-0"
+					on:click={toggleEdit}
+				>
 					{isEditing ? $_('cancel') : $_('edit')}
 				</Button>
 				{#if isEditing}
@@ -286,7 +292,7 @@
 			</TabItem>
 
 			<TabItem
-			activeClasses="w-24 h-12 text-blue flex justify-center items-center bg-zinc-200 dark:bg-zinc-800 rounded-xl"
+				activeClasses="w-24 h-12 text-blue flex justify-center items-center bg-zinc-200 dark:bg-zinc-800 rounded-xl"
 				inactiveClasses="w-24 h-12 dark:text-white flex justify-center items-center"
 				open
 				class="backdrop-blur-sm shadow-sm rounded-lg transition-all duration-200 hover:bg-slate-300 dark:hover:bg-slate-800"
@@ -317,13 +323,18 @@
 		<div class="flex mb-4 justify-between items-center">
 			<h1 class="text-2xl font-bold text-gray-800">{$_('representative-details')}</h1>
 			<div class="flex space-x-2">
-				<Button on:click={toggleEdit} class="px-4 py-2 rounded-lg {isEditing ? "bg-red-500 dark:bg-red-500" : "bg-blue dark:bg-blue hover:bg-blue dark:hover:bg-blue"} focus:ring-0" disabled={isSaving}>
+				<Button
+					on:click={toggleEdit}
+					class="px-4 py-2 rounded-lg {isEditing
+						? 'bg-red-500 dark:bg-red-500'
+						: 'bg-blue dark:bg-blue hover:bg-blue dark:hover:bg-blue'} focus:ring-0"
+					disabled={isSaving}
+				>
 					{#if isEditing}
 						{$_('cancel')}
 					{:else}
-					{$_('edit')}
+						{$_('edit')}
 					{/if}
-					
 				</Button>
 				{#if isEditing}
 					<Button
@@ -335,7 +346,7 @@
 						{#if isSaving}
 							<Spinner size="4" color="white" />
 						{:else}
-						{$_('save')}
+							{$_('save')}
 						{/if}
 					</Button>
 				{/if}
@@ -395,9 +406,11 @@
 			<div class="w-full md:w-2/3">
 				<Tabs style="pills" class="justify-center mb-6">
 					{#each Object.keys(LanguageEnum).filter((key) => key !== 'ARABIC') as key}
-						<TabItem open={key === 'KURDISH'} title={$_(key.toLowerCase())}
-						activeClasses="w-24 h-12 text-blue flex justify-center items-center bg-zinc-200 dark:bg-zinc-800 rounded-xl"
-						inactiveClasses="w-24 h-12 dark:text-white flex justify-center items-center"
+						<TabItem
+							open={key === 'KURDISH'}
+							title={$_(key.toLowerCase())}
+							activeClasses="w-24 h-12 text-blue flex justify-center items-center bg-zinc-200 dark:bg-zinc-800 rounded-xl"
+							inactiveClasses="w-24 h-12 dark:text-white flex justify-center items-center"
 						>
 							<div transition:fade={{ duration: 300 }}>
 								<div class="mt-4">
@@ -447,5 +460,3 @@
 		</div>
 	</Card>
 </div>
-
-

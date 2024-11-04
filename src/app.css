@@ -59,34 +59,32 @@ div[role='application'] {
 	}
 }
 
-
-
-	.dark div[class="tox-editor-header"] button{
-		background-color: #1d1d1d !important;
-		border: none !important;
-	}
-	.dark div[class="tox-editor-container"]{
-		background-color: #1d1d1d !important;
-		color: white !important;
-		border: none !important;
-	}
-	.dark div[class="tox-toolbar__group"] > button> span> svg{
-		fill: white !important;
-		border: none !important;
-	}
-	.dark div[class="tox-toolbar__group"] > button> span{
-		color: white !important;
-		border: none !important;
-	}
-	.dark div[role="group"]{
-		background-color: #1d1d1d !important;
-		border: none !important;
-	}
-	.dark div[class="tox-statusbar"] *{
-		background-color: #1d1d1d !important;
-		color: white !important;
-		border: none !important;
-	}
-	.dark body[id="tinymce"] select{
-		background-color: #1d1d1d !important;
-	}
+.dark div[class='tox-editor-header'] button {
+	background-color: #1d1d1d !important;
+	border: none !important;
+}
+.dark div[class='tox-editor-container'] {
+	background-color: #1d1d1d !important;
+	color: white !important;
+	border: none !important;
+}
+.dark div[class='tox-toolbar__group'] > button > span > svg {
+	fill: white !important;
+	border: none !important;
+}
+.dark div[class='tox-toolbar__group'] > button > span {
+	color: white !important;
+	border: none !important;
+}
+.dark div[role='group'] {
+	background-color: #1d1d1d !important;
+	border: none !important;
+}
+.dark div[class='tox-statusbar'] * {
+	background-color: #1d1d1d !important;
+	color: white !important;
+	border: none !important;
+}
+.dark body[id='tinymce'] select {
+	background-color: #1d1d1d !important;
+}

@@ -163,7 +163,13 @@
 						{/if}
 					</Button>
 				{/if}
-				<Button on:click={toggleEdit} class="px-2 py-2 rounded-lg {isEditing ? "bg-red-500 dark:bg-red-500 hover:bg-red-500 dark:hover:bg-red-500" : "bg-blue dark:bg-blue hover:bg-blue dark:hover:bg-blue"} focus:ring-0" disabled={isSaving}>
+				<Button
+					on:click={toggleEdit}
+					class="px-2 py-2 rounded-lg {isEditing
+						? 'bg-red-500 dark:bg-red-500 hover:bg-red-500 dark:hover:bg-red-500'
+						: 'bg-blue dark:bg-blue hover:bg-blue dark:hover:bg-blue'} focus:ring-0"
+					disabled={isSaving}
+				>
 					{isEditing ? $_('cancel') : $_('edit')}
 				</Button>
 			</div>
@@ -190,7 +196,10 @@
 					{/each}
 				</div>
 				{#if isEditing}
-					<Button on:click={addPhone} class="mt-2 bg-blue dark:bg-blue hover:bg-blue dark:hover:bg-blue">
+					<Button
+						on:click={addPhone}
+						class="mt-2 bg-blue dark:bg-blue hover:bg-blue dark:hover:bg-blue"
+					>
 						<Plus size="20" class="mr-2" />
 						{$_('add-phone')}
 					</Button>
@@ -261,7 +270,10 @@
 					{/each}
 				</div>
 				{#if isEditing}
-					<Button on:click={addSocial} class="mt-2 bg-blue dark:bg-blue hover:bg-blue dark:hover:bg-blue">
+					<Button
+						on:click={addSocial}
+						class="mt-2 bg-blue dark:bg-blue hover:bg-blue dark:hover:bg-blue"
+					>
 						<Plus size="20" class="mr-2" />
 						{$_('add-social')}
 					</Button>

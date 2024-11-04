@@ -91,7 +91,6 @@
 	}
 </script>
 
-
 <!-- Add the back button at the top -->
 <div class="mt-24">
 	<Button
@@ -182,9 +181,11 @@
 
 		<Tabs style="pills" class="justify-center mb-6">
 			{#each Object.keys(LanguageEnum).filter((key) => key !== 'ARABIC') as key}
-				<TabItem open title={$_(key.toLowerCase())}
-				activeClasses="w-24 h-12 text-blue flex justify-center items-center dark:bg-zinc-800 rounded-xl"
-				inactiveClasses="w-24 h-12 dark:text-white flex justify-center items-center"
+				<TabItem
+					open
+					title={$_(key.toLowerCase())}
+					activeClasses="w-24 h-12 text-blue flex justify-center items-center dark:bg-zinc-800 rounded-xl"
+					inactiveClasses="w-24 h-12 dark:text-white flex justify-center items-center"
 				>
 					<div class="mt-4">
 						<Label for="title-en" class="mb-2">{$_('title')} ({$_(key.toLowerCase())})</Label>

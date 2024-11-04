@@ -9,7 +9,6 @@ export const handle: Handle = async ({ event, resolve }) => {
 		localStorage.setItem('lang', lang);
 	} else {
 		locale.set(savedLang || 'ckb');
-		
 	}
 	return resolve(event);
 };
