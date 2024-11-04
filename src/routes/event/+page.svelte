@@ -115,16 +115,16 @@
 			<h1 class="text-2xl font-bold text-gray-800">{$_('event-details')}</h1>
 			<div class="flex gap-2">
 				{#if isEditing}
-					<Button on:click={handleSave} class="px-2 py-2 rounded-full" color="green">
-						<DocumentCheck size="20" />
+					<Button on:click={handleSave} class="px-2 py-2 rounded-lg" color="green">
+						{$_('save')}
 					</Button>
 					{#if event.id}
-						<Button on:click={handleDelete} class="px-2 py-2 rounded-full" color="red">
+						<Button on:click={handleDelete} class="px-2 py-2 rounded-lg" color="red">
 							<Trash size="20" />
 						</Button>
 					{/if}
 				{/if}
-				<Button on:click={toggleEdit} class="px-2 py-2 rounded-full {isEditing ? "bg-red-500 dark:bg-red-500" : "bg-blue dark:bg-blue hover:blue dark:hover:bg-blue"} focus:ring-0">
+				<Button on:click={toggleEdit} class="px-2 py-2 rounded-lg {isEditing ? "bg-red-500 dark:bg-red-500" : "bg-blue dark:bg-blue hover:blue dark:hover:bg-blue"} focus:ring-0">
 					{isEditing ? $_('cancel') : $_('edit')}
 				</Button>
 			</div>
