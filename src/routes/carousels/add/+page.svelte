@@ -308,7 +308,7 @@
 
 <ProgressBar bind:this={progress} color="#f17f18" />
 
-<div class="mb-6">
+<div class="mt-24">
 	<Button
 		color="light"
 		on:click={goBack}
@@ -334,7 +334,7 @@
 
 <h1 class="text-3xl font-bold mb-6">{$_('add-new-carousel')}</h1>
 
-<Card class="max-w-2xl mx-auto p-6 bg-white dark:bg-main-dark shadow-lg rounded-lg">
+<Card class="max-w-2xl mx-auto p-6 bg-white dark:bg-main-dark shadow-lg rounded-lg mb-4">
 	<form on:submit|preventDefault={handleSubmit} class="flex flex-col space-y-6">
 		{#if Object.values(fileType).some((type) => type === 'video')}
 			<div class="mb-4">

@@ -131,7 +131,7 @@
 	}
 </script>
 
-<div class="pt-24">
+<div class="mt-24">
 	<Button
 		color="light"
 		on:click={goBack}

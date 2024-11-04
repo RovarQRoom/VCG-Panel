@@ -23,7 +23,6 @@
 	import { carouselStore } from '$lib/Stores/Carousel';
 	import { page } from '$app/stores';
 	import { VITE_SUPABASE_STORAGE_URL } from '$env/static/public';
-	import { isVideoFile } from '$lib/utils/fileUtils';
 	import { toastStore } from '$lib/Stores/Toast';
 	// @ts-ignore
 	import ProgressBar from 'svelte-progress-bar';
@@ -408,8 +407,8 @@
 
 <ProgressBar bind:this={progress} color="#f17f18" />
 
-<div class="mb-6">
-	<Button color="light" on:click={goBack} class="px-4 py-2 border-0 dark:bg-input-dark">
+<div class="mt-24">
+	<Button color="light" on:click={goBack} class="px-4 py-2 border-0 dark:bg-input-dark mb-6">
 		<svg
 			class="w-4 h-4 mr-2"
 			fill="none"
@@ -430,7 +429,7 @@
 
 <h1 class="text-3xl font-bold mb-6">{$_('edit-carousel')}</h1>
 
-<Card class="max-w-2xl mx-auto p-6 bg-white dark:bg-main-dark shadow-lg rounded-lg">
+<Card class="max-w-2xl mx-auto p-6 bg-white dark:bg-main-dark shadow-lg rounded-lg mb-4">
 	<form on:submit|preventDefault={handleUpdate} class="flex flex-col space-y-6">
 		{#if Object.values(fileType).some((type) => type === 'video') || Object.values(mediaUrl).some( (url) => isVideoUrl(url) )}
 			<div class="mb-4">

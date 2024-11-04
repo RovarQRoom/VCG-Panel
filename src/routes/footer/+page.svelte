@@ -152,19 +152,19 @@
 				{#if isEditing}
 					<Button
 						on:click={handleSave}
-						class="px-2 py-2 rounded-full mx-2"
+						class="px-2 py-2 rounded-lg mx-2"
 						color="green"
 						disabled={isSaving}
 					>
 						{#if isSaving}
 							<Spinner size="4" color="white" />
 						{:else}
-							<DocumentCheck size="20" />
+							{$_('save')}
 						{/if}
 					</Button>
 				{/if}
-				<Button on:click={toggleEdit} class="px-2 py-2 rounded-full" disabled={isSaving}>
-					<PencilSquare size="20" class={isEditing ? 'text-gray-300' : ''} />
+				<Button on:click={toggleEdit} class="px-2 py-2 rounded-lg {isEditing ? "bg-red-500 dark:bg-red-500 hover:bg-red-500 dark:hover:bg-red-500" : "bg-blue dark:bg-blue hover:bg-blue dark:hover:bg-blue"} focus:ring-0" disabled={isSaving}>
+					{isEditing ? $_('cancel') : $_('edit')}
 				</Button>
 			</div>
 		</div>
@@ -190,7 +190,7 @@
 					{/each}
 				</div>
 				{#if isEditing}
-					<Button on:click={addPhone} class="mt-2">
+					<Button on:click={addPhone} class="mt-2 bg-blue dark:bg-blue hover:bg-blue dark:hover:bg-blue">
 						<Plus size="20" class="mr-2" />
 						{$_('add-phone')}
 					</Button>
@@ -261,7 +261,7 @@
 					{/each}
 				</div>
 				{#if isEditing}
-					<Button on:click={addSocial} class="mt-2">
+					<Button on:click={addSocial} class="mt-2 bg-blue dark:bg-blue hover:bg-blue dark:hover:bg-blue">
 						<Plus size="20" class="mr-2" />
 						{$_('add-social')}
 					</Button>
