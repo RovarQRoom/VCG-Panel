@@ -248,8 +248,8 @@
 		<div class="flex justify-between items-center mb-3">
 			<h2 class="text-lg font-semibold">{$_('title')}</h2>
 			<div class="flex gap-2">
-				<Button size="xs" color="primary" on:click={toggleEdit}>
-					{$_('edit')}
+				<Button size="xs" class="{isEditing ? "bg-red-500" : "bg-blue dark:bg-blue hover:bg-blue dark:hover:bg-blue"} focus:ring-0" on:click={toggleEdit}>
+					{isEditing ? $_('cancel') : $_('edit')}
 				</Button>
 				{#if isEditing}
 					<Button size="xs" color="green" on:click={saveHeading}>
@@ -262,7 +262,9 @@
 		<Tabs style="pill" class="flex justify-center rounded-lg p-2">
 			<TabItem
 				open
-				class="bg-slate-200/90 dark:bg-slate-700/90 backdrop-blur-sm shadow-sm rounded-lg transition-all duration-200 hover:bg-slate-300 dark:hover:bg-slate-800"
+				activeClasses="w-24 h-12 text-blue flex justify-center items-center bg-zinc-200 dark:bg-zinc-800 rounded-xl"
+				inactiveClasses="w-24 h-12 dark:text-white flex justify-center items-center"
+				class=" backdrop-blur-sm shadow-sm rounded-lg transition-all duration-200 hover:bg-slate-300 dark:hover:bg-slate-800"
 			>
 				<div slot="title" class="py-1 px-3">
 					<span>{$_('english')}</span>
@@ -273,7 +275,7 @@
 						dir="ltr"
 						class="w-full px-3 py-2 rounded-lg 
 							    text-gray-900 dark:text-white
-							   bg-white dark:bg-[#1a2232]
+							   bg-zinc-300 dark:bg-zinc-900 border-0
 							   transition-all duration-200 ease-in-out
 							   placeholder:text-gray-400 dark:placeholder:text-gray-300 disabled:bg-gray-200 dark:disabled:bg-gray-600 disabled:cursor-not-allowed"
 						placeholder="Enter English title"
@@ -284,8 +286,10 @@
 			</TabItem>
 
 			<TabItem
+			activeClasses="w-24 h-12 text-blue flex justify-center items-center bg-zinc-200 dark:bg-zinc-800 rounded-xl"
+				inactiveClasses="w-24 h-12 dark:text-white flex justify-center items-center"
 				open
-				class="bg-slate-200/90 dark:bg-slate-700/90 backdrop-blur-sm shadow-sm rounded-lg transition-all duration-200 hover:bg-slate-300 dark:hover:bg-slate-800"
+				class="backdrop-blur-sm shadow-sm rounded-lg transition-all duration-200 hover:bg-slate-300 dark:hover:bg-slate-800"
 			>
 				<div slot="title" class="py-1 px-3">
 					<span>{$_('kurdish')}</span>
@@ -294,7 +298,7 @@
 					<Input
 						type="text"
 						dir="rtl"
-						class="w-full px-3 py-2 rounded-lg bg-[#f1f1f1] dark:bg-[#212121]
+						class="w-full px-3 py-2 rounded-lg bg-zinc-300 dark:bg-zinc-900 border-0
 							   text-gray-900 dark:text-white
 							   transition-all duration-200 ease-in-out
 							   placeholder:text-gray-400 dark:placeholder:text-gray-300 disabled:bg-gray-200 dark:disabled:bg-gray-600 disabled:cursor-not-allowed"
@@ -313,23 +317,28 @@
 		<div class="flex mb-4 justify-between items-center">
 			<h1 class="text-2xl font-bold text-gray-800">{$_('representative-details')}</h1>
 			<div class="flex space-x-2">
+				<Button on:click={toggleEdit} class="px-4 py-2 rounded-lg {isEditing ? "bg-red-500 dark:bg-red-500" : "bg-blue dark:bg-blue hover:bg-blue dark:hover:bg-blue"} focus:ring-0" disabled={isSaving}>
+					{#if isEditing}
+						{$_('cancel')}
+					{:else}
+					{$_('edit')}
+					{/if}
+					
+				</Button>
 				{#if isEditing}
 					<Button
 						on:click={handleSave}
-						class="px-2 py-2 rounded-full"
+						class="px-2 py-2 rounded-lg"
 						color="green"
 						disabled={isSaving}
 					>
 						{#if isSaving}
 							<Spinner size="4" color="white" />
 						{:else}
-							<DocumentCheck size="20" />
+						{$_('save')}
 						{/if}
 					</Button>
 				{/if}
-				<Button on:click={toggleEdit} class="px-2 py-2 rounded-full" disabled={isSaving}>
-					<PencilSquare size="20" class={isEditing ? 'text-gray-300' : ''} />
-				</Button>
 			</div>
 		</div>
 
@@ -375,7 +384,7 @@
 					/>
 					<Button
 						on:click={() => document.getElementById('file-upload')?.click()}
-						class="px-4 py-2 w-full sm:w-auto"
+						class="px-4 py-2 w-full sm:w-auto bg-blue dark:bg-blue hover:bg-blue dark:hover:bg-blue"
 						disabled={!isEditing}
 					>
 						{$_('change-photo')}
@@ -386,7 +395,10 @@
 			<div class="w-full md:w-2/3">
 				<Tabs style="pills" class="justify-center mb-6">
 					{#each Object.keys(LanguageEnum).filter((key) => key !== 'ARABIC') as key}
-						<TabItem open={key === 'KURDISH'} title={$_(key.toLowerCase())}>
+						<TabItem open={key === 'KURDISH'} title={$_(key.toLowerCase())}
+						activeClasses="w-24 h-12 text-blue flex justify-center items-center bg-zinc-200 dark:bg-zinc-800 rounded-xl"
+						inactiveClasses="w-24 h-12 dark:text-white flex justify-center items-center"
+						>
 							<div transition:fade={{ duration: 300 }}>
 								<div class="mt-4">
 									<Label for="name-{key.toLowerCase()}" class="mb-2">{$_('name')} ({key})</Label>

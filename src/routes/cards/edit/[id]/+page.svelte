@@ -131,7 +131,7 @@
 	}
 </script>
 
-<div class="mb-6">
+<div class="pt-24">
 	<Button
 		color="light"
 		on:click={goBack}
@@ -157,7 +157,7 @@
 
 <h1 class="text-3xl font-bold mb-6">{$_('edit-card')}</h1>
 
-<Card class="max-w-2xl mx-auto p-6 bg-white dark:bg-main-dark shadow-lg rounded-lg">
+<Card class="max-w-2xl mx-auto p-6 bg-white dark:bg-main-dark shadow-lg rounded-lg mb-4">
 	<form on:submit|preventDefault={handleUpdate} class="flex flex-col space-y-6">
 		<div>
 			<Label for="link" class="mb-2">{$_('link')}</Label>
@@ -194,7 +194,10 @@
 
 		<Tabs style="pills" class="justify-center mb-6">
 			{#each Object.keys(LanguageEnum).filter((key) => key !== 'ARABIC') as key}
-				<TabItem open title={$_(key.toLowerCase())}>
+				<TabItem open title={$_(key.toLowerCase())} 
+				activeClasses="w-24 h-12 text-blue flex justify-center items-center bg-zinc-200 dark:bg-zinc-800 rounded-xl"
+				inactiveClasses="w-24 h-12 dark:text-white flex justify-center items-center"
+				>
 					<div class="mt-4">
 						<Label for="title-{key.toLowerCase()}" class="mb-2"
 							>{$_('title')} ({$_(key.toLowerCase())})</Label
@@ -243,7 +246,7 @@
 		<div class="flex justify-end">
 			<Button
 				type="submit"
-				class="px-6 py-2 bg-orange-500 hover:bg-orange-600 text-white rounded-lg transition duration-300 ease-in-out"
+				class="px-6 py-2 bg-blue dark:bg-blue hover:bg-blue dark:hover:bg-blue text-white rounded-lg transition duration-300 ease-in-out"
 				disabled={isLoading}
 			>
 				{#if isLoading}

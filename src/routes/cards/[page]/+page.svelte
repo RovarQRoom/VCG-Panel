@@ -133,8 +133,8 @@
 		<div class="flex justify-between items-center mb-3">
 			<h2 class="text-lg font-semibold">{$_('title')}</h2>
 			<div class="flex gap-2">
-				<Button size="xs" color="primary" on:click={toggleEdit}>
-					{$_('edit')}
+				<Button size="xs" class="w-12 h-8 {isEditing ? "bg-red-500 dark:bg-red-500 hover:bg-red dark:hover:bg-red" :"bg-blue dark:bg-blue hover:bg-blue dark:hover:bg-blue"} focus:ring-0" on:click={toggleEdit}>
+					{isEditing ? $_('cancel') : $_('edit')}
 				</Button>
 				{#if isEditing}
 					<Button size="xs" color="green" on:click={saveHeading}>
@@ -144,10 +144,13 @@
 			</div>
 		</div>
 
-		<Tabs style="pill" class="flex justify-center  rounded-lg p-2">
+		<Tabs style="pill" class="flex justify-center items-center  rounded-lg p-2"
+		>
 			<TabItem
 				open
-				class="bg-slate-200/90 dark:bg-slate-700/90 backdrop-blur-sm shadow-sm rounded-lg transition-all duration-200 hover:bg-slate-300 dark:hover:bg-slate-800"
+				activeClasses="w-24 h-12 text-blue flex justify-center items-center"
+				inactiveClasses="w-24 h-12 dark:text-white flex justify-center items-center"
+				class="bg-zinc-200 dark:bg-zinc-900 backdrop-blur-sm shadow-sm rounded-lg transition-all duration-200 hover:bg-slate-300 dark:hover:bg-slate-800"
 			>
 				<div slot="title" class="py-1 px-3">
 					<span>{$_('english')}</span>
@@ -156,8 +159,8 @@
 					<Input
 						type="text"
 						dir="ltr"
-						class="w-full px-3 py-2 h-12 rounded-lg border
-							   bg-white dark:bg-[#1a2232] text-gray-900 dark:text-white
+						class="w-full bg-zinc-300 dark:bg-zinc-900 border-0 px-3 py-2 h-12 rounded-lg
+							    text-gray-900 dark:text-white
 							   focus:border-transparent
 							   transition-all duration-200 ease-in-out
 							   placeholder:text-gray-400 dark:placeholder:text-gray-300 disabled:bg-gray-200 dark:disabled:bg-gray-600 disabled:cursor-not-allowed"
@@ -169,7 +172,9 @@
 			</TabItem>
 
 			<TabItem
-				class="bg-slate-200/90 dark:bg-slate-700/90 backdrop-blur-sm shadow-sm rounded-lg transition-all duration-200 hover:bg-slate-300 dark:hover:bg-slate-800"
+			activeClasses="w-24 h-12 text-blue flex justify-center items-center"
+				inactiveClasses="w-24 h-12 dark:text-white flex justify-center items-center"
+				class="bg-zinc-200 dark:bg-zinc-900 backdrop-blur-sm shadow-sm rounded-lg transition-all duration-200 hover:bg-slate-300 dark:hover:bg-slate-800"
 			>
 				<div slot="title" class="py-1 px-3">
 					<span>{$_('kurdish')}</span>
@@ -179,7 +184,7 @@
 						type="text"
 						dir="rtl"
 						class="w-full px-3 py-2 rounded-lg h-12
-							   bg-white dark:bg-[#1a2232] text-gray-900 dark:text-white
+							   bg-zinc-300 dark:bg-zinc-900 border-0 text-gray-900 dark:text-white
 							   focus:ring-2 focus:ring-primary focus:border-transparent
 							   transition-all duration-200 ease-in-out
 							   placeholder:text-gray-400 dark:placeholder:text-gray-300 disabled:bg-gray-200 dark:disabled:bg-gray-600 disabled:cursor-not-allowed"
@@ -197,7 +202,7 @@
 
 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
 	<Card
-		class="cursor-pointer  dark:bg-darkBlue hover:bg-secondary-light dark:hover:bg-secondary-dark"
+		class="cursor-pointer bg-zinc-100 dark:bg-zinc-800 border-0 hover:bg-secondary-light dark:hover:bg-secondary-dark"
 		on:click={goToAddCard}
 	>
 		<div class="flex items-center justify-center h-full">
@@ -220,7 +225,7 @@
 
 	{#each $cardStore.data as card}
 		<Card
-			class="relative overflow-hidden pb-1 hover:scale-105 transition-all duration-300 bg-main-light dark:bg-main-dark"
+			class="relative overflow-hidden pb-1 hover:scale-105 transition-all duration-300 bg-zinc-100 dark:bg-zinc-800 border-0 "
 		>
 			<div class="p-5">
 				<div class="flex items-start mb-4">

@@ -457,7 +457,9 @@
 		{/if}
 		<Tabs style="pills" class="justify-center mb-6">
 			{#each Object.keys(LanguageEnum).filter((key) => key !== 'ARABIC') as key}
-				<TabItem open title={$_(key.toLowerCase())}>
+				<TabItem open title={$_(key.toLowerCase())}
+				activeClasses="w-24 h-12 text-blue flex justify-center items-center bg-zinc-200 dark:bg-zinc-800 rounded-xl"
+				inactiveClasses="w-24 h-12 dark:text-white flex justify-center items-center">
 					<div class="mt-4">
 						<Label for="title-{key.toLowerCase()}" class="mb-2">
 							{$_('title')} ({$_(key.toLowerCase())})
@@ -610,7 +612,7 @@
 		<div class="flex justify-end">
 			<Button
 				type="submit"
-				class="px-6 py-2 bg-orange-500 text-white rounded-lg transition duration-300 ease-in-out"
+				class="px-6 py-2 bg-blue dark:bg-blue hover:bg-blue dark:hover:bg-blue text-white text-white rounded-lg transition duration-300 ease-in-out"
 				disabled={isLoading}
 			>
 				{#if isLoading}

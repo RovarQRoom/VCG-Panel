@@ -124,8 +124,8 @@
 						</Button>
 					{/if}
 				{/if}
-				<Button on:click={toggleEdit} class="px-2 py-2 rounded-full">
-					<PencilSquare size="20" class={isEditing ? 'text-gray-300' : ''} />
+				<Button on:click={toggleEdit} class="px-2 py-2 rounded-full {isEditing ? "bg-red-500 dark:bg-red-500" : "bg-blue dark:bg-blue hover:blue dark:hover:bg-blue"} focus:ring-0">
+					{isEditing ? $_('cancel') : $_('edit')}
 				</Button>
 			</div>
 		</div>
@@ -145,7 +145,10 @@
 
 			<Tabs style="pills" class="justify-center mb-6">
 				{#each Object.keys(LanguageEnum).filter((key) => key !== 'ARABIC') as key}
-					<TabItem open={key === 'ENGLISH'} title={$_(key.toLowerCase())}>
+					<TabItem open={key === 'ENGLISH'} title={$_(key.toLowerCase())}
+					activeClasses="w-24 h-12 text-blue flex justify-center items-center bg-zinc-200 dark:bg-zinc-800 rounded-xl"
+				inactiveClasses="w-24 h-12 dark:text-white flex justify-center items-center"
+					>
 						<div class="mt-4">
 							<Label for="place-{key.toLowerCase()}" class="mb-2"
 								>{$_('place')} ({$_(key.toLowerCase())})</Label

@@ -91,8 +91,9 @@
 	}
 </script>
 
+
 <!-- Add the back button at the top -->
-<div class="mb-6">
+<div class="mt-24">
 	<Button
 		color="light"
 		on:click={goBack}
