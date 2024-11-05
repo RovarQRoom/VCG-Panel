@@ -8,6 +8,7 @@
 		TableHead,
 		TableHeadCell,
 		Button,
+		GradientButton,
 		Badge,
 		Modal,
 		Label,
@@ -186,24 +187,15 @@
 						<TableBodyCell>
 							<div class="flex space-x-2 gap-3">
 								{#if registration.action === null}
-									<Button
-										size="xs"
-										color="green"
-										class="gap-2"
-										on:click={() => handleAccept(registration.id)}
-									>
-										<CheckCircleSolid class="mr-2 h-4 w-4" />
-										{$_('accept')}
-									</Button>
-									<Button
-										size="xs"
-										color="red"
-										class="gap-2"
-										on:click={() => handleReject(registration.id)}
-									>
-										<CircleMinusSolid class="mr-2 h-4 w-4" />
-										{$_('reject')}
-									</Button>
+								<GradientButton shadow color="green" class="gap-2" on:click={() => handleAccept(registration.id)}><CheckCircleSolid class=" h-4 w-4" />
+									{$_('accept')}</GradientButton>
+
+
+								<GradientButton shadow color="red" class="gap-2" on:click={() => handleReject(registration.id)}>
+									<CircleMinusSolid class=" h-4 w-4" />
+									{$_('reject')}</GradientButton>
+									
+									
 								{:else if registration.action === true}
 									<Badge color="green" class="w-24 rounded-3xl">{$_('accepted')}</Badge>
 								{:else}
@@ -212,7 +204,7 @@
 								<Button
 									size="xs"
 									color="light"
-									class="hover:bg-red-100 transition-colors duration-300 rounded-full p-2"
+									class="min-w-10 hover:bg-red-100 transition-colors duration-300 rounded-full p-2 bg-white dark:bg-input-dark dark:hover:bg-[#363636] border-0"
 									on:click={() => deleteRegistration(registration.id)}
 								>
 									<TrashBinOutline
