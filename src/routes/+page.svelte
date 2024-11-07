@@ -18,7 +18,7 @@
 </script>
 
 <div class="p-4 mt-24 h-auto">
-	<div class="p-4  rounded-lg mt-14">
+	<div class="p-4 rounded-lg mt-14">
 		<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-4 mb-4">
 			<div
 				class="flex items-center justify-center h-52 rounded bg-blue text-white dark:bg-darkBlue"
@@ -37,10 +37,10 @@
 		</div>
 
 		<div
-			class="flex items-center justify-center h-52 rounded bg-blue text-white dark:bg-darkBlue mb-4"
+			class="flex items-center justify-center text-center h-52 rounded bg-blue text-white dark:bg-darkBlue mb-4"
 		>
-			<p class="text-2xl text-gray-400 dark:text-gray-500">
-				Welcome, <span class="font-semibold text-gray-900 dark:text-white">{userName}</span>
+			<p class="text-xl font-medium flex gap-4">
+				Welcome, <span class="text-2xl font-bold text-gray-900 dark:text-white">{userName}</span>
 			</p>
 		</div>
 		<!-- <div

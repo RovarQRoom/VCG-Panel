@@ -187,15 +187,24 @@
 						<TableBodyCell>
 							<div class="flex space-x-2 gap-3">
 								{#if registration.action === null}
-								<GradientButton shadow color="green" class="gap-2" on:click={() => handleAccept(registration.id)}><CheckCircleSolid class=" h-4 w-4" />
-									{$_('accept')}</GradientButton>
+									<GradientButton
+										shadow
+										color="green"
+										class="gap-2"
+										on:click={() => handleAccept(registration.id)}
+										><CheckCircleSolid class=" h-4 w-4" />
+										{$_('accept')}</GradientButton
+									>
 
-
-								<GradientButton shadow color="red" class="gap-2" on:click={() => handleReject(registration.id)}>
-									<CircleMinusSolid class=" h-4 w-4" />
-									{$_('reject')}</GradientButton>
-									
-									
+									<GradientButton
+										shadow
+										color="red"
+										class="gap-2"
+										on:click={() => handleReject(registration.id)}
+									>
+										<CircleMinusSolid class=" h-4 w-4" />
+										{$_('reject')}</GradientButton
+									>
 								{:else if registration.action === true}
 									<Badge color="green" class="w-24 rounded-3xl">{$_('accepted')}</Badge>
 								{:else}
