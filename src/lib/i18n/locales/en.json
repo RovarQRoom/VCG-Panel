@@ -180,5 +180,6 @@
   "settings": "Settings",
   "add-setting": "Add Setting",
   "edit-setting": "Edit Setting",
-  "field-is-required": "Field is required"
+  "field-is-required": "Field is required",
+  "add-image": "Add Image"
 }

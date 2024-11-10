@@ -175,5 +175,6 @@
   "settings": "الإعدادات",
   "add-setting": "إضافة إعداد",
   "edit-setting": "تعديل الإعداد",
-  "field-is-required": "الحقل مطلوب"
+  "field-is-required": "الحقل مطلوب",
+  "add-image": "إضافة الصورة"
 }
