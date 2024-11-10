@@ -1,11 +1,12 @@
 <script lang="ts">
-	import { Modal, Button, Label, Input, Toggle } from 'flowbite-svelte';
+	import { Modal, Button, Label, Input } from 'flowbite-svelte';
 	import { _, locale } from 'svelte-i18n';
 	import type { RouteEntity } from '$lib/Models/Entities/Route';
 	import type { OptionEntity } from '$lib/Models/Entities/Option';
 	import { settingStore } from '$lib/Stores/Setting';
 	import { optionStore } from '$lib/Stores/Option';
 	import type { InsertOption, Language } from '$lib/Supabase/Types/database.types';
+	import AnimatedToggle from '$lib/Components/AnimatedToggle.svelte';
 
 	export let showModal = false;
 	export let route: RouteEntity | null = null;
@@ -82,9 +83,12 @@
 
 		<div class="mb-4">
 			<Label for="newOption">{$_('new-option')}</Label>
-			<div class="flex gap-2">
+			<div class="flex items-center gap-2">
 				<Input id="newOption" bind:value={newOption.field} placeholder={$_('enter-option-field')} />
-				<Toggle bind:checked={newOption.disabled} />
+				<AnimatedToggle 
+					bind:checked={newOption.disabled} 
+					on:change={({ detail }) => newOption.disabled = detail.checked}
+				/>
 				<Button color="green" on:click={addOption}>{$_('add')}</Button>
 			</div>
 		</div>
@@ -93,8 +97,11 @@
 			{#each $optionStore.data as option (option.id)}
 				<div class="flex items-center justify-between p-2 bg-slate-50 dark:bg-slate-800 rounded">
 					<span class="dark:text-white">{option.field}</span>
-					<div class="flex gap-2">
-						<Toggle checked={!option.disabled} on:change={() => toggleOption(option)} />
+					<div class="flex items-center gap-2">
+						<AnimatedToggle 
+							checked={!option.disabled} 
+							on:change={() => toggleOption(option)}
+							/>
 						<Button color="red" size="xs" on:click={() => deleteOption(option.id)}>
 							{$_('delete')}
 						</Button>
