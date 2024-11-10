@@ -461,7 +461,7 @@
 										fill="#1C274C"
 									/>
 								</svg>
-								<p>{$_('addImage')}</p>
+								<p>{$_('add-image')}</p>
 							</div>
 
 							<div class="relative">

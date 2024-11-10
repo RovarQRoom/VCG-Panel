@@ -284,6 +284,6 @@
 		</Card>
 	{/each}
 </div>
-<div class="flex justify-center mt-8">
+<div class="flex justify-center my-8">
 	<Pagination Store={cardStore} currentPage={Number($page.params.page)} name={'cards'} {filter} />
 </div>
