@@ -6,7 +6,6 @@
 	import { settingStore } from '$lib/Stores/Setting';
 	import { optionStore } from '$lib/Stores/Option';
 	import type { InsertOption, Language } from '$lib/Supabase/Types/database.types';
-	import AnimatedToggle from '$lib/Components/AnimatedToggle.svelte';
 
 	export let showModal = false;
 	export let route: RouteEntity | null = null;
@@ -74,7 +73,12 @@
 	}
 </script>
 
-<Modal bind:open={showModal} size="md" autoclose={false}>
+<Modal
+	backdropClass="fixed top-0 start-0 end-0 h-modal md:inset-0 md:h-full z-50 w-full p-4 flex bg-black bg-opacity-50 backdrop-blur-sm"
+	bind:open={showModal}
+	size="md"
+	autoclose={false}
+>
 	<div class="p-4">
 		<h2 class="text-xl font-bold mb-4 dark:text-white">
 			{$_('settings-for')}
@@ -95,7 +99,7 @@
 				<div class="flex items-center justify-between p-2 bg-slate-50 dark:bg-slate-800 rounded">
 					<span class="dark:text-white">{option.field}</span>
 					<div class="flex items-center gap-2">
-						<AnimatedToggle checked={!option.disabled} on:change={() => toggleOption(option)} />
+						<Toggle checked={!option.disabled} on:change={() => toggleOption(option)} />
 						<Button color="red" size="xs" on:click={() => deleteOption(option.id)}>
 							{$_('delete')}
 						</Button>
