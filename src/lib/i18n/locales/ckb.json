@@ -100,7 +100,7 @@
   "5-10k$": "5-10K$",
   "8-12k$": "8-12K$",
   "10-15k$": "10-15K$",
-  "event-deleted-successfully": "ئڤێنتەکە بە سەرکەوتوویی سڕاوەتەوە",
+  "event-deleted-successfully": "ئڤێنتەکە بە سەرکەوتووی سڕاوەتەوە",
   "place-and-date-are-required": "شوێن و بەروار پێویستە",
   "event-created-successfully": "ڕووداوێک بە سەرکەوتوویی دروستکرا",
   "event-updated-successfully": "ڕووداوەکە بە سەرکەوتوویی نوێکرایەوە",
@@ -175,5 +175,14 @@
   "settings": "ڕێکخستنەکان",
   "add-setting": "زیادکردنی ڕێکخستن",
   "edit-setting": "دەستکاریکردنی ڕێکخستن",
-  "field-is-required": "خانە پێویستە"
+  "field-is-required": "خانە پێویستە",
+  "option-created-successfully": "هەڵبژاردن بە سەرکەوتوویی دروستکرا",
+  "option-updated-successfully": "هەڵبژاردن بە سەرکەوتوویی نوێکرایەوە",
+  "option-deleted-successfully": "هەڵبژاردن بە سەرکەوتوویی سڕایەوە",
+  "no-option-found": "هیچ هەڵبژاردنێک نەدۆزرایەوە",
+  "settings-for": "ڕێکخستنەکان بۆ",
+  "new-option": "هەڵبژاردنی نوێ",
+  "enter-option-field": "خانەی هەڵبژاردن داخڵ بکە",
+  "add": "زیادکردن",
+  "close": "داخستن"
 }

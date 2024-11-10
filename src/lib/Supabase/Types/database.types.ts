@@ -222,6 +222,7 @@ export type Database = {
 				Row: {
 					created_at: string;
 					deleted_at: string | null;
+					disabled: boolean;
 					field: string | null;
 					id: number;
 					setting: number | null;
@@ -229,6 +230,7 @@ export type Database = {
 				Insert: {
 					created_at?: string;
 					deleted_at?: string | null;
+					disabled?: boolean;
 					field?: string | null;
 					id?: number;
 					setting?: number | null;
@@ -236,6 +238,7 @@ export type Database = {
 				Update: {
 					created_at?: string;
 					deleted_at?: string | null;
+					disabled?: boolean;
 					field?: string | null;
 					id?: number;
 					setting?: number | null;

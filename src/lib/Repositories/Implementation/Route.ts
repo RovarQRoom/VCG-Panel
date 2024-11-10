@@ -10,7 +10,7 @@ export class RouteRepository implements IRoute {
 		const response = await supabase
 			.from('Route')
 			.insert(route)
-			.select('*')
+			.select('*, name(id, ckb, en), setting:Setting(id)')
 			.returns<RouteEntity>()
 			.single();
 
@@ -23,7 +23,7 @@ export class RouteRepository implements IRoute {
 	async getRouteAsync(id: number): Promise<RouteEntity> {
 		const response = await supabase
 			.from('Route')
-			.select('*, name(id, ckb, en)')
+			.select('*, name(id, ckb, en), setting:Setting(id)')
 			.eq('id', id)
 			.is('deleted_at', null)
 			.returns<RouteEntity>()
@@ -38,7 +38,7 @@ export class RouteRepository implements IRoute {
 	async getRoutesAsync(_option?: ListOption): Promise<PostgrestSingleResponse<RouteEntity[]>> {
 		const response = await supabase
 			.from('Route')
-			.select(`*, name(id, ${_option?.language ?? 'en'})`, {
+			.select(`*, name(id, ${_option?.language ?? 'en'}), setting:Setting(id)`, {
 				count: 'exact'
 			})
 			.is('deleted_at', null)
@@ -60,7 +60,7 @@ export class RouteRepository implements IRoute {
 			.from('Route')
 			.update(route)
 			.eq('id', route.id!)
-			.select('*, name(id, ckb, en)')
+			.select('*, name(id, ckb, en), setting:Setting(id)')
 			.returns<RouteEntity>()
 			.single();
 

@@ -159,9 +159,9 @@
   "loading": "تحميل",
   "failed-to-load-route": "فشل تحميل المسار",
   "enter-english-name": "أدخل الاسم الانجليزي",
-  "enter-kurdish-name": "أدخل الاسم ��لكردي",
+  "enter-kurdish-name": "أدخل الاسم ��ردي",
   "failed-to-update-route": "فشل تحديث المسار",
-  "failed-to-update-password": "فشل تحديث كلمة المرور",
+  "failed-to-update-password": "فشل تحديث كلمة لمرور",
   "enter-link": "أدخل الرابط",
   "profile-updated-successfully": "تم تحديث الملف الشخصي بنجاح",
   "failed-to-update-profile": "فشل في تحديث الملف الشخصي",
@@ -175,5 +175,14 @@
   "settings": "الإعدادات",
   "add-setting": "إضافة إعداد",
   "edit-setting": "تعديل الإعداد",
-  "field-is-required": "الحقل مطلوب"
+  "field-is-required": "الحقل مطلوب",
+  "option-created-successfully": "تم إنشاء الخيار بنجاح",
+  "option-updated-successfully": "تم تحديث الخيار بنجاح",
+  "option-deleted-successfully": "تم حذف الخيار بنجاح",
+  "no-option-found": "لم يتم العثور على خيار",
+  "settings-for": "الإعدادات لـ",
+  "new-option": "خيار جديد",
+  "enter-option-field": "أدخل حقل الخيار",
+  "add": "إضافة",
+  "close": "إغلاق"
 }

@@ -18,6 +18,7 @@
 	import type { Language, UpdateLanguage, UpdateRoute } from '$lib/Supabase/Types/database.types';
 	import type { ListOption } from '$lib/Models/Common/ListOption';
 	import RouteEditModal from './RouteEditModal.svelte';
+	import SettingOptionsModal from './SettingOptionsModal.svelte';
 
 	let filter: ListOption = {
 		page: 1,
@@ -27,6 +28,9 @@
 
 	let showEditModal = false;
 	let selectedRoute: number | null = null;
+
+	let showSettingsModal = false;
+	let selectedRouteForSettings: RouteEntity | null = null;
 
 	onMount(async () => {
 		await routeStore.fetchAll(filter);
@@ -52,6 +56,11 @@
 	const handleEdit = (route: number) => {
 		selectedRoute = route;
 		showEditModal = true;
+	};
+
+	const handleRowDoubleClick = (route: RouteEntity) => {
+		selectedRouteForSettings = route;
+		showSettingsModal = true;
 	};
 
 	let previousLocale = $locale;
@@ -83,6 +92,7 @@
 				{#each $routeStore.data as route}
 					<TableBodyRow
 						class="bg-input-light border-white dark:bg-main-dark dark:border-input-dark transition-colors duration-200"
+						on:dblclick={() => handleRowDoubleClick(route)}
 					>
 						<TableBodyCell>{getLanguageData(route.name)}</TableBodyCell>
 						<TableBodyCell dir="ltr">{route.link}</TableBodyCell>
@@ -143,4 +153,8 @@
 	</div>
 
 	<RouteEditModal bind:showModal={showEditModal} route={selectedRoute} />
+	<SettingOptionsModal 
+		bind:showModal={showSettingsModal} 
+		bind:route={selectedRouteForSettings} 
+	/>
 </div>
