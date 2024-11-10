@@ -71,7 +71,7 @@
   "footer-not-saved": "فۆتەر سەیڤ نەکراوە",
   "social-media": "کۆمەڵایەتییەکان",
   "invalid-image-file": "فایلێکی وێنەی نادروست",
-  "image-upload-failed": "بارکردنی وێنە شکستی هێ��ا",
+  "image-upload-failed": "بارکردنی وێنە شکستی هێا",
   "footer": "پێی لاپەڕە",
   "home": "سەرەکی",
   "event": "ئیڤێنت",
@@ -167,5 +167,13 @@
   "failed-to-update-profile": "شکستی هێنا لە نوێکردنەوەی پڕۆفایلی",
   "profile-settings": "ڕێکخستنەکانی پڕۆفایلی",
   "email-cannot-be-changed": "ئیمەیڵ ناتوانرێت بگۆڕدرێت",
-  "enter-your-name": "ناوی خۆت بنووسە"
+  "enter-your-name": "ناوی خۆت بنووسە",
+  "setting-created-successfully": "ڕێکخستن بە سەرکەوتوویی دروستکرا",
+  "setting-updated-successfully": "ڕێکخستن بە سەرکەوتوویی نوێکرایەوە",
+  "setting-deleted-successfully": "ڕێکخستن بە سەرکەوتوویی سڕایەوە",
+  "no-setting-found": "هیچ ڕێکخستنێک نەدۆزرایەوە",
+  "settings": "ڕێکخستنەکان",
+  "add-setting": "زیادکردنی ڕێکخستن",
+  "edit-setting": "دەستکاریکردنی ڕێکخستن",
+  "field-is-required": "خانە پێویستە"
 }
