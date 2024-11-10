@@ -1,8 +1,7 @@
 <script lang="ts">
-	import { Modal, Button, Label, Input, Tabs, TabItem, Img, Spinner } from 'flowbite-svelte';
+	import { Modal, Label, Input, Tabs, TabItem, Img, Spinner } from 'flowbite-svelte';
 	import { _ } from 'svelte-i18n';
 	import type { Language, UpdateLanguage, UpdateRoute } from '$lib/Supabase/Types/database.types';
-	import { onMount } from 'svelte';
 	import { routeStore } from '$lib/Stores/Route';
 	import { ArrowUp } from 'svelte-heros-v2';
 	import { toastStore } from '$lib/Stores/Toast';

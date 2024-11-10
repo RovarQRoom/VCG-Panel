@@ -159,5 +159,7 @@
   "loading": "تحميل",
   "failed-to-load-route": "فشل تحميل المسار",
   "enter-english-name": "أدخل الاسم الانجليزي",
-  "enter-kurdish-name": "أدخل الاسم الكردي"
+  "enter-kurdish-name": "أدخل الاسم الكردي",
+  "failed-to-update-route": "فشل تحديث المسار",
+  "failed-to-update-password": "فشل تحديث كلمة المرور"
 }

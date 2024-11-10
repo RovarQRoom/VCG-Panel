@@ -41,9 +41,7 @@ export class UserRepository implements IUser {
 	}
 	async updatePasswordAsync(request: UpdatePasswordRequest): Promise<void> {
 		const response = await supabase.auth.updateUser({
-			data: {
-				password: request.newPassword
-			}
+			password: request.newPassword
 		});
 		if (response.error) {
 			throw response.error;

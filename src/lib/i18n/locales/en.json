@@ -164,5 +164,7 @@
   "loading": "Loading",
   "failed-to-load-route": "Failed to load route",
   "enter-english-name": "Enter english name",
-  "enter-kurdish-name": "Enter kurdish name"
+  "enter-kurdish-name": "Enter kurdish name",
+  "failed-to-update-route": "Failed to update route",
+  "failed-to-update-password": "Failed to update password"
 }

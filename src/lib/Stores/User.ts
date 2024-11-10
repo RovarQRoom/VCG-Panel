@@ -9,7 +9,7 @@ import { _ } from 'svelte-i18n';
 
 const userRepository = new UserRepository();
 
-export const userStore = () => {
+const createUserStore = () => {
 	const { subscribe, set, update } = writable<Store<UserEntity>>(new Store<UserEntity>());
 
 	return {
@@ -37,7 +37,7 @@ export const userStore = () => {
 			};
 		},
 		putPassword: async (request: UpdatePasswordRequest) => {
-			if (!request.newPassword || !request.oldPassword) {
+			if (!request.newPassword) {
 				toastStore.showToast(get(_)('password-required'));
 			}
 			if (request.newPassword == request.oldPassword) {
@@ -51,3 +51,5 @@ export const userStore = () => {
 		}
 	};
 };
+
+export const userStore = createUserStore();

@@ -159,5 +159,7 @@
   "loading": "چاوەرێبکە",
   "failed-to-load-route": "شکستی هێنا لە بارکردنی ڕێگا",
   "enter-english-name": "ناوی ئینگلیزی داخڵ بکە",
-  "enter-kurdish-name": "ناوی کوردی داخڵ بکە"
+  "enter-kurdish-name": "ناوی کوردی داخڵ بکە",
+  "failed-to-update-route": "شکستی هێنا لە نوێکردنەوەی ڕێگاکە",
+  "failed-to-update-password": "شکستی هێنا لە نوێکردنەوەی وشەی نهێنی"
 }
