@@ -88,7 +88,7 @@
 			</TableHead>
 			<TableBody>
 				{#each $routeStore.data as route}
-					<TableBodyRow
+					<tr
 						class="bg-input-light border-white dark:bg-main-dark dark:border-input-dark transition-colors duration-200 text-center"
 						on:click={() => handleRowClick(route)}
 					>
@@ -119,12 +119,13 @@
 										class="tgl tgl-skewed"
 										id="cb3-8"
 										type="checkbox"
-										on:change={() => handleRouteToggle(route)}
+										checked={route.disabled}
+										on:click|stopPropagation={() => handleRouteToggle(route)}
 									/>
 									<label
 										class="tgl-btn"
-										data-tg-off={$_('active')}
 										data-tg-on={$_('disabled-route')}
+										data-tg-off={$_('active')}
 										for="cb3-8"
 									></label>
 								</div>
@@ -149,7 +150,7 @@
 								</button>
 							</div>
 						</TableBodyCell>
-					</TableBodyRow>
+					</tr>
 				{/each}
 			</TableBody>
 		</Table>
