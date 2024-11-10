@@ -159,7 +159,7 @@
   "loading": "تحميل",
   "failed-to-load-route": "فشل تحميل المسار",
   "enter-english-name": "أدخل الاسم الانجليزي",
-  "enter-kurdish-name": "أدخل الاسم الكردي",
+  "enter-kurdish-name": "أدخل الاسم ��لكردي",
   "failed-to-update-route": "فشل تحديث المسار",
   "failed-to-update-password": "فشل تحديث كلمة المرور",
   "enter-link": "أدخل الرابط",
@@ -167,5 +167,13 @@
   "failed-to-update-profile": "فشل في تحديث الملف الشخصي",
   "profile-settings": "إعدادات الملف الشخصي",
   "email-cannot-be-changed": "لا يمكن تغيير البريد الإلكتروني",
-  "enter-your-name": "أدخل اسمك"
+  "enter-your-name": "أدخل اسمك",
+  "setting-created-successfully": "تم إنشاء الإعداد بنجاح",
+  "setting-updated-successfully": "تم تحديث الإعداد بنجاح",
+  "setting-deleted-successfully": "تم حذف الإعداد بنجاح",
+  "no-setting-found": "لم يتم العثور على إعداد",
+  "settings": "الإعدادات",
+  "add-setting": "إضافة إعداد",
+  "edit-setting": "تعديل الإعداد",
+  "field-is-required": "الحقل مطلوب"
 }

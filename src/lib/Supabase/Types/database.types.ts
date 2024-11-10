@@ -218,19 +218,51 @@ export type Database = {
 				};
 				Relationships: [];
 			};
+			Option: {
+				Row: {
+					created_at: string;
+					deleted_at: string | null;
+					field: string | null;
+					id: number;
+					setting: number | null;
+				};
+				Insert: {
+					created_at?: string;
+					deleted_at?: string | null;
+					field?: string | null;
+					id?: number;
+					setting?: number | null;
+				};
+				Update: {
+					created_at?: string;
+					deleted_at?: string | null;
+					field?: string | null;
+					id?: number;
+					setting?: number | null;
+				};
+				Relationships: [
+					{
+						foreignKeyName: 'Option_setting_fkey';
+						columns: ['setting'];
+						isOneToOne: false;
+						referencedRelation: 'Setting';
+						referencedColumns: ['id'];
+					}
+				];
+			};
 			Register: {
 				Row: {
 					action: boolean | null;
 					created_at: string;
 					deleted_at: string | null;
-					email: string;
+					email: string | null;
 					goal_income: string | null;
 					id: number;
-					language: Database['public']['Enums']['LanguageEnum'];
+					language: Database['public']['Enums']['LanguageEnum'] | null;
 					monthly_income: string | null;
-					name: string;
-					phone: string;
-					service: Database['public']['Enums']['Service'];
+					name: string | null;
+					phone: string | null;
+					service: Database['public']['Enums']['Service'] | null;
 					trade_priority: boolean | null;
 					traded_before: boolean | null;
 					trading_from: string | null;
@@ -240,14 +272,14 @@ export type Database = {
 					action?: boolean | null;
 					created_at?: string;
 					deleted_at?: string | null;
-					email: string;
+					email?: string | null;
 					goal_income?: string | null;
 					id?: number;
-					language?: Database['public']['Enums']['LanguageEnum'];
+					language?: Database['public']['Enums']['LanguageEnum'] | null;
 					monthly_income?: string | null;
-					name: string;
-					phone: string;
-					service?: Database['public']['Enums']['Service'];
+					name?: string | null;
+					phone?: string | null;
+					service?: Database['public']['Enums']['Service'] | null;
 					trade_priority?: boolean | null;
 					traded_before?: boolean | null;
 					trading_from?: string | null;
@@ -257,14 +289,14 @@ export type Database = {
 					action?: boolean | null;
 					created_at?: string;
 					deleted_at?: string | null;
-					email?: string;
+					email?: string | null;
 					goal_income?: string | null;
 					id?: number;
-					language?: Database['public']['Enums']['LanguageEnum'];
+					language?: Database['public']['Enums']['LanguageEnum'] | null;
 					monthly_income?: string | null;
-					name?: string;
-					phone?: string;
-					service?: Database['public']['Enums']['Service'];
+					name?: string | null;
+					phone?: string | null;
+					service?: Database['public']['Enums']['Service'] | null;
 					trade_priority?: boolean | null;
 					traded_before?: boolean | null;
 					trading_from?: string | null;
@@ -348,6 +380,35 @@ export type Database = {
 						columns: ['name'];
 						isOneToOne: false;
 						referencedRelation: 'Language';
+						referencedColumns: ['id'];
+					}
+				];
+			};
+			Setting: {
+				Row: {
+					created_at: string;
+					deleted_at: string | null;
+					id: number;
+					route: number | null;
+				};
+				Insert: {
+					created_at?: string;
+					deleted_at?: string | null;
+					id?: number;
+					route?: number | null;
+				};
+				Update: {
+					created_at?: string;
+					deleted_at?: string | null;
+					id?: number;
+					route?: number | null;
+				};
+				Relationships: [
+					{
+						foreignKeyName: 'Setting_route_fkey';
+						columns: ['route'];
+						isOneToOne: true;
+						referencedRelation: 'Route';
 						referencedColumns: ['id'];
 					}
 				];
@@ -609,6 +670,10 @@ export type Language = Database['public']['Tables']['Language']['Row'];
 export type InsertLanguage = Database['public']['Tables']['Language']['Insert'];
 export type UpdateLanguage = Database['public']['Tables']['Language']['Update'];
 
+export type Option = Database['public']['Tables']['Option']['Row'];
+export type InsertOption = Database['public']['Tables']['Option']['Insert'];
+export type UpdateOption = Database['public']['Tables']['Option']['Update'];
+
 export type Register = Database['public']['Tables']['Register']['Row'];
 export type InsertRegister = Database['public']['Tables']['Register']['Insert'];
 export type UpdateRegister = Database['public']['Tables']['Register']['Update'];
@@ -620,6 +685,10 @@ export type UpdateRepresentative = Database['public']['Tables']['Representative'
 export type Route = Database['public']['Tables']['Route']['Row'];
 export type InsertRoute = Database['public']['Tables']['Route']['Insert'];
 export type UpdateRoute = Database['public']['Tables']['Route']['Update'];
+
+export type Setting = Database['public']['Tables']['Setting']['Row'];
+export type InsertSetting = Database['public']['Tables']['Setting']['Insert'];
+export type UpdateSetting = Database['public']['Tables']['Setting']['Update'];
 
 export type Social = Database['public']['Tables']['Social']['Row'];
 export type InsertSocial = Database['public']['Tables']['Social']['Insert'];
