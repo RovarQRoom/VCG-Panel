@@ -25,22 +25,31 @@
 				<div class="hidden md:flex space-x-4 items-center">
 					<a
 						href="/setting/password"
-						class="nav-item text-gray-700 dark:text-gray-200 {activeUrl.startsWith('/setting/password') ? activeClass : ''}"
+						class="nav-item text-gray-700 dark:text-gray-200 flex items-center gap-2 {activeUrl.startsWith('/setting/password') ? activeClass : ''}"
 					>
+					<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
+						<path stroke-linecap="round" stroke-linejoin="round" d="M16.5 10.5V6.75a4.5 4.5 0 10-9 0v3.75m-.75 11.25h10.5a2.25 2.25 0 002.25-2.25v-6.75a2.25 2.25 0 00-2.25-2.25H6.75a2.25 2.25 0 00-2.25 2.25v6.75a2.25 2.25 0 002.25 2.25z" />
+					</svg>
 						{$_('password-settings')}
 					</a>
 					<a
 						href="/setting/route"
-						class="nav-item text-gray-700 dark:text-gray-200 {activeUrl.startsWith('/setting/route') ? activeClass : ''}"
+						class="nav-item text-gray-700 dark:text-gray-200 flex items-center gap-2 {activeUrl.startsWith('/setting/route') ? activeClass : ''}"
 					>
+					<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
+						<path stroke-linecap="round" stroke-linejoin="round" d="M9 6.75V15m6-6v8.25m.503 3.498l4.875-2.437c.381-.19.622-.58.622-1.006V4.82c0-.836-.88-1.38-1.628-1.006l-3.869 1.934c-.317.159-.69.159-1.006 0L9.503 3.252a1.125 1.125 0 00-1.006 0L3.622 5.689C3.24 5.88 3 6.27 3 6.695V19.18c0 .836.88 1.38 1.628 1.006l3.869-1.934c.317-.159.69-.159 1.006 0l4.994 2.497c.317.158.69.158 1.006 0z" />
+					</svg>
 						{$_('route-settings')}
 					</a>
 					<a
-					href="/setting/profile"
-					class="nav-item block {activeUrl.startsWith('/setting/profile') ? activeClass : ''}"
-				>
-					{$_('profile-settings')}
-				</a>
+						href="/setting/profile"
+						class="nav-item text-gray-700 dark:text-gray-200 flex items-center gap-2 {activeUrl.startsWith('/setting/profile') ? activeClass : ''}"
+					>
+					<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
+						<path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z" />
+					</svg>
+						{$_('profile-settings')}
+					</a>
 				</div>
 			</div>
 
@@ -48,21 +57,30 @@
 			<div class="md:hidden {isMenuOpen ? 'block' : 'hidden'} pb-3">
 				<a
 					href="/setting/password"
-					class="nav-item block {activeUrl.startsWith('/setting/password') ? activeClass : ''}"
+					class="nav-item flex items-center gap-2 {activeUrl.startsWith('/setting/password') ? activeClass : ''}"
 				>
 					{$_('password-settings')}
+					<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
+						<path stroke-linecap="round" stroke-linejoin="round" d="M16.5 10.5V6.75a4.5 4.5 0 10-9 0v3.75m-.75 11.25h10.5a2.25 2.25 0 002.25-2.25v-6.75a2.25 2.25 0 00-2.25-2.25H6.75a2.25 2.25 0 00-2.25 2.25v6.75a2.25 2.25 0 002.25 2.25z" />
+					</svg>
 				</a>
 				<a
 					href="/setting/route"
-					class="nav-item block {activeUrl.startsWith('/setting/route') ? activeClass : ''}"
+					class="nav-item flex items-center gap-2 {activeUrl.startsWith('/setting/route') ? activeClass : ''}"
 				>
 					{$_('route-settings')}
+					<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
+						<path stroke-linecap="round" stroke-linejoin="round" d="M9 6.75V15m6-6v8.25m.503 3.498l4.875-2.437c.381-.19.622-.58.622-1.006V4.82c0-.836-.88-1.38-1.628-1.006l-3.869 1.934c-.317.159-.69.159-1.006 0L9.503 3.252a1.125 1.125 0 00-1.006 0L3.622 5.689C3.24 5.88 3 6.27 3 6.695V19.18c0 .836.88 1.38 1.628 1.006l3.869-1.934c.317-.159.69-.159 1.006 0l4.994 2.497c.317.158.69.158 1.006 0z" />
+					</svg>
 				</a>
 				<a
 					href="/setting/profile"
-					class="nav-item block {activeUrl.startsWith('/setting/profile') ? activeClass : ''}"
+					class="nav-item flex items-center gap-2 {activeUrl.startsWith('/setting/profile') ? activeClass : ''}"
 				>
 					{$_('profile-settings')}
+					<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
+						<path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z" />
+					</svg>
 				</a>
 			</div>
 		</div>
@@ -81,7 +99,6 @@
 		padding: 0.5rem 1rem;
 		border-radius: 0.375rem;
 		transition: all 0.3s ease;
-		display: inline-block;
 	}
 
 	.nav-item:hover:not([data-active='true']) {
