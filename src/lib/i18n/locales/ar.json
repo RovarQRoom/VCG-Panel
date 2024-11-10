@@ -161,5 +161,6 @@
   "enter-english-name": "أدخل الاسم الانجليزي",
   "enter-kurdish-name": "أدخل الاسم الكردي",
   "failed-to-update-route": "فشل تحديث المسار",
-  "failed-to-update-password": "فشل تحديث كلمة المرور"
+  "failed-to-update-password": "فشل تحديث كلمة المرور",
+  "enter-link": "أدخل الرابط"
 }

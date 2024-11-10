@@ -166,5 +166,6 @@
   "enter-english-name": "Enter english name",
   "enter-kurdish-name": "Enter kurdish name",
   "failed-to-update-route": "Failed to update route",
-  "failed-to-update-password": "Failed to update password"
+  "failed-to-update-password": "Failed to update password",
+  "enter-link": "Enter link"
 }

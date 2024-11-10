@@ -172,9 +172,10 @@
 				</div>
 
 				<div class="mb-6 flex gap-4 items-end">
-					<div class="flex-1">
+					<div class="flex-1" dir="ltr">
 						<Label for="link" class="mb-2 text-slate-700 dark:text-slate-300">{$_('link')}</Label>
 						<Input
+							dir="ltr"
 							id="link"
 							bind:value={updateRoute.link}
 							required
