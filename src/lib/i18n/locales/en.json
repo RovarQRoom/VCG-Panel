@@ -167,5 +167,10 @@
   "enter-kurdish-name": "Enter kurdish name",
   "failed-to-update-route": "Failed to update route",
   "failed-to-update-password": "Failed to update password",
-  "enter-link": "Enter link"
+  "enter-link": "Enter link",
+  "profile-updated-successfully": "Profile updated successfully",
+  "failed-to-update-profile": "Failed to update profile",
+  "profile-settings": "Profile Settings",
+  "enter-your-name": "Enter your name",
+  "email-cannot-be-changed": "Email cannot be changed"
 }

@@ -35,6 +35,12 @@
 					>
 						{$_('route-settings')}
 					</a>
+					<a
+					href="/setting/profile"
+					class="nav-item block {activeUrl.startsWith('/setting/profile') ? activeClass : ''}"
+				>
+					{$_('profile-settings')}
+				</a>
 				</div>
 			</div>
 
@@ -51,6 +57,12 @@
 					class="nav-item block {activeUrl.startsWith('/setting/route') ? activeClass : ''}"
 				>
 					{$_('route-settings')}
+				</a>
+				<a
+					href="/setting/profile"
+					class="nav-item block {activeUrl.startsWith('/setting/profile') ? activeClass : ''}"
+				>
+					{$_('profile-settings')}
 				</a>
 			</div>
 		</div>
@@ -81,3 +93,5 @@
 		background-color: rgb(31 41 55);
 	}
 </style>
+
+

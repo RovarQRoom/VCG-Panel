@@ -162,5 +162,10 @@
   "enter-kurdish-name": "أدخل الاسم الكردي",
   "failed-to-update-route": "فشل تحديث المسار",
   "failed-to-update-password": "فشل تحديث كلمة المرور",
-  "enter-link": "أدخل الرابط"
+  "enter-link": "أدخل الرابط",
+  "profile-updated-successfully": "تم تحديث الملف الشخصي بنجاح",
+  "failed-to-update-profile": "فشل في تحديث الملف الشخصي",
+  "profile-settings": "إعدادات الملف الشخصي",
+  "email-cannot-be-changed": "لا يمكن تغيير البريد الإلكتروني",
+  "enter-your-name": "أدخل اسمك"
 }
