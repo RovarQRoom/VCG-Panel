@@ -119,7 +119,7 @@
 	size="lg"
 	autoclose={false}
 	class="w-full"
-	defaultClass="bg-[#f1f1f1] dark:bg-darkBlue"
+	defaultClass="bg-[#f1f1f1] dark:bg-main-dark"
 	backdropClass="bg-white dark:bg-darkBlue backdrop-blur-sm"
 >
 	<div class="relative p-4">
@@ -149,7 +149,7 @@
 									id="name-en"
 									bind:value={nameLanguage.en}
 									required
-									class="mt-1 dark:bg-[#1a2232] border-0 transition-all duration-300 hover:ring-2 hover:ring-sky-500 focus:ring-indigo-500"
+									class="mt-1 dark:bg-input-dark border-0 transition-all duration-300 hover:ring-2 hover:ring-sky-500 focus:ring-indigo-500"
 									placeholder={$_('enter-english-name')}
 								/>
 							</div>
@@ -163,7 +163,7 @@
 									id="name-ckb"
 									bind:value={nameLanguage.ckb}
 									required
-									class="mt-1 dark:bg-[#1a2232] border-0 transition-all duration-300 hover:ring-2 hover:ring-sky-500 focus:ring-indigo-500"
+									class="mt-1 dark:bg-input-dark border-0 transition-all duration-300 hover:ring-2 hover:ring-sky-500 focus:ring-indigo-500"
 									placeholder={$_('enter-kurdish-name')}
 								/>
 							</div>
@@ -179,7 +179,7 @@
 							id="link"
 							bind:value={updateRoute.link}
 							required
-							class="mt-1 dark:bg-[#1a2232] border-0 transition-all duration-300 hover:ring-2 hover:ring-sky-500 focus:ring-indigo-500"
+							class="mt-1 dark:bg-input-dark border-0 transition-all duration-300 hover:ring-2 hover:ring-sky-500 focus:ring-indigo-500"
 							placeholder={$_('enter-link')}
 						/>
 					</div>
