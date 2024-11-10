@@ -6,6 +6,7 @@ import type { PostgrestSingleResponse } from '@supabase/supabase-js';
 export interface IOption {
     createOptionAsync(option: InsertOption): Promise<OptionEntity>;
     getOptionAsync(id: number): Promise<OptionEntity>;
+    getOptionsBySettingIdAsync(setting_id: number): Promise<OptionEntity[]>;
     getOptionsAsync(option?: ListOption): Promise<PostgrestSingleResponse<OptionEntity[]>>;
     updateOptionAsync(option: UpdateOption): Promise<OptionEntity>;
     deleteOptionAsync(id: number): Promise<void>;

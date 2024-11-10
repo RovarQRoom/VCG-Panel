@@ -6,6 +6,7 @@ import type { PostgrestSingleResponse } from '@supabase/supabase-js';
 export interface ISetting {
     createSettingAsync(setting: InsertSetting): Promise<SettingEntity>;
     getSettingAsync(id: number): Promise<SettingEntity>;
+    getSettingByRouteIdAsync(route_id: number): Promise<SettingEntity>;
     getSettingsAsync(option?: ListOption): Promise<PostgrestSingleResponse<SettingEntity[]>>;
     updateSettingAsync(setting: UpdateSetting): Promise<SettingEntity>;
     deleteSettingAsync(id: number): Promise<void>;

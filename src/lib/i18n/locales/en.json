@@ -181,5 +181,15 @@
   "add-setting": "Add Setting",
   "edit-setting": "Edit Setting",
   "field-is-required": "Field is required",
-  "add-image": "Add Image"
+  "option-created-successfully": "Option created successfully",
+  "option-updated-successfully": "Option updated successfully",
+  "option-deleted-successfully": "Option deleted successfully",
+  "no-option-found": "No option found",
+  "settings-for": "Settings for",
+  "new-option": "New Option",
+  "enter-option-field": "Enter option field",
+  "add": "Add",
+  "close": "Close",
+  "add-image": "Add Image",
+  "double-click-for-settings": "Double click to open settings"
 }

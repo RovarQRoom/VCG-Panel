@@ -36,15 +36,15 @@
 			if (routeData) {
 				updateRoute = {
 					id: routeData.id,
-					name: routeData.name.id,
+					name: routeData.name?.id,
 					link: routeData.link,
 					disabled: routeData.disabled,
 					icon: routeData.icon
 				};
 				nameLanguage = {
-					id: routeData.name.id,
-					en: routeData.name.en,
-					ckb: routeData.name.ckb
+					id: routeData.name?.id ?? 0,
+					en: routeData.name?.en ?? '',
+					ckb: routeData.name?.ckb ?? ''
 				};
 				iconFile.preview = routeData.icon;
 			}

@@ -10,7 +10,7 @@ export class SettingRepository implements ISetting {
 		const response = await supabase
 			.from('Setting')
 			.insert(setting)
-			.select('*, options(*)')
+			.select('*, options:Option(id,field,disabled)')
 			.returns<SettingEntity>()
 			.single();
 
@@ -23,9 +23,10 @@ export class SettingRepository implements ISetting {
 	async getSettingAsync(id: number): Promise<SettingEntity> {
 		const response = await supabase
 			.from('Setting')
-			.select('*, options(*)')
+			.select('*, options:Option(id,field,disabled)')
 			.eq('id', id)
 			.is('deleted_at', null)
+			.is('Option.deleted_at', null)
 			.returns<SettingEntity>()
 			.single();
 
@@ -35,10 +36,24 @@ export class SettingRepository implements ISetting {
 		return response.data;
 	}
 
+	async getSettingByRouteIdAsync(route_id: number): Promise<SettingEntity> {
+		const response = await supabase
+			.from('Setting')
+			.select('*, options:Option(id,field,disabled)')
+			.eq('route', route_id)
+			.is('deleted_at', null)
+			.returns<SettingEntity>()
+			.single();
+
+		if (response.error) {
+			throw response.error;
+		}
+		return response.data;
+	}
 	async getSettingsAsync(_option?: ListOption): Promise<PostgrestSingleResponse<SettingEntity[]>> {
 		const response = await supabase
 			.from('Setting')
-			.select('*, options(*)', {
+			.select('*, options:Option(id,field,disabled)', {
 				count: 'exact'
 			})
 			.is('deleted_at', null)
@@ -60,7 +75,7 @@ export class SettingRepository implements ISetting {
 			.from('Setting')
 			.update(setting)
 			.eq('id', setting.id!)
-			.select('*, options(*)')
+			.select('*, options:Option(id,field,disabled)')
 			.returns<SettingEntity>()
 			.single();
 
