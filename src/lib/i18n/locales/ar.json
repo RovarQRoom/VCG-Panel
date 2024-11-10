@@ -159,7 +159,7 @@
   "loading": "تحميل",
   "failed-to-load-route": "فشل تحميل المسار",
   "enter-english-name": "أدخل الاسم الانجليزي",
-  "enter-kurdish-name": "أدخل الاسم ��ردي",
+  "enter-kurdish-name": "أدخل الاسم ��دي",
   "failed-to-update-route": "فشل تحديث المسار",
   "failed-to-update-password": "فشل تحديث كلمة لمرور",
   "enter-link": "أدخل الرابط",
@@ -185,5 +185,6 @@
   "enter-option-field": "أدخل حقل الخيار",
   "add": "إضافة",
   "close": "إغلاق",
-  "add-image": "إضافة الصورة"
+  "add-image": "إضافة الصورة",
+  "double-click-for-settings": "انقر نقرًا مزدوجًا لفتح الإعدادات"
 }

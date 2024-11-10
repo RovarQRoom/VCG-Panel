@@ -91,8 +91,9 @@
 			<TableBody>
 				{#each $routeStore.data as route}
 					<TableBodyRow
-						class="bg-input-light border-white dark:bg-main-dark dark:border-input-dark transition-colors duration-200"
+						class="bg-input-light border-white dark:bg-main-dark dark:border-input-dark transition-colors duration-200 cursor-pointer hover:relative group"
 						on:dblclick={() => handleRowDoubleClick(route)}
+						title={$_('double-click-for-settings')}
 					>
 						<TableBodyCell>{getLanguageData(route.name)}</TableBodyCell>
 						<TableBodyCell dir="ltr">{route.link}</TableBodyCell>
@@ -153,8 +154,5 @@
 	</div>
 
 	<RouteEditModal bind:showModal={showEditModal} route={selectedRoute} />
-	<SettingOptionsModal 
-		bind:showModal={showSettingsModal} 
-		bind:route={selectedRouteForSettings} 
-	/>
+	<SettingOptionsModal bind:showModal={showSettingsModal} bind:route={selectedRouteForSettings} />
 </div>
