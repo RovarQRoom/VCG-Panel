@@ -57,6 +57,7 @@ export class UserRepository implements IUser {
 		const response = await supabase
 			.from('User')
 			.update(user)
+			.eq('id', user.id!)
 			.select('*')
 			.returns<UserEntity>()
 			.single();

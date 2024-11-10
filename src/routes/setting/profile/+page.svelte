@@ -117,10 +117,10 @@
 
 		<div class="flex flex-col items-center mb-8">
 			<div
-				class="w-32 h-32 mb-4 overflow-hidden rounded-full shadow-lg transition-transform duration-300 hover:scale-105"
+				class="w-32 h-32 mb-4 overflow-hidden rounded-full shadow-lg transition-transform duration-300 hover:scale-105 flex items-center justify-center"
 			>
 				{#if imageFile.preview}
-					<img src={imageFile.preview} alt="Profile" class="w-full h-full object-cover" />
+					<img src={imageFile.preview} alt="Profile" class="object-cover align-middle" />
 				{:else}
 					<div class="w-full h-full bg-gray-200 dark:bg-gray-700 flex items-center justify-center">
 						<svg
