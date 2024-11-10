@@ -81,7 +81,7 @@
 
 	<div class="overflow-x-auto relative shadow-md sm:rounded-lg">
 		<Table hoverable={true}>
-			<TableHead class="bg-main-dark dark:bg-input-dark text-white">
+			<TableHead class="bg-main-dark dark:bg-input-dark text-white text-center">
 				<TableHeadCell>{$_('name')}</TableHeadCell>
 				<TableHeadCell>{$_('link')}</TableHeadCell>
 				<TableHeadCell>{$_('icon')}</TableHeadCell>
@@ -91,9 +91,8 @@
 			<TableBody>
 				{#each $routeStore.data as route}
 					<TableBodyRow
-						class="bg-input-light border-white dark:bg-main-dark dark:border-input-dark transition-colors duration-200 cursor-pointer hover:relative group"
-						on:dblclick={() => handleRowDoubleClick(route)}
-						title={$_('double-click-for-settings')}
+						class="bg-input-light border-white dark:bg-main-dark dark:border-input-dark transition-colors duration-200 cursor-pointer hover:relative group text-center"
+						on:click={() => handleRowDoubleClick(route)}
 					>
 						<TableBodyCell>{getLanguageData(route.name)}</TableBodyCell>
 						<TableBodyCell dir="ltr">{route.link}</TableBodyCell>
@@ -116,35 +115,31 @@
 							</span>
 						</TableBodyCell>
 						<TableBodyCell>
-							<div class="flex items-center space-x-3">
+							<div class="flex items-center space-x-3 justify-center">
 								<Toggle
 									checked={!route.disabled}
 									on:change={() => handleRouteToggle(route)}
 									class="transition-all duration-200"
 								/>
 
-								<Button
-									size="xs"
-									color="light"
-									class="min-w-10 hover:bg-sky-100 transition-colors duration-300 rounded-full p-2 bg-white dark:bg-input-dark dark:hover:bg-[#363636] border-0"
-									on:click={() => handleEdit(route.id)}
+								<button
+									class="min-w-10 hover:bg-sky-100 transition-colors duration-300 rounded-full p-2 bg-white dark:bg-input-dark dark:hover:bg-[#363636] border-0 flex items-center justify-center disabled:opacity-50"
+									on:click|stopPropagation={() => handleEdit(route.id)}
 								>
 									<PenSolid
 										class="h-5 w-5 text-sky-500 hover:text-sky-700 transition-colors duration-300"
 									/>
-								</Button>
+								</button>
 
-								<Button
-									size="xs"
-									color="light"
-									class="min-w-10 hover:bg-red-100 transition-colors duration-300 rounded-full p-2 bg-white dark:bg-input-dark dark:hover:bg-[#363636] border-0"
-									on:click={() => handleDelete(route)}
+								<button
+									class="min-w-10 hover:bg-red-100 transition-colors duration-300 rounded-full p-2 bg-white dark:bg-input-dark dark:hover:bg-[#363636] border-0 flex items-center justify-center disabled:opacity-50 disabled:cursor-not-allowed"
+									on:click|stopPropagation={() => handleDelete(route)}
 									disabled
 								>
 									<TrashBinOutline
 										class="h-5 w-5 text-red-500 hover:text-red-700 transition-colors duration-300"
 									/>
-								</Button>
+								</button>
 							</div>
 						</TableBodyCell>
 					</TableBodyRow>
