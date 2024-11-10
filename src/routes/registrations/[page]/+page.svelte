@@ -243,7 +243,7 @@
 	size="sm"
 	class="w-full"
 	autoclose={false}
-	defaultClass="bg-[#f1f1f1] dark:bg-darkBlue"
+	defaultClass="bg-[#f1f1f1] dark:bg-main-dark"
 	backdropClass="bg-white dark:bg-darkBlue backdrop-blur-sm"
 >
 	<div class="relative p-4">
@@ -264,7 +264,7 @@
 					type="number"
 					bind:value={excelOption.from}
 					min="1"
-					class="mt-1 dark:bg-[#1a2232] border-0"
+					class="mt-1 dark:bg-input-dark border-0"
 				/>
 			</div>
 
@@ -275,7 +275,7 @@
 					type="number"
 					bind:value={excelOption.to}
 					min={excelOption.from}
-					class="mt-1 dark:bg-[#1a2232] border-0"
+					class="mt-1 dark:bg-input-dark border-0"
 				/>
 			</div>
 		</div>
