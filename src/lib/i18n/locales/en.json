@@ -191,5 +191,6 @@
   "add": "Add",
   "close": "Close",
   "add-image": "Add Image",
-  "double-click-for-settings": "Double click to open settings"
+  "double-click-for-settings": "Double click to open settings",
+  "disabled-route": "Deactive"
 }

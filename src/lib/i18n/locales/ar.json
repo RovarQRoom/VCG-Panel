@@ -186,5 +186,6 @@
   "add": "إضافة",
   "close": "إغلاق",
   "add-image": "إضافة الصورة",
-  "double-click-for-settings": "انقر نقرًا مزدوجًا لفتح الإعدادات"
+  "double-click-for-settings": "انقر نقرًا مزدوجًا لفتح الإعدادات",
+  "disabled-route": "غير نشط"
 }

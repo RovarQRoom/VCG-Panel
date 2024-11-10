@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { Modal, Button, Label, Input } from 'flowbite-svelte';
+	import { Modal, Button, Label, Input, Toggle } from 'flowbite-svelte';
 	import { _, locale } from 'svelte-i18n';
 	import type { RouteEntity } from '$lib/Models/Entities/Route';
 	import type { OptionEntity } from '$lib/Models/Entities/Option';
@@ -85,10 +85,7 @@
 			<Label for="newOption">{$_('new-option')}</Label>
 			<div class="flex items-center gap-2">
 				<Input id="newOption" bind:value={newOption.field} placeholder={$_('enter-option-field')} />
-				<AnimatedToggle 
-					bind:checked={newOption.disabled} 
-					on:change={({ detail }) => newOption.disabled = detail.checked}
-				/>
+				<Toggle bind:checked={newOption.disabled} />
 				<Button color="green" on:click={addOption}>{$_('add')}</Button>
 			</div>
 		</div>
@@ -98,10 +95,7 @@
 				<div class="flex items-center justify-between p-2 bg-slate-50 dark:bg-slate-800 rounded">
 					<span class="dark:text-white">{option.field}</span>
 					<div class="flex items-center gap-2">
-						<AnimatedToggle 
-							checked={!option.disabled} 
-							on:change={() => toggleOption(option)}
-							/>
+						<AnimatedToggle checked={!option.disabled} on:change={() => toggleOption(option)} />
 						<Button color="red" size="xs" on:click={() => deleteOption(option.id)}>
 							{$_('delete')}
 						</Button>
