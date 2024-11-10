@@ -121,7 +121,7 @@
 						d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
 					></path>
 				</svg>
-				<div class={activeUrl === '/event' ? 'flex' : 'flex md:hidden'}>
+				<div class={activeUrl.startsWith('/event') ? 'flex' : 'flex md:hidden'}>
 					<p>{$_('event')}</p>
 				</div>
 			</div>
@@ -147,7 +147,7 @@
 					></path>
 				</svg>
 
-				<div class={activeUrl === '/representative' ? 'flex' : 'flex md:hidden'}>
+				<div class={activeUrl.startsWith('/representative') ? 'flex' : 'flex md:hidden'}>
 					<p>{$_('representative')}</p>
 				</div>
 			</div>
@@ -196,7 +196,7 @@
 					></path>
 				</svg>
 
-				<div class={activeUrl === '/footer' ? 'flex' : 'flex md:hidden'}>
+				<div class={activeUrl.startsWith('/footer') ? 'flex' : 'flex md:hidden'}>
 					<p>{$_('footer')}</p>
 				</div>
 			</div>
@@ -225,7 +225,7 @@
 					/>
 				</svg>
 
-				<div class={activeUrl === '/setting' ? 'flex' : 'flex md:hidden'}>
+				<div class={activeUrl.startsWith('/setting') ? 'flex' : 'flex md:hidden'}>
 					<p>{$_('setting')}</p>
 				</div>
 			</div>

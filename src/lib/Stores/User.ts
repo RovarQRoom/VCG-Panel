@@ -6,6 +6,7 @@ import { UserRepository } from '$lib/Repositories/Implementation/User';
 import { get, writable } from 'svelte/store';
 import { toastStore } from './Toast';
 import { _ } from 'svelte-i18n';
+import type { UpdateUser } from '$lib/Supabase/Types/database.types';
 
 const userRepository = new UserRepository();
 
@@ -35,6 +36,14 @@ const createUserStore = () => {
 				limit: _option?.limit ?? 10,
 				remainingData: response.data?.length
 			};
+		},
+		putProfile: async (user: UpdateUser) => {
+			const response = await userRepository.updateProfile(user);
+			if (response.error) {
+				toastStore.showToast(response.error.message);
+				throw response.error;
+			}
+			return response;
 		},
 		putPassword: async (request: UpdatePasswordRequest) => {
 			if (!request.newPassword) {

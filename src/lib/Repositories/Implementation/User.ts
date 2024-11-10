@@ -4,8 +4,22 @@ import type { UpdatePasswordRequest } from '$lib/Models/Request/Password';
 import { supabase } from '$lib/Supabase/supabase';
 import type { PostgrestSingleResponse } from '@supabase/supabase-js';
 import type { IUser } from '../Interface/IUser';
+import type { UpdateUser } from '$lib/Supabase/Types/database.types';
 
 export class UserRepository implements IUser {
+	async getUserByUidAsync(uid: string): Promise<UserEntity> {
+		const response = await supabase
+			.from('User')
+			.select('*')
+			.eq('auth', uid)
+			.is('deleted_at', null)
+			.returns<UserEntity>()
+			.single();
+		if (response.error) {
+			throw response.error;
+		}
+		return response.data;
+	}
 	async getUsersAsync(_option?: ListOption): Promise<PostgrestSingleResponse<UserEntity[]>> {
 		const response = await supabase
 			.from('User')
@@ -38,6 +52,18 @@ export class UserRepository implements IUser {
 			throw response.error;
 		}
 		return response.data;
+	}
+	async updateProfile(user: UpdateUser): Promise<PostgrestSingleResponse<UserEntity>> {
+		const response = await supabase
+			.from('User')
+			.update(user)
+			.select('*')
+			.returns<UserEntity>()
+			.single();
+		if (response.error) {
+			throw response.error;
+		}
+		return response;
 	}
 	async updatePasswordAsync(request: UpdatePasswordRequest): Promise<void> {
 		const response = await supabase.auth.updateUser({

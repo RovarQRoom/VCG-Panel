@@ -162,5 +162,10 @@
   "enter-kurdish-name": "ناوی کوردی داخڵ بکە",
   "failed-to-update-route": "شکستی هێنا لە نوێکردنەوەی ڕێگاکە",
   "failed-to-update-password": "شکستی هێنا لە نوێکردنەوەی وشەی نهێنی",
-  "enter-link": "لینکی داخڵ بکە"
+  "enter-link": "لینکی داخڵ بکە",
+  "profile-updated-successfully": "پڕۆفایلی بە سەرکەوتوویی نوێکرایەوە",
+  "failed-to-update-profile": "شکستی هێنا لە نوێکردنەوەی پڕۆفایلی",
+  "profile-settings": "ڕێکخستنەکانی پڕۆفایلی",
+  "email-cannot-be-changed": "ئیمەیڵ ناتوانرێت بگۆڕدرێت",
+  "enter-your-name": "ناوی خۆت بنووسە"
 }
