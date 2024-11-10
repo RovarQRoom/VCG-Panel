@@ -46,7 +46,6 @@
 			createHeading.id = $headingStore.id;
 			createHeading.title = $headingStore.title?.id ?? 0;
 		}
-		console.log('createHeading', createHeading);
 	});
 
 	let isEditing = false;

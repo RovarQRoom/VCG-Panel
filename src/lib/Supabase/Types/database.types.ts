@@ -314,6 +314,44 @@ export type Database = {
 					}
 				];
 			};
+			Route: {
+				Row: {
+					created_at: string;
+					deleted_at: string | null;
+					disabled: boolean;
+					icon: string | null;
+					id: number;
+					link: string;
+					name: number;
+				};
+				Insert: {
+					created_at?: string;
+					deleted_at?: string | null;
+					disabled?: boolean;
+					icon?: string | null;
+					id?: number;
+					link: string;
+					name: number;
+				};
+				Update: {
+					created_at?: string;
+					deleted_at?: string | null;
+					disabled?: boolean;
+					icon?: string | null;
+					id?: number;
+					link?: string;
+					name?: number;
+				};
+				Relationships: [
+					{
+						foreignKeyName: 'Route_name_fkey';
+						columns: ['name'];
+						isOneToOne: false;
+						referencedRelation: 'Language';
+						referencedColumns: ['id'];
+					}
+				];
+			};
 			Social: {
 				Row: {
 					created_at: string;
@@ -383,6 +421,36 @@ export type Database = {
 						referencedColumns: ['id'];
 					}
 				];
+			};
+			User: {
+				Row: {
+					auth: string | null;
+					created_at: string;
+					deleted_at: string | null;
+					email: string | null;
+					id: number;
+					image: string | null;
+					name: string | null;
+				};
+				Insert: {
+					auth?: string | null;
+					created_at?: string;
+					deleted_at?: string | null;
+					email?: string | null;
+					id?: number;
+					image?: string | null;
+					name?: string | null;
+				};
+				Update: {
+					auth?: string | null;
+					created_at?: string;
+					deleted_at?: string | null;
+					email?: string | null;
+					id?: number;
+					image?: string | null;
+					name?: string | null;
+				};
+				Relationships: [];
 			};
 		};
 		Views: {
@@ -549,6 +617,10 @@ export type Representative = Database['public']['Tables']['Representative']['Row
 export type InsertRepresentative = Database['public']['Tables']['Representative']['Insert'];
 export type UpdateRepresentative = Database['public']['Tables']['Representative']['Update'];
 
+export type Route = Database['public']['Tables']['Route']['Row'];
+export type InsertRoute = Database['public']['Tables']['Route']['Insert'];
+export type UpdateRoute = Database['public']['Tables']['Route']['Update'];
+
 export type Social = Database['public']['Tables']['Social']['Row'];
 export type InsertSocial = Database['public']['Tables']['Social']['Insert'];
 export type UpdateSocial = Database['public']['Tables']['Social']['Update'];
@@ -556,3 +628,7 @@ export type UpdateSocial = Database['public']['Tables']['Social']['Update'];
 export type Ticket = Database['public']['Tables']['Ticket']['Row'];
 export type InsertTicket = Database['public']['Tables']['Ticket']['Insert'];
 export type UpdateTicket = Database['public']['Tables']['Ticket']['Update'];
+
+export type User = Database['public']['Tables']['User']['Row'];
+export type InsertUser = Database['public']['Tables']['User']['Insert'];
+export type UpdateUser = Database['public']['Tables']['User']['Update'];
