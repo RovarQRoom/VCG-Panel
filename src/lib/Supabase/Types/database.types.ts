@@ -256,6 +256,7 @@ export type Database = {
 			Register: {
 				Row: {
 					action: boolean | null;
+					callTime: Database['public']['Enums']['CallTime'] | null;
 					created_at: string;
 					deleted_at: string | null;
 					email: string | null;
@@ -273,6 +274,7 @@ export type Database = {
 				};
 				Insert: {
 					action?: boolean | null;
+					callTime?: Database['public']['Enums']['CallTime'] | null;
 					created_at?: string;
 					deleted_at?: string | null;
 					email?: string | null;
@@ -290,6 +292,7 @@ export type Database = {
 				};
 				Update: {
 					action?: boolean | null;
+					callTime?: Database['public']['Enums']['CallTime'] | null;
 					created_at?: string;
 					deleted_at?: string | null;
 					email?: string | null;
@@ -524,6 +527,7 @@ export type Database = {
 			[_ in never]: never;
 		};
 		Enums: {
+			CallTime: 'AM11_PM02' | 'PM02_PM05' | 'PM05_PM08';
 			HeadingEnum: 'CARD' | 'REPRESENTATIVE';
 			Knowledge: 'BEGINNER' | 'INTERMEDIATE' | 'ADVANCE';
 			LanguageEnum: 'ENGLISH' | 'ARABIC' | 'KURDISH';
@@ -626,6 +630,12 @@ export type CompositeTypes<
 
 // Schema: public
 // Enums
+export enum CallTime {
+	AM11_PM02 = 'AM11_PM02',
+	PM02_PM05 = 'PM02_PM05',
+	PM05_PM08 = 'PM05_PM08'
+}
+
 export enum HeadingEnum {
 	CARD = 'CARD',
 	REPRESENTATIVE = 'REPRESENTATIVE'

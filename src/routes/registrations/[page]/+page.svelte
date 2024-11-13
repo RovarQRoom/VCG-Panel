@@ -13,7 +13,8 @@
 		Modal,
 		Label,
 		Input,
-		Spinner
+		Spinner,
+		type ColorVariant
 	} from 'flowbite-svelte';
 	import {
 		CheckCircleSolid,
@@ -28,6 +29,7 @@
 	import { page } from '$app/stores';
 	import { toastStore } from '$lib/Stores/Toast';
 	import { exportToExcel } from '$lib/utils/exportToExcel';
+	import type { Knowledge } from '$lib/Supabase/Types/database.types';
 
 	let filter: ListOption = {
 		page: 1,
@@ -118,6 +120,38 @@
 			isExporting = false;
 		}
 	}
+
+	function getCallTimeBadgeColor(callTime: string | null): ColorVariant {
+		switch (callTime) {
+			case 'AM11_PM02':
+				return 'green';
+			case 'PM02_PM05':
+				return 'yellow';
+			case 'PM05_PM08':
+				return 'red';
+			default:
+				return 'primary';
+		}
+	}
+
+	function getBooleanBadgeColor(value: boolean | null): string {
+		return value
+			? 'bg-emerald-100 text-emerald-800 dark:bg-emerald-900 dark:text-emerald-300'
+			: 'bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-300';
+	}
+
+	function getTradingKnowledgeBadgeColor(value: string | null): ColorVariant {
+		switch (value) {
+			case 'BEGINNER':
+				return 'green';
+			case 'INTERMEDIATE':
+				return 'yellow';
+			case 'ADVANCE':
+				return 'purple';
+			default:
+				return 'primary';
+		}
+	}
 </script>
 
 <div class="p-4 mt-24">
@@ -133,82 +167,119 @@
 	</div>
 
 	<div class="overflow-x-auto relative shadow-md sm:rounded-lg">
-		<Table hoverable={true}>
+		<Table hoverable={true} class="w-full text-sm">
 			<TableHead class="bg-main-dark dark:bg-input-dark text-white">
-				<TableHeadCell>{$_('name')}</TableHeadCell>
-				<TableHeadCell>{$_('email')}</TableHeadCell>
-				<TableHeadCell>{$_('phone')}</TableHeadCell>
-				<TableHeadCell>{$_('language')}</TableHeadCell>
-				<TableHeadCell>{$_('created-at')}</TableHeadCell>
-				<TableHeadCell>{$_('trading_knowledge')}</TableHeadCell>
-				<TableHeadCell>{$_('trade_priority')}</TableHeadCell>
-				<TableHeadCell>{$_('traded_before')}</TableHeadCell>
-				<TableHeadCell>{$_('service_type')}</TableHeadCell>
-				<TableHeadCell>{$_('monthly_income')}</TableHeadCell>
-				<TableHeadCell>{$_('goal_income')}</TableHeadCell>
-				<TableHeadCell>{$_('actions')}</TableHeadCell>
+				<TableHeadCell class="px-6 py-4">{$_('name')}</TableHeadCell>
+				<TableHeadCell class="px-6 py-4">{$_('email')}</TableHeadCell>
+				<TableHeadCell class="px-6 py-4">{$_('phone')}</TableHeadCell>
+				<TableHeadCell class="px-6 py-4">{$_('call-time')}</TableHeadCell>
+				<TableHeadCell class="px-6 py-4">{$_('created-at')}</TableHeadCell>
+				<TableHeadCell class="px-6 py-4">{$_('trading_knowledge')}</TableHeadCell>
+				<TableHeadCell class="px-6 py-4">{$_('trade_priority')}</TableHeadCell>
+				<TableHeadCell class="px-6 py-4">{$_('traded_before')}</TableHeadCell>
+				<TableHeadCell class="px-6 py-4">{$_('service_type')}</TableHeadCell>
+				<TableHeadCell class="px-6 py-4">{$_('monthly_income')}</TableHeadCell>
+				<TableHeadCell class="px-6 py-4">{$_('goal_income')}</TableHeadCell>
+				<TableHeadCell class="px-6 py-4">{$_('actions')}</TableHeadCell>
 			</TableHead>
 			<TableBody>
 				{#each $registerStore.data as registration}
 					<TableBodyRow
-						class="bg-input-light border-white dark:bg-main-dark dark:border-input-dark"
+						class="bg-white dark:bg-main-dark border-b border-gray-100 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors duration-200"
 					>
-						<TableBodyCell>{registration.name}</TableBodyCell>
-						<TableBodyCell>{registration.email}</TableBodyCell>
-						<TableBodyCell>{registration.phone}</TableBodyCell>
-						<TableBodyCell>
-							<Badge class="w-20 py-1  " color={getLanguageBadge(registration.language)}>
-								{registration.language}
-							</Badge>
+						<TableBodyCell class="px-6 py-4 font-medium">{registration.name}</TableBodyCell>
+						<TableBodyCell class="px-6 py-4">{registration.email}</TableBodyCell>
+						<TableBodyCell class="px-6 py-4">{registration.phone}</TableBodyCell>
+						<TableBodyCell class="px-6 py-4">
+							{#if registration.callTime}
+								<Badge
+									color={getCallTimeBadgeColor(registration.callTime)}
+									class="px-3 py-1 text-xs font-medium rounded-full"
+								>
+									{$_(registration.callTime.toLowerCase())}
+								</Badge>
+							{:else}
+								<span class="text-gray-400">-</span>
+							{/if}
 						</TableBodyCell>
-						<TableBodyCell>{new Date(registration.created_at).toLocaleString()}</TableBodyCell>
-						<TableBodyCell>
-							{registration.trading_knowledge
-								? $_(registration.trading_knowledge.toLocaleLowerCase())
+						<TableBodyCell class="px-6 py-4">
+							{new Date(registration.created_at).toLocaleString()}
+						</TableBodyCell>
+						<TableBodyCell class="px-6 py-4">
+							{#if registration.trading_knowledge}
+								<Badge
+									color={getTradingKnowledgeBadgeColor(registration.trading_knowledge)}
+									class="px-3 py-1 text-xs font-medium rounded-full w-24"
+								>
+									{$_(registration.trading_knowledge.toLowerCase())}
+								</Badge>
+							{:else}
+								<span class="text-gray-400">{$_('no-data')}</span>
+							{/if}
+						</TableBodyCell>
+						<TableBodyCell class="px-6 py-4">
+							<span
+								class={`inline-block px-3 py-1 text-xs font-medium rounded-full ${getBooleanBadgeColor(registration.trade_priority)} w-12 text-center`}
+							>
+								{registration.trade_priority ? $_('true') : $_('false')}
+							</span>
+						</TableBodyCell>
+						<TableBodyCell class="px-6 py-4">
+							<span
+								class={`inline-block px-3 py-1 text-xs font-medium rounded-full ${getBooleanBadgeColor(registration.traded_before)} w-12 text-center`}
+							>
+								{registration.traded_before ? $_('true') : $_('false')}
+							</span>
+						</TableBodyCell>
+						<TableBodyCell class="px-6 py-4">
+							{#if registration.service}
+								<Badge color="blue" class="px-3 py-1 text-xs font-medium rounded-full">
+									{$_(registration.service.toLowerCase())}
+								</Badge>
+							{:else}
+								<span class="text-gray-400">{$_('no-data')}</span>
+							{/if}
+						</TableBodyCell>
+						<TableBodyCell class="px-6 py-4">
+							{registration.monthly_income
+								? $_(registration.monthly_income.toLowerCase())
 								: $_('no-data')}
 						</TableBodyCell>
-						<TableBodyCell>{registration.trade_priority ? $_('true') : $_('false')}</TableBodyCell>
-						<TableBodyCell>{registration.traded_before ? $_('true') : $_('false')}</TableBodyCell>
-						<TableBodyCell
-							>{registration.service
-								? $_(registration.service.toLocaleLowerCase())
-								: $_('no-data')}</TableBodyCell
-						>
-						<TableBodyCell
-							>{registration.monthly_income
-								? $_(registration.monthly_income.toLocaleLowerCase())
-								: $_('no-data')}</TableBodyCell
-						>
-						<TableBodyCell
-							>{registration.goal_income
-								? $_(registration.goal_income.toLocaleLowerCase())
-								: $_('no-data')}</TableBodyCell
-						>
-						<TableBodyCell>
+						<TableBodyCell class="px-6 py-4">
+							{registration.goal_income
+								? $_(registration.goal_income.toLowerCase())
+								: $_('no-data')}
+						</TableBodyCell>
+						<TableBodyCell class="px-6 py-4">
 							<div class="flex space-x-2 gap-3">
 								{#if registration.action === null}
 									<GradientButton
 										shadow
 										color="green"
-										class="gap-2"
+										class="gap-2 text-xs"
 										on:click={() => handleAccept(registration.id)}
-										><CheckCircleSolid class=" h-4 w-4" />
-										{$_('accept')}</GradientButton
 									>
+										<CheckCircleSolid class="h-4 w-4" />
+										{$_('accept')}
+									</GradientButton>
 
 									<GradientButton
 										shadow
 										color="red"
-										class="gap-2"
+										class="gap-2 text-xs"
 										on:click={() => handleReject(registration.id)}
 									>
-										<CircleMinusSolid class=" h-4 w-4" />
-										{$_('reject')}</GradientButton
-									>
+										<CircleMinusSolid class="h-4 w-4" />
+										{$_('reject')}
+									</GradientButton>
 								{:else if registration.action === true}
-									<Badge color="green" class="w-24 rounded-3xl">{$_('accepted')}</Badge>
+									<Badge color="green" class="px-4 py-1 rounded-full">
+										{$_('accepted')}
+									</Badge>
 								{:else}
-									<Badge color="red" class="w-24 rounded-3xl">{$_('rejected')}</Badge>
+									<Badge color="red" class="px-4 py-1 rounded-full">
+										{$_('rejected')}
+									</Badge>
 								{/if}
 								<Button
 									size="xs"

@@ -187,5 +187,9 @@
   "close": "داخستن",
   "add-image": "وێنە زیاد بکە",
   "double-click-for-settings": "دووجار کلیک بکە بۆ کردنەوەی ڕێکخستنەکان",
-  "disabled-route": "ناچالاک"
+  "disabled-route": "ناچالاک",
+  "am11_pm02": "11:00am - 2:00pm",
+  "pm02_pm05": "2:00pm - 5:00pm",
+  "pm05_pm08": "5:00pm - 8:00pm",
+  "call-time": "کاتی پەیوەندیکردن"
 }
