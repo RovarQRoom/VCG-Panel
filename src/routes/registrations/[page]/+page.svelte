@@ -128,7 +128,7 @@
 			case 'PM02_PM05':
 				return 'yellow';
 			case 'PM05_PM08':
-				return 'red';
+				return 'purple';
 			default:
 				return 'primary';
 		}
