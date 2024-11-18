@@ -257,19 +257,19 @@
 					</h5>
 				</div>
 
-				<div class="relative">
+				<div class="relative z-50">
 					{#if truncateText(getLanguageData(card.description), 100).isTruncated}
 						<p
 							class="text-gray-700 dark:text-gray-400 text-sm leading-relaxed line-clamp-3"
-							data-tooltip-target="tooltip-{card.id}"
+							id={`tooltip-${card.id}`}
 						>
 							{truncateText(getLanguageData(card.description), 100).text}
 						</p>
-
 						<Tooltip
-							triggeredBy="[data-tooltip-target='tooltip-{card.id}']"
+							triggeredBy={`#tooltip-${card.id}`}
+							trigger="click"
 							placement="bottom"
-							class="bg-slate-900 dark:bg-slate-100 py-2 px-4 text-justify contrast-200 dark:text-black text-white z-50 opacity-95"
+							class="rounded-lg shadow-md tooltip text-[0.7rem] font-medium bg-slate-900 dark:bg-slate-100 py-2 px-4 text-justify contrast-200 dark:text-black text-white z-50 opacity-90 max-w-sm"
 						>
 							{getLanguageData(card.description)}
 						</Tooltip>
