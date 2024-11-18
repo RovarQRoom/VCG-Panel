@@ -13,9 +13,9 @@
 	let pageCount: LinkType[] = [];
 
 	let activeClass =
-		'px-3 py-2 text-sm font-medium text-white bg-primary-light dark:bg-primary-dark rounded-lg';
+		'px-4 py-2 text-sm font-semibold text-white bg-primary-light dark:bg-primary-dark rounded-lg transform transition-all duration-200 hover:scale-105 hover:shadow-lg';
 	let normalClass =
-		'px-3 py-2 text-sm font-medium text-primary-dark bg-secondary-light hover:bg-primary-light hover:text-white dark:bg-secondary-dark dark:text-primary-light dark:hover:bg-primary-dark dark:hover:text-white rounded-lg transition-colors duration-300';
+		'px-4 py-2 text-sm font-medium text-primary-dark bg-white hover:bg-primary-light hover:text-white dark:bg-secondary-dark dark:text-primary-light dark:hover:bg-primary-dark dark:hover:text-white rounded-lg transition-all duration-200 hover:scale-105 hover:shadow-md border border-gray-200 dark:border-gray-700';
 
 	onMount(async () => {
 		await fetchData();
@@ -109,9 +109,9 @@
 </script>
 
 {#if $Store && ($Store.pages ?? 0) > 1}
-	<div dir="ltr">
+	<div class="flex justify-center my-8" dir="ltr">
 		<Pagination
-			ulClass="inline-flex items-center gap-2"
+			ulClass="inline-flex items-center gap-3 p-2 rounded-xl  backdrop-blur-sm shadow-lg"
 			{normalClass}
 			{activeClass}
 			pages={pageCount}
@@ -124,34 +124,45 @@
 		>
 			<svelte:fragment slot="prev">
 				<span class="sr-only">Previous</span>
-				<svg
-					class="w-5 h-5"
-					fill="currentColor"
-					viewBox="0 0 20 20"
-					xmlns="http://www.w3.org/2000/svg"
-				>
-					<path
-						fill-rule="evenodd"
-						d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z"
-						clip-rule="evenodd"
-					></path>
-				</svg>
+				<div class="group">
+					<svg
+						class="w-5 h-5 transition-transform duration-200 group-hover:-translate-x-1"
+						fill="currentColor"
+						viewBox="0 0 20 20"
+						xmlns="http://www.w3.org/2000/svg"
+					>
+						<path
+							fill-rule="evenodd"
+							d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z"
+							clip-rule="evenodd"
+						></path>
+					</svg>
+				</div>
 			</svelte:fragment>
 			<svelte:fragment slot="next">
 				<span class="sr-only">Next</span>
-				<svg
-					class="w-5 h-5"
-					fill="currentColor"
-					viewBox="0 0 20 20"
-					xmlns="http://www.w3.org/2000/svg"
-				>
-					<path
-						fill-rule="evenodd"
-						d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
-						clip-rule="evenodd"
-					></path>
-				</svg>
+				<div class="group">
+					<svg
+						class="w-5 h-5 transition-transform duration-200 group-hover:translate-x-1"
+						fill="currentColor"
+						viewBox="0 0 20 20"
+						xmlns="http://www.w3.org/2000/svg"
+					>
+						<path
+							fill-rule="evenodd"
+							d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
+							clip-rule="evenodd"
+						></path>
+					</svg>
+				</div>
 			</svelte:fragment>
 		</Pagination>
 	</div>
 {/if}
+
+<style>
+	/* Add smooth transition for dark mode */
+	:global(.dark) {
+		transition: background-color 0.3s ease-in-out;
+	}
+</style>
