@@ -267,7 +267,6 @@
 						</p>
 						<Tooltip
 							triggeredBy={`#tooltip-${card.id}`}
-							trigger="click"
 							placement="bottom"
 							class="rounded-lg shadow-md tooltip text-[0.7rem] font-medium bg-slate-900 dark:bg-slate-100 py-2 px-4 text-justify contrast-200 dark:text-black text-white z-50 opacity-90 max-w-sm"
 						>
