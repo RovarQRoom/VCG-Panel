@@ -57,7 +57,7 @@ export class SocialRepository implements ISocial {
 			.is('deleted_at', null)
 			.range(
 				((option?.page ?? 1) - 1) * (option?.limit ?? 10),
-				(option?.page ?? 1) * (option?.limit ?? 10)
+				(option?.page ?? 1) * (option?.limit ?? 10) - 1
 			)
 			.returns<Social[]>();
 		if (response.error) {

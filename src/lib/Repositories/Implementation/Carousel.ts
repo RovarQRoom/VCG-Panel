@@ -46,7 +46,7 @@ export class CarouselRepository implements ICarousel {
 			.order('id', { ascending: false })
 			.range(
 				((_option?.page ?? 1) - 1) * (_option?.limit ?? 10),
-				(_option?.page ?? 1) * (_option?.limit ?? 10)
+				(_option?.page ?? 1) * (_option?.limit ?? 10) - 1
 			)
 			.returns<CarouselEntity[]>();
 		if (response.error) {

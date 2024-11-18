@@ -22,6 +22,7 @@
 	import { headingStore } from '$lib/Stores/Heading';
 	import { toastStore } from '$lib/Stores/Toast';
 	import { languageStore } from '$lib/Stores/Language';
+	import { Tooltip } from 'flowbite-svelte';
 
 	let filter: ListOption = {
 		page: 1,
@@ -125,6 +126,14 @@
 	function getLanguageData(card: Language | null | undefined) {
 		return (card?.[($locale ?? 'en') as keyof Language] ?? $_('no-title')).toString();
 	}
+
+	function truncateText(
+		text: string,
+		maxLength: number = 100
+	): { text: string; isTruncated: boolean } {
+		if (text.length <= maxLength) return { text, isTruncated: false };
+		return { text: text.slice(0, maxLength) + '...', isTruncated: true };
+	}
 </script>
 
 <div class="mb-8 max-w-2xl mx-auto mt-24">
@@ -206,7 +215,7 @@
 
 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
 	<Card
-		class="cursor-pointer bg-zinc-100 dark:bg-zinc-800 border-0 hover:bg-secondary-light dark:hover:bg-secondary-dark"
+		class="cursor-pointer bg-zinc-100 dark:bg-zinc-800 border-0 hover:bg-secondary-light dark:hover:bg-secondary-dark h-[200px]"
 		on:click={goToAddCard}
 	>
 		<div class="flex items-center justify-center h-full">
@@ -229,28 +238,47 @@
 
 	{#each $cardStore.data as card}
 		<Card
-			class="relative overflow-hidden pb-1 hover:scale-105 transition-all duration-300 bg-zinc-100 dark:bg-zinc-800 border-0 "
+			class="relative overflow-hidden pb-1 hover:scale-105 transition-all duration-300 bg-zinc-100 dark:bg-zinc-800 border-0 h-[200px]"
 		>
 			<div class="p-5">
-				<div class="flex items-start mb-4">
+				<div class="flex items-start mb-4 gap-2">
 					{#if card.icon}
 						<img
 							src={`${VITE_SUPABASE_STORAGE_URL}${card.icon}`}
 							alt="{card.title?.en} icon"
-							class="w-12 h-12 mr-4"
+							class="w-12 h-12 mr-4 object-contain"
 						/>
 					{:else}
 						<div class="w-12 h-12 mr-4 bg-gray-200 rounded-full"></div>
 					{/if}
 
-					<h5 class="text-xl font-semibold text-gray-900 dark:text-white">
+					<h5 class=" font-semibold text-gray-900 dark:text-white text-lg">
 						{getLanguageData(card.title)}
 					</h5>
 				</div>
 
-				<p class="text-gray-700 dark:text-gray-400 text-sm leading-relaxed">
-					{getLanguageData(card.description)}
-				</p>
+				<div class="relative">
+					{#if truncateText(getLanguageData(card.description), 100).isTruncated}
+						<p
+							class="text-gray-700 dark:text-gray-400 text-sm leading-relaxed line-clamp-3"
+							data-tooltip-target="tooltip-{card.id}"
+						>
+							{truncateText(getLanguageData(card.description), 100).text}
+						</p>
+
+						<Tooltip
+							triggeredBy="[data-tooltip-target='tooltip-{card.id}']"
+							placement="bottom"
+							class="bg-slate-900 dark:bg-slate-100 py-2 px-4 text-justify contrast-200 dark:text-black text-white z-50 opacity-95"
+						>
+							{getLanguageData(card.description)}
+						</Tooltip>
+					{:else}
+						<p class="text-gray-700 dark:text-gray-400 text-sm leading-relaxed line-clamp-3">
+							{getLanguageData(card.description)}
+						</p>
+					{/if}
+				</div>
 			</div>
 
 			<div
@@ -287,3 +315,13 @@
 <div class="flex justify-center my-8">
 	<Pagination Store={cardStore} currentPage={Number($page.params.page)} name={'cards'} {filter} />
 </div>
+
+<style>
+	/* Add Tailwind line-clamp utility if not already included */
+	.line-clamp-3 {
+		display: -webkit-box;
+		-webkit-line-clamp: 3;
+		-webkit-box-orient: vertical;
+		overflow: hidden;
+	}
+</style>
